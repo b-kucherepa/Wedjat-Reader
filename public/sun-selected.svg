@@ -1,0 +1,18 @@
+<svg width="46.56mm" height="46.56mm" viewBox="0 0 46.56 46.56" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns="http://www.w3.org/2000/svg">
+  <defs />
+  <g transform="translate(-10.9)">
+    <circle cx="34.16" cy="23.22" r="9.309" fill="#90f" stroke="#90f" stroke-width="2.377" stroke-linecap="round"
+      stroke-linejoin="round" stroke-miterlimit="1.6" stroke-dashoffset="142.825" paint-order="stroke fill markers" />
+    <path d="M34.16 9.578V1.354" id="prefix__a" fill="none" fill-opacity="1" stroke="#90f" stroke-width="2.646"
+      stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="1.6" stroke-dasharray="none"
+      stroke-dashoffset="142.825" stroke-opacity="1" paint-order="stroke fill markers" />
+    <use xlink:href="#prefix__a" transform="translate(-.037 35.59)" />
+    <use x="0" y="0" xlink:href="#prefix__a" id="prefix__b" transform="rotate(90 34.15 23.28)" />
+    <use xlink:href="#prefix__b" transform="translate(-35.48 -.015)" />
+    <use x="0" y="0" xlink:href="#prefix__a" id="prefix__c" transform="rotate(45 34.24 23.48)" />
+    <use x="0" y="0" xlink:href="#prefix__c" id="prefix__d" transform="translate(-25.36 25.17)" />
+    <use xlink:href="#prefix__d" transform="rotate(90 34.24 23.27)" />
+    <use xlink:href="#prefix__d" transform="rotate(90 34.19 48.47)" />
+  </g>
+</svg>
