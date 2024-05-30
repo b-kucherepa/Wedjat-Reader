@@ -1,57 +1,71 @@
-import { SyntheticEvent, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function MenuCurtain(props: any) {
-  const [visualCurtainWidth, setVisualCurtainWidth] = useState(0);
+  const [curtainWidth, setCurtainWidth] = useState(0);
+  const curtainWidthRef = useRef(curtainWidth);
+  curtainWidthRef.current = curtainWidth;
 
   useEffect(() => {
     let touchStart: number | null = null;
     let touchEnd: number | null = null;
-    let curtainWidth: number = 0;
-    let touchStartWidth: number = curtainWidth;
+    let touchStartWidth: number = curtainWidthRef.current;
 
     function getTouchDistance(): number {
       return touchStart && touchEnd ? touchStart - touchEnd : 0;
     }
 
-    function getMinSwipeDistance(screenFraction: number): number {
-      return window.innerWidth * screenFraction;
+    function getScreenFractionSize(fraction: number): number {
+      return window.innerWidth * fraction;
     }
 
-    function onTouchStart(e: any): void {
+    function handleTouchStart(e: any): void {
       touchEnd = null;
       touchStart = e.touches[0].clientX;
-      touchStartWidth = curtainWidth;
+      touchStartWidth = curtainWidthRef.current;
     }
 
-    function onTouchMove(e: any): void {
+    function handleTouchMove(e: any): void {
       touchEnd = e.touches[0].clientX;
-      curtainWidth =
-        touchStartWidth - (100 * getTouchDistance()) / window.innerWidth;
-      setVisualCurtainWidth(curtainWidth);
+      setCurtainWidth(
+        touchStartWidth - (100 * getTouchDistance()) / window.innerWidth
+      );
     }
 
-    function onTouchEnd(e: any): void {
-      const isLeftSwipe = getTouchDistance() > getMinSwipeDistance(0.4);
-      const isRightSwipe = getTouchDistance() < -getMinSwipeDistance(0.4);
+    function handleClick(e: any): void {
+      const isLeftSideTouch: boolean = e.clientX < getScreenFractionSize(0.2);
+      console.log(
+        e.clientX,
+        getScreenFractionSize(0.2),
+        isLeftSideTouch,
+        curtainWidthRef.current
+      );
+      if (isLeftSideTouch) {
+        setCurtainWidth(100);
+      }
+    }
+
+    function handleTouchEnd(e: any): void {
+      const isLeftSwipe = getTouchDistance() > getScreenFractionSize(0.4);
+      const isRightSwipe = getTouchDistance() < -getScreenFractionSize(0.4);
 
       if (isRightSwipe) {
-        curtainWidth = 100;
+        setCurtainWidth(100);
       } else if (isLeftSwipe) {
-        curtainWidth = 0;
+        setCurtainWidth(0);
       } else {
-        curtainWidth = touchStartWidth;
+        setCurtainWidth(touchStartWidth);
       }
-
-      setVisualCurtainWidth(curtainWidth);
     }
 
-    window.addEventListener("touchstart", onTouchStart);
-    window.addEventListener("touchmove", onTouchMove);
-    window.addEventListener("touchend", onTouchEnd);
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchmove", handleTouchMove);
+    window.addEventListener("touchend", handleTouchEnd);
+    window.addEventListener("click", handleClick);
     return () => {
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove", onTouchMove);
-      window.removeEventListener("touchend", onTouchEnd);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
+      window.removeEventListener("click", handleClick);
     };
   }, []);
 
@@ -60,16 +74,16 @@ function MenuCurtain(props: any) {
       <div
         id={props.id}
         className="overlay"
-        style={{ width: `${visualCurtainWidth}%` }}
+        style={{ width: `${curtainWidth}%` }}
       >
-        <button className="closebtn" onClick={() => setVisualCurtainWidth(0)}>
+        <button className="closebtn" onClick={() => setCurtainWidth(0)}>
           &times;
         </button>
 
         <div className="overlay-content">{props.children}</div>
       </div>
 
-      <button onClick={() => setVisualCurtainWidth(100)}>EXPAND MENU</button>
+      <button onClick={() => setCurtainWidth(100)}>EXPAND MENU</button>
     </>
   );
 }
