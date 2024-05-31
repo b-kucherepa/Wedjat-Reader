@@ -6,6 +6,8 @@ import SlideshowOption from "./slideshowOption";
 
 function MenuCurtain(props: any) {
   const EXPANDED_WIDTH = 100;
+  const SWIPE_WIDTH = 20;
+  const HINT_WIDTH = 10;
   const COLLAPSED_WIDTH = 0;
 
   const [curtainWidth, setCurtainWidth] = useState(COLLAPSED_WIDTH);
@@ -21,8 +23,8 @@ function MenuCurtain(props: any) {
       return touchStart && touchEnd ? touchStart - touchEnd : 0;
     }
 
-    function getScreenFractionSize(fraction: number): number {
-      return window.innerWidth * fraction;
+    function getScreenFractionSize(percent: number): number {
+      return (window.innerWidth * percent) / 100;
     }
 
     function handleTouchStart(e: any): void {
@@ -39,8 +41,10 @@ function MenuCurtain(props: any) {
     }
 
     function handleTouchEnd(e: any): void {
-      const isLeftSwipe = getTouchDistance() > getScreenFractionSize(0.4);
-      const isRightSwipe = getTouchDistance() < -getScreenFractionSize(0.4);
+      const isLeftSwipe =
+        getTouchDistance() > getScreenFractionSize(SWIPE_WIDTH);
+      const isRightSwipe =
+        getTouchDistance() < -getScreenFractionSize(SWIPE_WIDTH);
 
       if (isRightSwipe) {
         setCurtainWidth(EXPANDED_WIDTH);
@@ -52,7 +56,8 @@ function MenuCurtain(props: any) {
     }
 
     function handleClick(e: any): void {
-      const isLeftSideTouch: boolean = e.clientX < getScreenFractionSize(0.2);
+      const isLeftSideTouch: boolean =
+        e.clientX <= getScreenFractionSize(HINT_WIDTH);
       if (isLeftSideTouch) {
         setCurtainWidth(EXPANDED_WIDTH);
         touchStartWidth = EXPANDED_WIDTH;
@@ -60,11 +65,14 @@ function MenuCurtain(props: any) {
     }
 
     function handleMouseMove(e: any): void {
-      const isLeftSideHover: boolean = e.clientX < getScreenFractionSize(0.2);
+      const isLeftSideHover: boolean =
+        e.clientX <= getScreenFractionSize(HINT_WIDTH);
 
-      if (curtainWidthRef.current < EXPANDED_WIDTH*0.2) {
-        setCurtainWidth(isLeftSideHover ? COLLAPSED_WIDTH + 10 : COLLAPSED_WIDTH);
-      } 
+      if (curtainWidthRef.current <= HINT_WIDTH) {
+        setCurtainWidth(
+          isLeftSideHover ? COLLAPSED_WIDTH + HINT_WIDTH : COLLAPSED_WIDTH
+        );
+      }
     }
 
     window.addEventListener("touchstart", handleTouchStart);
@@ -86,13 +94,23 @@ function MenuCurtain(props: any) {
       <div
         id={props.id}
         className="overlay"
-        style={{ width: `${curtainWidth}%` }}
+        style={{
+          width: `${curtainWidth}%`,
+        }}
       >
-        <button className="closebtn" onClick={() => setCurtainWidth(COLLAPSED_WIDTH)}>
+        <button
+          className="closebtn"
+          onClick={() => setCurtainWidth(COLLAPSED_WIDTH)}
+        >
           &times;
         </button>
 
-        <div className="overlay-content">
+        <div
+          className="overlay-content"
+          style={{
+            scale: curtainWidth > HINT_WIDTH ? curtainWidth/100 : 0,
+          }}
+        >
           <TextLoadBtn />
           <BgLoadBtn />
           <BgSelect />
