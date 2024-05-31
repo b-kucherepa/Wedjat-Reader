@@ -1,7 +1,14 @@
 import { useEffect, useRef, useState } from "react";
+import TextLoadBtn from "./textLoadBtn";
+import BgLoadBtn from "./bgLoadBtn";
+import BgSelect from "./bgSelect";
+import SlideshowOption from "./slideshowOption";
 
 function MenuCurtain(props: any) {
-  const [curtainWidth, setCurtainWidth] = useState(0);
+  const EXPANDED_WIDTH = 100;
+  const COLLAPSED_WIDTH = 0;
+
+  const [curtainWidth, setCurtainWidth] = useState(COLLAPSED_WIDTH);
   const curtainWidthRef = useRef(curtainWidth);
   curtainWidthRef.current = curtainWidth;
 
@@ -31,41 +38,46 @@ function MenuCurtain(props: any) {
       );
     }
 
-    function handleClick(e: any): void {
-      const isLeftSideTouch: boolean = e.clientX < getScreenFractionSize(0.2);
-      console.log(
-        e.clientX,
-        getScreenFractionSize(0.2),
-        isLeftSideTouch,
-        curtainWidthRef.current
-      );
-      if (isLeftSideTouch) {
-        setCurtainWidth(100);
-      }
-    }
-
     function handleTouchEnd(e: any): void {
       const isLeftSwipe = getTouchDistance() > getScreenFractionSize(0.4);
       const isRightSwipe = getTouchDistance() < -getScreenFractionSize(0.4);
 
       if (isRightSwipe) {
-        setCurtainWidth(100);
+        setCurtainWidth(EXPANDED_WIDTH);
       } else if (isLeftSwipe) {
-        setCurtainWidth(0);
+        setCurtainWidth(COLLAPSED_WIDTH);
       } else {
         setCurtainWidth(touchStartWidth);
       }
+    }
+
+    function handleClick(e: any): void {
+      const isLeftSideTouch: boolean = e.clientX < getScreenFractionSize(0.2);
+      if (isLeftSideTouch) {
+        setCurtainWidth(EXPANDED_WIDTH);
+        touchStartWidth = EXPANDED_WIDTH;
+      }
+    }
+
+    function handleMouseMove(e: any): void {
+      const isLeftSideHover: boolean = e.clientX < getScreenFractionSize(0.2);
+
+      if (curtainWidthRef.current < EXPANDED_WIDTH*0.2) {
+        setCurtainWidth(isLeftSideHover ? COLLAPSED_WIDTH + 10 : COLLAPSED_WIDTH);
+      } 
     }
 
     window.addEventListener("touchstart", handleTouchStart);
     window.addEventListener("touchmove", handleTouchMove);
     window.addEventListener("touchend", handleTouchEnd);
     window.addEventListener("click", handleClick);
+    window.addEventListener("mousemove", handleMouseMove);
     return () => {
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
       window.removeEventListener("click", handleClick);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
@@ -76,14 +88,16 @@ function MenuCurtain(props: any) {
         className="overlay"
         style={{ width: `${curtainWidth}%` }}
       >
-        <button className="closebtn" onClick={() => setCurtainWidth(0)}>
+        <button className="closebtn" onClick={() => setCurtainWidth(COLLAPSED_WIDTH)}>
           &times;
         </button>
 
-        <div className="overlay-content">{props.children}</div>
+        <div className="overlay-content">
+          <TextLoadBtn />
+          <BgLoadBtn />
+          <BgSelect />
+        </div>
       </div>
-
-      <button onClick={() => setCurtainWidth(100)}>EXPAND MENU</button>
     </>
   );
 }

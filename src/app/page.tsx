@@ -3,9 +3,6 @@ import { createContext, useEffect, useRef, useState } from "react";
 
 import MenuCurtain from "./menuCurtain";
 import RenderArea from "./renderArea";
-import TextLoadBtn from "./textLoadBtn";
-import BgLoadBtn from "./bgLoadBtn";
-import BgSelect from "./bgSelect";
 
 const DEFAULT_BG_IMAGE: [string, string] = ["/back.jpg", "default image"];
  
@@ -38,9 +35,6 @@ export default function Main() {
     <main id="mainText" className={`size-full	bg-cover`}>
       <RenderContext.Provider value={renderContextHook}>
         <MenuCurtain id="navCurtain">
-          <TextLoadBtn />
-          <BgLoadBtn />
-          <BgSelect />
         </MenuCurtain>
         <RenderArea id="renderArea"></RenderArea>
       </RenderContext.Provider>
