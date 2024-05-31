@@ -7,7 +7,7 @@ import SlideshowOption from "./slideshowOption";
 function MenuCurtain(props: any) {
   const EXPANDED_WIDTH = 100;
   const SWIPE_WIDTH = 20;
-  const HINT_WIDTH = 10;
+  const HINT_WIDTH = 15;
   const COLLAPSED_WIDTH = 0;
 
   const [curtainWidth, setCurtainWidth] = useState(COLLAPSED_WIDTH);
@@ -23,14 +23,23 @@ function MenuCurtain(props: any) {
       return touchStart && touchEnd ? touchStart - touchEnd : 0;
     }
 
-    function getScreenFractionSize(percent: number): number {
+    function getScreenPercentSize(percent: number): number {
       return (window.innerWidth * percent) / 100;
     }
 
     function handleTouchStart(e: any): void {
       touchEnd = null;
-      touchStart = e.touches[0].clientX;
       touchStartWidth = curtainWidthRef.current;
+
+      const isPressedNearTheEdge =
+        getScreenPercentSize(curtainWidthRef.current - HINT_WIDTH) <
+          e.touches[0].clientX &&
+        e.touches[0].clientX <
+          getScreenPercentSize(curtainWidthRef.current + HINT_WIDTH);
+
+      if (isPressedNearTheEdge) {
+        touchStart = e.touches[0].clientX;
+      }
     }
 
     function handleTouchMove(e: any): void {
@@ -42,9 +51,9 @@ function MenuCurtain(props: any) {
 
     function handleTouchEnd(e: any): void {
       const isLeftSwipe =
-        getTouchDistance() > getScreenFractionSize(SWIPE_WIDTH);
+        getTouchDistance() > getScreenPercentSize(SWIPE_WIDTH);
       const isRightSwipe =
-        getTouchDistance() < -getScreenFractionSize(SWIPE_WIDTH);
+        getTouchDistance() < -getScreenPercentSize(SWIPE_WIDTH);
 
       if (isRightSwipe) {
         setCurtainWidth(EXPANDED_WIDTH);
@@ -53,11 +62,13 @@ function MenuCurtain(props: any) {
       } else {
         setCurtainWidth(touchStartWidth);
       }
+
+      touchStart = null;
     }
 
     function handleClick(e: any): void {
       const isLeftSideTouch: boolean =
-        e.clientX <= getScreenFractionSize(HINT_WIDTH);
+        e.clientX <= getScreenPercentSize(HINT_WIDTH);
       if (isLeftSideTouch) {
         setCurtainWidth(EXPANDED_WIDTH);
         touchStartWidth = EXPANDED_WIDTH;
@@ -66,7 +77,7 @@ function MenuCurtain(props: any) {
 
     function handleMouseMove(e: any): void {
       const isLeftSideHover: boolean =
-        e.clientX <= getScreenFractionSize(HINT_WIDTH);
+        e.clientX <= getScreenPercentSize(HINT_WIDTH);
 
       if (curtainWidthRef.current <= HINT_WIDTH) {
         setCurtainWidth(
@@ -108,7 +119,7 @@ function MenuCurtain(props: any) {
         <div
           className="overlay-content"
           style={{
-            scale: curtainWidth > HINT_WIDTH ? curtainWidth/100 : 0,
+            scale: curtainWidth > HINT_WIDTH ? curtainWidth / 100 : 0,
           }}
         >
           <TextLoadBtn />
