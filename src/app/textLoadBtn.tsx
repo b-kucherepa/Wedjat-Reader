@@ -47,10 +47,10 @@ function TextLoadBtn(props: any) {
 
   return (
     <div>
-      <button type="button" id="import-pfx-button">
+      <label>
         Select text file:
-      </button>
-      <input onChange={handleFileSelect} type="file" id="file-input" />
+        <input onChange={handleFileSelect} type="file" id="file-input" />
+      </label>
     </div>
   );
 }

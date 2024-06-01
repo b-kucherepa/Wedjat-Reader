@@ -4,9 +4,8 @@ import { RenderContext } from "./page";
 function BgLoadBtn(props: any) {
   const context = useContext(RenderContext);
 
-  function handleFileRead(e: any, readFiles: [string, string][], fileName: string) {
-    readFiles.push([e.currentTarget.result, fileName]);
-
+  function handleFileRead(e: any, readFiles: [string, string, number][], fileName: string, filelastModifiedDate: number) {
+    readFiles.push([e.currentTarget.result, fileName, filelastModifiedDate]);
     context.setValues({
       text: context.values.text,
       bgImages: readFiles,
@@ -21,27 +20,27 @@ function BgLoadBtn(props: any) {
       return;
     }
 
-    const readFiles: [string, string][] = [];
+    const readFiles: [string, string, number][] = [];
 
     for (let f of files) {
       let reader = new FileReader();
-      reader.onload = ((e)=>handleFileRead(e, readFiles, f.name));
+      reader.onload = ((e)=>handleFileRead(e, readFiles, f.name, f.lastModifiedDate));
       reader.readAsDataURL(f);
     }
   }
 
   return (
     <div>
-      <button type="button" id="import-pfx-button">
+      <label>
         Select background file:
-      </button>
-      <input
+        <input
         onChange={handleFileSelect}
         type="file"
         id="file-input"
         multiple={true}
         accept="image/png, image/jpeg"
       />
+      </label>
     </div>
   );
 }
