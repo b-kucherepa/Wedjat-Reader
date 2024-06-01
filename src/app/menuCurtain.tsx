@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import TextLoadBtn from "./textLoadBtn";
 import BgLoadBtn from "./bgLoadBtn";
 import BgSelect from "./bgSelect";
-import SlideshowOption from "./slideshowOption";
+import SlideshowStart from "./slideshowStart";
 
 function MenuCurtain(props: any) {
   const EXPANDED_WIDTH = 100;
@@ -125,6 +125,7 @@ function MenuCurtain(props: any) {
           <TextLoadBtn />
           <BgLoadBtn />
           <BgSelect />
+          <SlideshowStart onClick={() => setCurtainWidth(COLLAPSED_WIDTH)}/>
         </div>
       </div>
     </>
