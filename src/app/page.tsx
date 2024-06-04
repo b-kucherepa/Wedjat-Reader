@@ -1,51 +1,53 @@
 "use client";
 import { createContext, useEffect, useRef, useState } from "react";
 import { shiftArrayIndexInLoop, generateRandomBetween } from "./utils";
+import { BgImage } from "./customClasses";
 
 import MenuCurtain from "./menuCurtain";
 import RenderArea from "./renderArea";
 
-const DEFAULT_BG_IMAGE: [string, string, number] = [
-  "/back.jpg",
-  "default image",
-  Date.now(),
-];
+const DEFAULT_BG_IMAGE: BgImage = new BgImage("/back.jpg", "default image", Date.now());
+
+
+const DEFAULT_RENDER_VALUES: {
+  text: string;
+  bgImages: BgImage[];
+  imageIndex: number;
+} = {
+  text: `Swipe right or click the left side of screen to open menu, then click "select text file - Choose files" to load a text file`,
+  bgImages: [DEFAULT_BG_IMAGE],
+  imageIndex: 0,
+};
+
+const DEFAULT_SLIDESHOW_VALUES: {
+  interval: number;
+  isRandom: boolean;
+  isEnabled: boolean;
+} = {
+  interval: 1000,
+  isRandom: false,
+  isEnabled: false,
+};
 
 export const RenderContext = createContext({
-  values: {
-    text: `Swipe right or click the left side of screen to open menu, then click "select text file - Choose files" to load a text file`,
-    bgImages: [DEFAULT_BG_IMAGE],
-    imageIndex: 0,
-  },
+  values: DEFAULT_RENDER_VALUES,
   setValues: (_: any) => {
     _;
   },
 });
 
 export const SlideshowContext = createContext({
-  values: {
-    interval: 1000,
-    isRandom: false,
-    isEnabled: false,
-  },
+  values: DEFAULT_SLIDESHOW_VALUES,
   setValues: (_: any) => {
     _;
   },
 });
 
 export default function Main() {
-  const [renderValues, setRenderValues] = useState({
-    text: `Swipe right or click the left side of screen to open menu, then click "select text file - Choose files" to load a text file`,
-    bgImages: [DEFAULT_BG_IMAGE],
-    imageIndex: 0,
-  });
-
-  const [slideshowValues, setSlideshowValues] = useState({
-    interval: 2000,
-    isRandom: false,
-    isEnabled: false,
-  });
-
+  const [renderValues, setRenderValues] = useState(DEFAULT_RENDER_VALUES);
+  const [slideshowValues, setSlideshowValues] = useState(
+    DEFAULT_SLIDESHOW_VALUES
+  );
   const slideshowTimer = useRef(setTimeout(() => {}, 0));
 
   const renderContextHook = {
@@ -58,15 +60,14 @@ export default function Main() {
   };
 
   useEffect(() => {
-    console.log(renderValues.bgImages);
     document.body.style.backgroundImage =
-      `url(${renderValues.bgImages[renderValues.imageIndex][0]})` ??
+      `url(${renderValues.bgImages[renderValues.imageIndex].file})` ??
       DEFAULT_BG_IMAGE;
   });
 
   useEffect(() => {
     clearInterval(slideshowTimer.current);
-    
+
     if (slideshowValues.isEnabled) {
       slideshowTimer.current = setTimeout(() => {
         let indexShift = 0;

@@ -1,11 +1,20 @@
 import { useContext } from "react";
 import { RenderContext } from "./page";
+import { BgImage } from "./customClasses";
 
 function BgLoadBtn(props: any) {
   const context = useContext(RenderContext);
 
-  function handleFileRead(e: any, readFiles: [string, string, number][], fileName: string, filelastModifiedDate: number) {
-    readFiles.push([e.currentTarget.result, fileName, filelastModifiedDate]);
+  function handleFileRead(
+    e: any,
+    readFiles: BgImage[],
+    fileName: string,
+    fileLastModifiedDate: number
+  ) {
+    readFiles.push(
+      new BgImage(e.currentTarget.result, fileName, fileLastModifiedDate)
+    );
+
     context.setValues({
       text: context.values.text,
       bgImages: readFiles,
@@ -20,11 +29,12 @@ function BgLoadBtn(props: any) {
       return;
     }
 
-    const readFiles: [string, string, number][] = [];
+    const readFiles: BgImage[] = [];
 
     for (let f of files) {
       let reader = new FileReader();
-      reader.onload = ((e)=>handleFileRead(e, readFiles, f.name, f.lastModifiedDate));
+      reader.onload = (e) =>
+        handleFileRead(e, readFiles, f.name, f.lastModifiedDate);
       reader.readAsDataURL(f);
     }
   }
@@ -34,12 +44,12 @@ function BgLoadBtn(props: any) {
       <label>
         Select background file:
         <input
-        onChange={handleFileSelect}
-        type="file"
-        id="file-input"
-        multiple={true}
-        accept="image/png, image/jpeg"
-      />
+          onChange={handleFileSelect}
+          type="file"
+          id="file-input"
+          multiple={true}
+          accept="image/png, image/jpeg"
+        />
       </label>
     </div>
   );
