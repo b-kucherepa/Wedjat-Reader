@@ -4,12 +4,13 @@ import BgLoadBtn from "./bgLoadBtn";
 import BgSelect from "./bgSelect";
 import SlideshowStart from "./slideshowStart";
 import SlideshowOption from "./slideshowOption";
+import BgSort from "./bgSort";
 
-function MenuCurtain(props: any) {
-  const EXPANDED_WIDTH = 100;
-  const SWIPE_WIDTH = 20;
-  const HINT_WIDTH = 15;
-  const COLLAPSED_WIDTH = 0;
+function MenuCurtain() {
+  const EXPANDED_WIDTH: number = 100;
+  const SWIPE_WIDTH: number = 20;
+  const HINT_WIDTH: number = 15;
+  const COLLAPSED_WIDTH: number = 0;
 
   const [curtainWidth, setCurtainWidth] = useState(COLLAPSED_WIDTH);
   const curtainWidthRef = useRef(curtainWidth);
@@ -28,7 +29,7 @@ function MenuCurtain(props: any) {
       return (window.innerWidth * percent) / 100;
     }
 
-    function handleTouchStart(e: any): void {
+    function handleTouchStart(e: TouchEvent): void {
       touchEnd = null;
       touchStartWidth = curtainWidthRef.current;
 
@@ -43,14 +44,14 @@ function MenuCurtain(props: any) {
       }
     }
 
-    function handleTouchMove(e: any): void {
+    function handleTouchMove(e: TouchEvent): void {
       touchEnd = e.touches[0].clientX;
       setCurtainWidth(
         touchStartWidth - (100 * getTouchDistance()) / window.innerWidth
       );
     }
 
-    function handleTouchEnd(e: any): void {
+    function handleTouchEnd(): void {
       const isLeftSwipe =
         getTouchDistance() > getScreenPercentSize(SWIPE_WIDTH);
       const isRightSwipe =
@@ -67,7 +68,7 @@ function MenuCurtain(props: any) {
       touchStart = null;
     }
 
-    function handleClick(e: any): void {
+    function handleClick(e: MouseEvent): void {
       const isLeftSideTouch: boolean =
         e.clientX <= getScreenPercentSize(HINT_WIDTH);
       if (isLeftSideTouch) {
@@ -76,7 +77,7 @@ function MenuCurtain(props: any) {
       }
     }
 
-    function handleMouseMove(e: any): void {
+    function handleMouseMove(e: MouseEvent): void {
       const isLeftSideHover: boolean =
         e.clientX <= getScreenPercentSize(HINT_WIDTH);
 
@@ -104,7 +105,7 @@ function MenuCurtain(props: any) {
   return (
     <>
       <div
-        id={props.id}
+        id="navCurtain"
         className="overlay"
         style={{
           width: `${curtainWidth}%`,

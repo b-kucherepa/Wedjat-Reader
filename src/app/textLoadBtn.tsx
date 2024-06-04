@@ -1,37 +1,40 @@
 import languageEncoding from "detect-file-encoding-and-language";
-import { useContext } from "react";
+import { ChangeEvent, useContext } from "react";
 import { RenderContext } from "./page";
 
-function TextLoadBtn(props: any) {
+function TextLoadBtn() {
   const context = useContext(RenderContext);
 
-  async function getEncoding(file: any): Promise<string> {
-    languageEncoding(file).then((fileInfo) => console.log(fileInfo.encoding));
+  async function getEncoding(file: File): Promise<string> {
     return languageEncoding(file).then(
       (fileInfo) => fileInfo.encoding ?? "UTF-8"
     );
   }
 
-  function handleFileRead(e: any) {
-    const reader = e.currentTarget;
-    context.setValues({
-      text: reader.result,
-      bgImages: context.values.bgImages,
-      imageIndex: context.values.imageIndex,
-    });
+  function handleFileRead(e: ProgressEvent<FileReader>) {
+    const result: string | undefined = (
+      e.currentTarget as FileReader
+    ).result?.toString();
+
+    if (result) {
+      context.setValues({
+        ...context.values,
+        text: result,
+      });
+    }
   }
 
-  function handleFileSelect(e: any) {
-    let files = e.target.files;
-    if (files.length < 1) {
+  function handleFileSelect(e: ChangeEvent<HTMLInputElement>) {
+    let files: FileList | null = e.target.files;
+    if (!files) {
       alert("Please, select a file...");
       return;
+    } else {
+      let file: File = files[0];
+      let reader = new FileReader();
+      reader.onload = handleFileRead;
+      getEncoding(file).then((encoding) => reader.readAsText(file, encoding));
     }
-
-    let file = files[0];
-    let reader = new FileReader();
-    reader.onload = handleFileRead;
-    getEncoding(file).then((encoding) => reader.readAsText(file, encoding));
   }
 
   /*function onFileLoaded(e: any) {

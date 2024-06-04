@@ -97,8 +97,8 @@ export default function Main() {
     <main id="mainText" className={`size-full	bg-cover`}>
       <RenderContext.Provider value={renderContextHook}>
         <SlideshowContext.Provider value={slideshowContextHook}>
-          <MenuCurtain id="navCurtain"></MenuCurtain>
-          <RenderArea id="renderArea"></RenderArea>
+          <MenuCurtain></MenuCurtain>
+          <RenderArea></RenderArea>
         </SlideshowContext.Provider>
       </RenderContext.Provider>
     </main>

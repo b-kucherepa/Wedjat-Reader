@@ -3,9 +3,7 @@ export function shiftArrayIndexInLoop(
   currentIndex: number,
   shiftBy: number
 ): number {
-  const rawNewIndex = (currentIndex + shiftBy)%arrayLength;
-
-  console.log(rawNewIndex, arrayLength, currentIndex);
+  const rawNewIndex: number = (currentIndex + shiftBy)%arrayLength;
 
   if (rawNewIndex < 0) {
     return arrayLength - 1 + rawNewIndex;
@@ -15,7 +13,7 @@ export function shiftArrayIndexInLoop(
 }
 
 export function generateRandomBetween(min: number, max: number) {
-  const minCeiled = Math.ceil(min);
-  const maxFloored = Math.floor(max);
+  const minCeiled: number = Math.ceil(min);
+  const maxFloored: number = Math.floor(max);
   return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
 }

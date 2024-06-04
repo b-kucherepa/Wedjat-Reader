@@ -12,9 +12,8 @@ function SlideshowStart(props: any) {
           type="button"
           onClick={() =>
             context.setValues({
-              interval: context.values.interval,
+              ...context.values,
               isEnabled: !context.values.isEnabled,
-              isRandom: context.values.isRandom,
             })
           }
         >

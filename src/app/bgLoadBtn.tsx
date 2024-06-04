@@ -1,19 +1,23 @@
-import { useContext } from "react";
+import { ChangeEvent, useContext } from "react";
 import { RenderContext } from "./page";
 import { BgImage } from "./customClasses";
 
-function BgLoadBtn(props: any) {
+function BgLoadBtn() {
   const context = useContext(RenderContext);
 
   function handleFileRead(
-    e: any,
+    e: ProgressEvent<FileReader>,
     readFiles: BgImage[],
     fileName: string,
-    fileLastModifiedDate: number
+    fileLastModified: number
   ) {
-    readFiles.push(
-      new BgImage(e.currentTarget.result, fileName, fileLastModifiedDate)
-    );
+    const result: string | undefined = (
+      e.currentTarget as FileReader
+    ).result?.toString();
+
+    if (result) {
+      readFiles.push(new BgImage(result, fileName, fileLastModified));
+    }
 
     context.setValues({
       ...context.values,
@@ -22,20 +26,21 @@ function BgLoadBtn(props: any) {
     });
   }
 
-  function handleFileSelect(e: any) {
-    let files = e.target.files;
-    if (files.length < 1) {
+  function handleFileSelect(e: ChangeEvent<HTMLInputElement>) {
+    let files: FileList | null = e.target.files;
+
+    if (!files) {
       alert("Please, select a file...");
       return;
-    }
+    } else {
+      const readFiles: BgImage[] = [];
 
-    const readFiles: BgImage[] = [];
-
-    for (let f of files) {
-      let reader = new FileReader();
-      reader.onload = (e) =>
-        handleFileRead(e, readFiles, f.name, f.lastModifiedDate);
-      reader.readAsDataURL(f);
+      for (let f of files) {
+        let reader = new FileReader();
+        reader.onload = (e) =>
+          handleFileRead(e, readFiles, f.name, f.lastModified);
+        reader.readAsDataURL(f);
+      }
     }
   }
 

@@ -1,10 +1,10 @@
-import { ChangeEvent, useContext } from "react";
+import { ChangeEvent, ReactElement, useContext } from "react";
 import { RenderContext } from "./page";
 
 function BgSelect(): JSX.Element {
   const context = useContext(RenderContext);
 
-  const options = context.values.bgImages.map((image, index) => {
+  const options: ReactElement[] = context.values.bgImages.map((image, index) => {
     return (
       <option
         key={`option-${index}`}
