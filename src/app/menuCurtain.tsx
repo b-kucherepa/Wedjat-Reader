@@ -126,6 +126,7 @@ function MenuCurtain() {
         >
           <TextLoadBtn />
           <BgLoadBtn />
+          <BgSort />
           <BgSelect />
           <SlideshowOption/>
           <SlideshowStart onClick={() => setCurtainWidth(COLLAPSED_WIDTH)}/>

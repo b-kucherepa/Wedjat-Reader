@@ -61,7 +61,7 @@ export default function Main() {
 
   useEffect(() => {
     document.body.style.backgroundImage =
-      `url(${renderValues.bgImages[renderValues.imageIndex].file})` ??
+      `url(${renderValues.bgImages[renderValues.imageIndex]?.file})` ??
       DEFAULT_BG_IMAGE;
   });
 
@@ -92,6 +92,9 @@ export default function Main() {
       }, slideshowValues.interval);
     }
   }, [slideshowValues, renderValues]);
+
+  console.log(renderValues.imageIndex, typeof (renderValues.imageIndex));
+
 
   return (
     <main id="mainText" className={`size-full	bg-cover`}>
