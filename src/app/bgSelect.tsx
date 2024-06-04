@@ -6,7 +6,11 @@ function BgSelect(): JSX.Element {
 
   const options = context.values.bgImages.map((image, index) => {
     return (
-      <option key={`option-${index}`} value={index} selected={index === context.values.imageIndex}>
+      <option
+        key={`option-${index}`}
+        value={index}
+        selected={index === context.values.imageIndex}
+      >
         {image.name}
       </option>
     );
@@ -14,8 +18,7 @@ function BgSelect(): JSX.Element {
 
   function handleDropdownSelect(e: ChangeEvent<HTMLSelectElement>): void {
     context.setValues({
-      text: context.values.text,
-      bgImages: context.values.bgImages,
+      ...context.values,
       imageIndex: e.target.value,
     });
   }

@@ -5,9 +5,8 @@ function SlideshowOption(props: any) {
   const context = useContext(SlideshowContext);
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
     context.setValues({
-      interval: context.values.interval,
+      ...context.values,
       isRandom: e.target.checked,
-      isEnabled: context.values.isEnabled,
     });
   }
 

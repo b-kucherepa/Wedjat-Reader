@@ -5,9 +5,9 @@ function SlideshowStart(props: any) {
   const context = useContext(SlideshowContext);
 
   return (
-    <>
+    <div>
       <label>
-        Slideshow:
+        Slideshow: 
         <button
           type="button"
           onClick={() =>
@@ -21,7 +21,7 @@ function SlideshowStart(props: any) {
           {context.values.isEnabled ? "stop" : "start"}
         </button>
       </label>
-    </>
+    </div>
   );
 }
 

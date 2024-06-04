@@ -16,7 +16,7 @@ function BgLoadBtn(props: any) {
     );
 
     context.setValues({
-      text: context.values.text,
+      ...context.values,
       bgImages: readFiles,
       imageIndex: 0,
     });
