@@ -4,18 +4,16 @@ import { RenderContext } from "./page";
 function BgSelect(): JSX.Element {
   const context = useContext(RenderContext);
 
-  const options: ReactElement[] = context.values.bgImages.map((image, index) => {
-    const date = new Date(image.modified)
-    return (
-      <option
-        key={`option-${index}`}
-        value={index}
-        selected={index === context.values.imageIndex}
-      >
-        {image.name}, last modified: {date.toLocaleString()};
-      </option>
-    );
-  });
+  const options: ReactElement[] = context.values.bgImages.map(
+    (image, index) => {
+      const date = new Date(image.modified);
+      return (
+        <option key={`option-${index}`} value={index}>
+          {image.name}, last modified: {date.toLocaleString()};
+        </option>
+      );
+    }
+  );
 
   function handleDropdownSelect(e: ChangeEvent<HTMLSelectElement>): void {
     context.setValues({
@@ -32,10 +30,11 @@ function BgSelect(): JSX.Element {
         style={{
           backgroundSize: "cover",
           backgroundImage: `url(${
-            context.values.bgImages[context.values.imageIndex]?.file??""
+            context.values.bgImages[context.values.imageIndex]?.file ?? ""
           })`,
         }}
         onChange={handleDropdownSelect}
+        value={context.values.imageIndex}
       >
         {options}
       </select>

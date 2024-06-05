@@ -6,7 +6,7 @@ import { BgImage } from "./customClasses";
 import MenuCurtain from "./menuCurtain";
 import RenderArea from "./renderArea";
 
-const DEFAULT_BG_IMAGE: BgImage = new BgImage("/back.jpg", "default image", Date.now());
+const DEFAULT_BG_IMAGE: BgImage = new BgImage("/back.jpg", "default image", 0);
 
 
 const DEFAULT_RENDER_VALUES: {
