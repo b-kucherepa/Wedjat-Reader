@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import TextLoadBtn from "./textLoadBtn";
 import BgLoadBtn from "./bgLoadBtn";
 import BgSelect from "./bgSelect";
-import SlideshowStart from "./slideshowStart";
-import SlideshowOption from "./slideshowOption";
+import ShowStart from "./showStart";
+import RandomShowOption from "./randomShowOption";
 
 function MenuCurtain() {
   const EXPANDED_WIDTH: number = 100;
@@ -126,8 +126,8 @@ function MenuCurtain() {
           <TextLoadBtn />
           <BgLoadBtn />
           <BgSelect />
-          <SlideshowOption />
-          <SlideshowStart onClick={() => setCurtainWidth(COLLAPSED_WIDTH)} />
+          <RandomShowOption />
+          <ShowStart onClick={() => setCurtainWidth(COLLAPSED_WIDTH)} />
         </tbody>
       </table>
     </div>

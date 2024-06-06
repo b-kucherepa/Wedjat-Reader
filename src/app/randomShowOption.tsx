@@ -1,7 +1,7 @@
 import { ChangeEvent, useContext } from "react";
 import { SlideshowContext } from "./page";
 
-function SlideshowOption() {
+function RandomShowOption() {
   const context = useContext(SlideshowContext);
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
     context.setValues({
@@ -29,4 +29,4 @@ function SlideshowOption() {
   );
 }
 
-export default SlideshowOption;
+export default RandomShowOption;
