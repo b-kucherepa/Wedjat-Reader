@@ -5,10 +5,20 @@ function SlideshowStart(props: any) {
   const context = useContext(SlideshowContext);
 
   return (
-    <div>
-      <label>
-        Slideshow: 
+    <tr>
+      <td>
+        <label
+          htmlFor="start-slideshow-button"
+          className="place-content-center"
+        >
+          Slideshow:{" "}
+        </label>{" "}
+      </td>
+
+      <td>
         <button
+          id="start-slideshow-button"
+          className="font-bold"
           type="button"
           onClick={() =>
             context.setValues({
@@ -18,9 +28,9 @@ function SlideshowStart(props: any) {
           }
         >
           {context.values.isEnabled ? "stop" : "start"}
-        </button>
-      </label>
-    </div>
+        </button>{" "}
+      </td>
+    </tr>
   );
 }
 

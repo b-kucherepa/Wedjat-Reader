@@ -1,7 +1,7 @@
 import { ChangeEvent, useContext } from "react";
 import { SlideshowContext } from "./page";
 
-function SlideshowOption(props: any) {
+function SlideshowOption() {
   const context = useContext(SlideshowContext);
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
     context.setValues({
@@ -11,11 +11,21 @@ function SlideshowOption(props: any) {
   }
 
   return (
-    <div>
-      <label>
-        Randomize slideshow: <input type="checkbox" onChange={handleChange} />
-      </label>
-    </div>
+    <tr>
+      <td>
+        <label htmlFor="randomize-button" className="place-content-center">
+          Randomize slideshow:
+        </label>{" "}
+      </td>
+
+      <td>
+        <input
+          id="randomize-button"
+          type="checkbox"
+          onChange={handleChange}
+        />{" "}
+      </td>
+    </tr>
   );
 }
 

@@ -7,6 +7,7 @@ function BgSort() {
 
   enum SortBy {
     Name,
+    Size,
     Modified,
     None,
   }
@@ -32,6 +33,11 @@ function BgSort() {
         case SortBy.Name:
           indexedImageArray.sort(
             (a: any, b: any) => a.imageData.name - b.imageData.name
+          );
+          break;
+        case SortBy.Size:
+          indexedImageArray.sort(
+            (a: any, b: any) => a.imageData.size - b.imageData.size
           );
           break;
         case SortBy.Modified:
@@ -74,16 +80,33 @@ function BgSort() {
     }
   }
   return (
-    <label>
-      Sort by:
-      <button className="mx-2 w-16 text-left" type="button" onClick={() => sortImages(SortBy.Name)}>
+    <div className="flex flex-col mx-2 w-24 items-start">
+      <label>Sort by:</label>
+      <button
+        type="button"
+        className="font-bold"
+        onClick={() => sortImages(SortBy.Name)}
+      >
         name {getSortIcon(SortBy.Name)}
       </button>
-      <button className="mx-2 w-24 text-left" type="button" onClick={() => sortImages(SortBy.Modified)}>
+      <button
+        type="button"
+        className="font-bold"
+        onClick={() => sortImages(SortBy.Size)}
+      >
+        size {getSortIcon(SortBy.Size)}
+      </button>
+      <button
+        type="button"
+        className="font-bold"
+        onClick={() => sortImages(SortBy.Modified)}
+      >
         modified {getSortIcon(SortBy.Modified)}
       </button>
-    </label>
+    </div>
   );
 }
 
 export default BgSort;
+
+//font-bold bg-sky-300 p-1 border-cyan-700 border-solid border-4 rounded-lg

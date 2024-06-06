@@ -49,12 +49,20 @@ function TextLoadBtn() {
   }*/
 
   return (
-    <div>
-      <label>
-        Select text file:
-        <input onChange={handleFileSelect} type="file" id="file-input" />
-      </label>
-    </div>
+    <tr>
+      <td>
+        <label htmlFor="text-file-input" className="place-content-center">
+          Select text file:
+        </label>
+      </td>
+      <td>
+        <input
+          onChange={handleFileSelect}
+          type="file"
+          id="text-file-input"
+        />
+      </td>
+    </tr>
   );
 }
 

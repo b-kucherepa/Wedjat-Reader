@@ -9,6 +9,7 @@ function BgLoadBtn() {
     e: ProgressEvent<FileReader>,
     readFiles: BgImage[],
     fileName: string,
+    fileSize: number,
     fileLastModified: number
   ) {
     const result: string | undefined = (
@@ -16,7 +17,7 @@ function BgLoadBtn() {
     ).result?.toString();
 
     if (result) {
-      readFiles.push(new BgImage(result, fileName, fileLastModified));
+      readFiles.push(new BgImage(result, fileName, fileSize, fileLastModified));
     }
 
     context.setValues({
@@ -38,25 +39,29 @@ function BgLoadBtn() {
       for (let f of files) {
         let reader = new FileReader();
         reader.onload = (e) =>
-          handleFileRead(e, readFiles, f.name, f.lastModified);
+          handleFileRead(e, readFiles, f.name, f.size, f.lastModified);
         reader.readAsDataURL(f);
       }
     }
   }
 
   return (
-    <div>
-      <label>
-        Select background file:
+    <tr>
+      <td>
+        <label htmlFor="bg-files-input" className="place-content-center">
+          Select background file:
+        </label>
+      </td>
+      <td>
         <input
           onChange={handleFileSelect}
           type="file"
-          id="file-input"
+          id="bg-files-input"
           multiple={true}
           accept="image/png, image/jpeg"
         />
-      </label>
-    </div>
+      </td>
+    </tr>
   );
 }
 

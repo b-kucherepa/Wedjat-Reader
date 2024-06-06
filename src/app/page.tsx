@@ -6,7 +6,7 @@ import { BgImage } from "./customClasses";
 import MenuCurtain from "./menuCurtain";
 import RenderArea from "./renderArea";
 
-const DEFAULT_BG_IMAGE: BgImage = new BgImage("/back.jpg", "default image", 0);
+const DEFAULT_BG_IMAGE: BgImage = new BgImage("/back.jpg", "default image", 378940, 0);
 
 
 const DEFAULT_RENDER_VALUES: {
@@ -92,9 +92,6 @@ export default function Main() {
       }, slideshowValues.interval);
     }
   }, [slideshowValues, renderValues]);
-
-  console.log(renderValues.imageIndex, typeof (renderValues.imageIndex));
-
 
   return (
     <main id="mainText" className={`size-full	bg-cover`}>

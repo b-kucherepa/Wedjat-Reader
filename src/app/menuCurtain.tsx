@@ -4,7 +4,6 @@ import BgLoadBtn from "./bgLoadBtn";
 import BgSelect from "./bgSelect";
 import SlideshowStart from "./slideshowStart";
 import SlideshowOption from "./slideshowOption";
-import BgSort from "./bgSort";
 
 function MenuCurtain() {
   const EXPANDED_WIDTH: number = 100;
@@ -103,36 +102,33 @@ function MenuCurtain() {
   }, []);
 
   return (
-    <>
-      <div
-        id="navCurtain"
-        className="overlay"
+    <div
+      id="navCurtain"
+      className="h-full w-0 fixed order-1 top-0 left-0 bg-black overflow-x-hidden duration-500"
+      style={{
+        width: `${curtainWidth}%`,
+      }}
+    >
+      <button
+        className="absolute top-2 right-8 text-6xl text-center"
+        onClick={() => setCurtainWidth(COLLAPSED_WIDTH)}
+      >
+        &times;
+      </button>
+
+      <table
+        className="table border-separate border-spacing-2 top-1/4 relative text-left mx-auto my-0 duration-500"
         style={{
-          width: `${curtainWidth}%`,
+          scale: curtainWidth > HINT_WIDTH ? curtainWidth / 100 : 0,
         }}
       >
-        <button
-          className="closebtn"
-          onClick={() => setCurtainWidth(COLLAPSED_WIDTH)}
-        >
-          &times;
-        </button>
-
-        <div
-          className="overlay-content"
-          style={{
-            scale: curtainWidth > HINT_WIDTH ? curtainWidth / 100 : 0,
-          }}
-        >
-          <TextLoadBtn />
-          <BgLoadBtn />
-          <BgSort />
-          <BgSelect />
-          <SlideshowOption/>
-          <SlideshowStart onClick={() => setCurtainWidth(COLLAPSED_WIDTH)}/>
-        </div>
-      </div>
-    </>
+        <TextLoadBtn />
+        <BgLoadBtn />
+        <BgSelect />
+        <SlideshowOption />
+        <SlideshowStart onClick={() => setCurtainWidth(COLLAPSED_WIDTH)} />
+      </table>
+    </div>
   );
 }
 
