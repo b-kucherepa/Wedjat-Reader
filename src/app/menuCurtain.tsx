@@ -117,16 +117,18 @@ function MenuCurtain() {
       </button>
 
       <table
-        className="table border-separate border-spacing-2 top-1/4 relative text-left mx-auto my-0 duration-500"
+        className="table border-separate border-spacing-2 top-1/4 relative text-left w-4/5 mx-auto my-0 duration-500"
         style={{
           scale: curtainWidth > HINT_WIDTH ? curtainWidth / 100 : 0,
         }}
       >
-        <TextLoadBtn />
-        <BgLoadBtn />
-        <BgSelect />
-        <SlideshowOption />
-        <SlideshowStart onClick={() => setCurtainWidth(COLLAPSED_WIDTH)} />
+        <tbody>
+          <TextLoadBtn />
+          <BgLoadBtn />
+          <BgSelect />
+          <SlideshowOption />
+          <SlideshowStart onClick={() => setCurtainWidth(COLLAPSED_WIDTH)} />
+        </tbody>
       </table>
     </div>
   );

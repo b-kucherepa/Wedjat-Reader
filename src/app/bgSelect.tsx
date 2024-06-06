@@ -11,8 +11,9 @@ function BgSelect(): JSX.Element {
       const date = new Date(image.modified);
       return (
         <option key={`option-${index}`} value={index}>
-          {image.name}, size: {formatBytes(image.size)}, last modified:{" "}
-          {date.toLocaleString()};
+          {image.name},
+          size: {formatBytes(image.size)}, 
+          last modified: {date.toLocaleString()};
         </option>
       );
     }
@@ -36,7 +37,7 @@ function BgSelect(): JSX.Element {
         <div className="flex flex-row">
           <select
             id="bgList"
-            className="h-auto bg-black shrink truncate"
+            className="w-full h-auto bg-black shrink text-pretty truncate"
             style={{
               backgroundSize: "cover",
               backgroundImage: `url(${
