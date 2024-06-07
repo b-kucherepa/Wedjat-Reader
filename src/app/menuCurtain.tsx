@@ -118,43 +118,40 @@ function MenuCurtain() {
       </button>
 
       <div
-        className="flex flex-col align-evenly basis-full relative text-left w-full h-full px-16 py-16 duration-500"
+        className="flex flex-col align-evenly basis-full gap-2 relative text-left w-full h-full px-16 py-16 duration-500"
         style={{
           scale: curtainWidth > HINT_WIDTH ? curtainWidth / 100 : 0,
         }}
       >
         <div className="flex flex-row h-content w-full items-start content-start gap-4">
-          <label
-            htmlFor="bg-files-input"
-            className="place-content-center w-1/4 shrink-0"
-          >
-            Select background file:
+          <label className="place-content-center w-1/4 shrink-0">
+            Select files for:
           </label>
-          <TextLoadBtn />
-        </div>
-
-        <div className="flex flex-row h-content w-full items-start content-start gap-4">
-          <label
-            htmlFor="text-file-input"
-            className="place-content-center w-1/4 shrink-0"
-          >
-            Select text file:
+          <label className="place-content-center">
+            text:
+            <TextLoadBtn />
           </label>
-          <BgLoadBtn />
+          <label className="place-content-center">
+            background images:
+            <BgLoadBtn />
+          </label>
         </div>
-
+        <hr />
         <div className="flex flex-row h-full w-full items-start content-start gap-4">
-          <label htmlFor="bgList" className="place-content-center w-1/4 shrink-0">
+          <label
+            htmlFor="bgList"
+            className="place-content-center w-1/4 shrink-0"
+          >
             Background:
           </label>
-          <label className="h-full">
-            Select: <BgSelect />
+          <label className="h-full flex flex-col">
+            select: <BgSelect />
           </label>
           <label className="w-28 h-full shrink-0">
-            Sort by: <BgSort />
+            sort by: <BgSort />
           </label>
         </div>
-
+        <hr />
         <div className="flex flex-row h-content w-full items-start content-start gap-4">
           <label
             htmlFor="randomize-button"
@@ -164,7 +161,7 @@ function MenuCurtain() {
           </label>
           <RandomShowOption />
         </div>
-
+        <hr />
         <div className="flex flex-row h-content w-full items-start content-start gap-4">
           <label
             htmlFor="start-slideshow-button"
