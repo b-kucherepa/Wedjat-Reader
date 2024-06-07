@@ -11,21 +11,7 @@ function RandomShowOption() {
   }
 
   return (
-    <tr>
-      <td>
-        <label htmlFor="randomize-button" className="place-content-center">
-          Randomize slideshow:
-        </label>{" "}
-      </td>
-
-      <td>
-        <input
-          id="randomize-button"
-          type="checkbox"
-          onChange={handleChange}
-        />{" "}
-      </td>
-    </tr>
+    <input id="randomize-button" type="checkbox" onChange={handleChange} />
   );
 }
 

@@ -48,22 +48,7 @@ function TextLoadBtn() {
     alert(content);
   }*/
 
-  return (
-    <tr>
-      <td>
-        <label htmlFor="text-file-input" className="place-content-center">
-          Select text file:
-        </label>
-      </td>
-      <td>
-        <input
-          onChange={handleFileSelect}
-          type="file"
-          id="text-file-input"
-        />
-      </td>
-    </tr>
-  );
+  return <input onChange={handleFileSelect} type="file" id="text-file-input" />;
 }
 
 export default TextLoadBtn;

@@ -4,6 +4,7 @@ import BgLoadBtn from "./bgLoadBtn";
 import BgSelect from "./bgSelect";
 import ShowStart from "./showStart";
 import RandomShowOption from "./randomShowOption";
+import BgSort from "./bgSort";
 
 function MenuCurtain() {
   const EXPANDED_WIDTH: number = 100;
@@ -116,20 +117,64 @@ function MenuCurtain() {
         &times;
       </button>
 
-      <table
-        className="table border-separate border-spacing-2 top-1/4 relative text-left w-4/5 mx-auto my-0 duration-500"
+      <div
+        className="flex flex-col align-evenly basis-full relative text-left w-full h-full px-16 py-16 duration-500"
         style={{
           scale: curtainWidth > HINT_WIDTH ? curtainWidth / 100 : 0,
         }}
       >
-        <tbody>
+        <div className="flex flex-row h-content w-full items-start content-start gap-4">
+          <label
+            htmlFor="bg-files-input"
+            className="place-content-center w-1/4 shrink-0"
+          >
+            Select background file:
+          </label>
           <TextLoadBtn />
+        </div>
+
+        <div className="flex flex-row h-content w-full items-start content-start gap-4">
+          <label
+            htmlFor="text-file-input"
+            className="place-content-center w-1/4 shrink-0"
+          >
+            Select text file:
+          </label>
           <BgLoadBtn />
-          <BgSelect />
+        </div>
+
+        <div className="flex flex-row h-full w-full items-start content-start gap-4">
+          <label htmlFor="bgList" className="place-content-center w-1/4 shrink-0">
+            Background:
+          </label>
+          <label className="h-full">
+            Select: <BgSelect />
+          </label>
+          <label className="w-28 h-full shrink-0">
+            Sort by: <BgSort />
+          </label>
+        </div>
+
+        <div className="flex flex-row h-content w-full items-start content-start gap-4">
+          <label
+            htmlFor="randomize-button"
+            className="place-content-center w-1/4 shrink-0"
+          >
+            Randomize slideshow:
+          </label>
           <RandomShowOption />
+        </div>
+
+        <div className="flex flex-row h-content w-full items-start content-start gap-4">
+          <label
+            htmlFor="start-slideshow-button"
+            className="place-content-center w-1/4 shrink-0"
+          >
+            Slideshow:
+          </label>
           <ShowStart onClick={() => setCurtainWidth(COLLAPSED_WIDTH)} />
-        </tbody>
-      </table>
+        </div>
+      </div>
     </div>
   );
 }

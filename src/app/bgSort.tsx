@@ -80,8 +80,7 @@ function BgSort() {
     }
   }
   return (
-    <div className="flex flex-col mx-2 w-24 items-start">
-      <label>Sort by:</label>
+    <div className="flex flex-col items-start justify-between">
       <button
         type="button"
         className="font-bold"

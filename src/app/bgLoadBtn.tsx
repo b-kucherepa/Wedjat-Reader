@@ -46,22 +46,13 @@ function BgLoadBtn() {
   }
 
   return (
-    <tr>
-      <td>
-        <label htmlFor="bg-files-input" className="place-content-center">
-          Select background file:
-        </label>
-      </td>
-      <td>
-        <input
-          onChange={handleFileSelect}
-          type="file"
-          id="bg-files-input"
-          multiple={true}
-          accept="image/png, image/jpeg"
-        />
-      </td>
-    </tr>
+    <input
+      onChange={handleFileSelect}
+      type="file"
+      id="bg-files-input"
+      multiple={true}
+      accept="image/png, image/jpeg"
+    />
   );
 }
 
