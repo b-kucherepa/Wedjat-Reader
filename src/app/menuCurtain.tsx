@@ -5,6 +5,7 @@ import BgSelect from "./bgSelect";
 import ShowStart from "./showStart";
 import RandomShowOption from "./randomShowOption";
 import BgSort from "./bgSort";
+import IntervalShowOption from "./intervalShowOption";
 
 function MenuCurtain() {
   const EXPANDED_WIDTH: number = 100;
@@ -128,20 +129,15 @@ function MenuCurtain() {
             Select files for:
           </label>
           <label className="place-content-center">
-            text:
-            <TextLoadBtn />
+            text: <TextLoadBtn />
           </label>
           <label className="place-content-center">
-            background images:
-            <BgLoadBtn />
+            background images: <BgLoadBtn />
           </label>
         </div>
         <hr />
         <div className="flex flex-row h-full w-full items-start content-start gap-4">
-          <label
-            htmlFor="bgList"
-            className="place-content-center w-1/4 shrink-0"
-          >
+          <label className="place-content-center w-1/4 shrink-0">
             Background:
           </label>
           <label className="h-full flex flex-col">
@@ -152,24 +148,19 @@ function MenuCurtain() {
           </label>
         </div>
         <hr />
-        <div className="flex flex-row h-content w-full items-start content-start gap-4">
-          <label
-            htmlFor="randomize-button"
-            className="place-content-center w-1/4 shrink-0"
-          >
-            Randomize slideshow:
-          </label>
-          <RandomShowOption />
-        </div>
-        <hr />
-        <div className="flex flex-row h-content w-full items-start content-start gap-4">
-          <label
-            htmlFor="start-slideshow-button"
-            className="place-content-center w-1/4 shrink-0"
-          >
+        <div className="flex flex-row h-content items-center w-full items-start content-start gap-4">
+          <label className="place-content-center w-1/4 shrink-0">
             Slideshow:
           </label>
-          <ShowStart onClick={() => setCurtainWidth(COLLAPSED_WIDTH)} />
+          <label className="place-content-center">
+            interval (s): <IntervalShowOption />
+          </label>
+          <label className="place-content-center">
+            randomize: <RandomShowOption />
+          </label>
+          <div className="place-content-center">
+            <ShowStart onClick={() => setCurtainWidth(COLLAPSED_WIDTH)} />
+          </div>
         </div>
       </div>
     </div>

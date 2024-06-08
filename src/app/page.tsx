@@ -24,7 +24,7 @@ const DEFAULT_SLIDESHOW_VALUES: {
   isRandom: boolean;
   isEnabled: boolean;
 } = {
-  interval: 1000,
+  interval: 5000,
   isRandom: false,
   isEnabled: false,
 };
