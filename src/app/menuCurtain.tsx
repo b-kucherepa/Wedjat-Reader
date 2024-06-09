@@ -106,63 +106,69 @@ function MenuCurtain() {
   return (
     <div
       id="navCurtain"
-      className="h-full w-0 fixed order-1 top-0 left-0 bg-black overflow-x-hidden duration-500"
+      className="h-full w-0 fixed z-1 top-0 left-0  bg-black overflow-x-hidden duration-500"
       style={{
         width: `${curtainWidth}%`,
       }}
     >
-      <button
-        className="absolute top-2 right-8 text-6xl text-center"
-        onClick={() => setCurtainWidth(COLLAPSED_WIDTH)}
-      >
-        &times;
-      </button>
-
       <div
-        className="flex flex-col align-evenly basis-full gap-2 relative text-left w-full h-full px-16 py-16 duration-500"
+        className="grid grid-cols-4 auto-rows-min gap-2 justify-stretch items-start relative text-left w-full h-full px-8 py-16 duration-500"
         style={{
           scale: curtainWidth > HINT_WIDTH ? curtainWidth / 100 : 0,
         }}
       >
-        <div className="flex flex-row h-content w-full items-start content-start gap-4">
-          <label className="place-content-center w-1/4 shrink-0">
-            Select files for:
-          </label>
-          <label className="place-content-center">
-            text: <TextLoadBtn />
-          </label>
-          <label className="place-content-center">
-            background images: <BgLoadBtn />
-          </label>
+        <label className="shrink-0 row-span-2">Select files for:</label>
+
+        <label>text:</label>
+        <div className="col-span-2">
+          <TextLoadBtn />
         </div>
-        <hr />
-        <div className="flex flex-row h-full w-full items-start content-start gap-4">
-          <label className="place-content-center w-1/4 shrink-0">
-            Background:
-          </label>
-          <label className="h-full flex flex-col">
-            select: <BgSelect />
-          </label>
-          <label className="w-28 h-full shrink-0">
-            sort by: <BgSort />
-          </label>
+
+        <label>back&shy;ground:</label>
+        <div className="col-span-2">
+          <BgLoadBtn />
         </div>
-        <hr />
-        <div className="flex flex-row h-content items-center w-full items-start content-start gap-4">
-          <label className="place-content-center w-1/4 shrink-0">
-            Slideshow:
-          </label>
-          <label className="place-content-center">
-            interval (s): <IntervalShowOption />
-          </label>
-          <label className="place-content-center">
-            randomize: <RandomShowOption />
-          </label>
-          <div className="place-content-center">
-            <ShowStart onClick={() => setCurtainWidth(COLLAPSED_WIDTH)} />
-          </div>
+
+        <hr className="col-span-4" />
+
+        <label className="shrink-0 row-span-2">Back&shy;ground:</label>
+
+        <label>sort by:</label>
+        <div className="col-span-2 flex flex-row justify-between items-start">
+          <BgSort />
+        </div>
+
+        <label>select:</label>
+        <div className="col-span-2 h-[50vh]	row-span-auto">
+          <BgSelect />
+        </div>
+
+        <hr className="col-span-4" />
+
+        <label className="shrink-0 row-span-3">Slide&shy;show:</label>
+
+        <label>inter&shy;val (s):</label>
+        <div className="col-span-2">
+          <IntervalShowOption />
+        </div>
+
+        <label>rando&shy;mize:</label>
+        <div className="col-span-2">
+          <RandomShowOption />
+        </div>
+
+        <label>launch:</label>
+        <div className="col-span-2">
+          <ShowStart onClick={() => setCurtainWidth(COLLAPSED_WIDTH)} />
         </div>
       </div>
+
+      <button
+        className="absolute top-2 right-8 text-6xl text-center z-5"
+        onClick={() => setCurtainWidth(COLLAPSED_WIDTH)}
+      >
+        &times;
+      </button>
     </div>
   );
 }

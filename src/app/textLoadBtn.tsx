@@ -48,7 +48,7 @@ function TextLoadBtn() {
     alert(content);
   }*/
 
-  return <input onChange={handleFileSelect} type="file" id="text-file-input" />;
+  return <input onChange={handleFileSelect} type="file" id="text-file-input"/>;
 }
 
 export default TextLoadBtn;
