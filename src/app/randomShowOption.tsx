@@ -2,10 +2,10 @@ import { ChangeEvent, useContext } from "react";
 import { SlideshowContext } from "./page";
 
 function RandomShowOption() {
-  const context = useContext(SlideshowContext);
+  const showContext = useContext(SlideshowContext);
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
-    context.setValues({
-      ...context.values,
+    showContext.setValues({
+      ...showContext.values,
       isRandom: e.target.checked,
     });
   }

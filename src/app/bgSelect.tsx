@@ -1,11 +1,11 @@
 import { ChangeEvent, ReactElement, useContext } from "react";
-import { RenderContext } from "./page";
+import { BgContext } from "./page";
 import { formatBytes } from "./utils";
 
 function BgSelect(): JSX.Element {
-  const context = useContext(RenderContext);
+  const bgContext = useContext(BgContext);
 
-  const options: ReactElement[] = context.values.bgImages.map(
+  const options: ReactElement[] = bgContext.values.bgImages.map(
     (image, index) => {
       const date = new Date(image.modified);
       return (
@@ -18,8 +18,8 @@ function BgSelect(): JSX.Element {
   );
 
   function handleDropdownSelect(e: ChangeEvent<HTMLSelectElement>): void {
-    context.setValues({
-      ...context.values,
+    bgContext.setValues({
+      ...bgContext.values,
       imageIndex: parseInt(e.target.value),
     });
   }
@@ -31,11 +31,11 @@ function BgSelect(): JSX.Element {
       style={{
         backgroundSize: "cover",
         backgroundImage: `url(${
-          context.values.bgImages[context.values.imageIndex]?.file ?? ""
+          bgContext.values.bgImages[bgContext.values.imageIndex]?.file ?? ""
         })`,
       }}
       onChange={handleDropdownSelect}
-      value={context.values.imageIndex}
+      value={bgContext.values.imageIndex}
     >
       {options}
     </select>

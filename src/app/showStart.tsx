@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { SlideshowContext } from "./page";
 
 function ShowStart(props: any) {
-  const context = useContext(SlideshowContext);
+  const showContext = useContext(SlideshowContext);
 
   return (
     <button
@@ -10,13 +10,13 @@ function ShowStart(props: any) {
       className="font-bold"
       type="button"
       onClick={() =>
-        context.setValues({
-          ...context.values,
-          isEnabled: !context.values.isEnabled,
+        showContext.setValues({
+          ...showContext.values,
+          isEnabled: !showContext.values.isEnabled,
         })
       }
     >
-      {context.values.isEnabled ? "stop" : "start"}
+      {showContext.values.isEnabled ? "stop" : "start"}
     </button>
   );
 }

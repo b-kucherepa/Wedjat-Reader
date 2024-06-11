@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
-import { RenderContext } from "./page";
+import { BgContext } from "./page";
 import { BgImage } from "./customClasses";
 
 function BgSort() {
-  const context = useContext(RenderContext);
+  const bgContext = useContext(BgContext);
 
   enum SortBy {
     Name,
@@ -19,7 +19,7 @@ function BgSort() {
     const indexedImageArray: {
       imageData: BgImage;
       prevIndex: number;
-    }[] = context.values.bgImages.map((image, index) => {
+    }[] = bgContext.values.bgImages.map((image, index) => {
       return { imageData: image, prevIndex: index };
     });
     console.log(indexedImageArray);
@@ -55,7 +55,7 @@ function BgSort() {
     }
 
     const newImageIndex = indexedImageArray.findIndex(
-      (indexedImage) => indexedImage.prevIndex === context.values.imageIndex
+      (indexedImage) => indexedImage.prevIndex === bgContext.values.imageIndex
     );
 
     const sortedBgArray: BgImage[] = indexedImageArray.map(
@@ -63,10 +63,10 @@ function BgSort() {
     );
     console.log(sortedBgArray);
 
-    console.log(newImageIndex, context.values.imageIndex);
+    console.log(newImageIndex, bgContext.values.imageIndex);
 
-    context.setValues({
-      ...context.values,
+    bgContext.setValues({
+      ...bgContext.values,
       bgImages: sortedBgArray,
       imageIndex: newImageIndex,
     });

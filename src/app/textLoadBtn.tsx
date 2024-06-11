@@ -1,9 +1,9 @@
 import languageEncoding from "detect-file-encoding-and-language";
 import { ChangeEvent, useContext } from "react";
-import { RenderContext } from "./page";
+import { TextContext } from "./page";
 
 function TextLoadBtn() {
-  const context = useContext(RenderContext);
+  const textContext = useContext(TextContext);
 
   async function getEncoding(file: File): Promise<string> {
     return languageEncoding(file).then(
@@ -17,8 +17,8 @@ function TextLoadBtn() {
     ).result?.toString();
 
     if (result) {
-      context.setValues({
-        ...context.values,
+      textContext.setValues({
+        ...textContext.values,
         text: result,
       });
     }

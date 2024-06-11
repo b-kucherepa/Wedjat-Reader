@@ -1,12 +1,12 @@
 import { useContext } from "react";
-import { RenderContext } from "./page";
+import { TextContext } from "./page";
 
 function RenderArea() {
-  const context = useContext(RenderContext);
+  const textContext = useContext(TextContext);
 
   return (
     <div id="renderArea" className="text">
-      <pre className="whitespace-pre-wrap">{context.values.text}</pre>
+      <pre className="whitespace-pre-wrap">{textContext.values.text}</pre>
     </div>
   );
 }

@@ -1,9 +1,9 @@
 import { ChangeEvent, useContext } from "react";
-import { RenderContext } from "./page";
+import { BgContext } from "./page";
 import { BgImage } from "./customClasses";
 
 function BgLoadBtn() {
-  const context = useContext(RenderContext);
+  const bgContext = useContext(BgContext);
 
   function handleFileRead(
     e: ProgressEvent<FileReader>,
@@ -20,8 +20,8 @@ function BgLoadBtn() {
       readFiles.push(new BgImage(result, fileName, fileSize, fileLastModified));
     }
 
-    context.setValues({
-      ...context.values,
+    bgContext.setValues({
+      ...bgContext.values,
       bgImages: readFiles,
       imageIndex: 0,
     });
