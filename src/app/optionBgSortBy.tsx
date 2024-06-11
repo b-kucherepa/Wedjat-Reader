@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { BgContext } from "./page";
 import { BgImage } from "./customClasses";
 
-function BgSort() {
+function OptionBgSortBy() {
   const bgContext = useContext(BgContext);
 
   enum SortBy {
@@ -46,7 +46,7 @@ function BgSort() {
           );
           break;
         default:
-          throw "Wrong sort type (that shouldn't happen)!";
+          throw "Error: wrong sort type (that shouldn't happen)!";
       }
     }
 
@@ -61,9 +61,6 @@ function BgSort() {
     const sortedBgArray: BgImage[] = indexedImageArray.map(
       (image) => image.imageData
     );
-    console.log(sortedBgArray);
-
-    console.log(newImageIndex, bgContext.values.imageIndex);
 
     bgContext.setValues({
       ...bgContext.values,
@@ -106,6 +103,6 @@ function BgSort() {
   );
 }
 
-export default BgSort;
+export default OptionBgSortBy;
 
 //font-bold bg-sky-300 p-1 border-cyan-700 border-solid border-4 rounded-lg

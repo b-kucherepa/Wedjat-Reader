@@ -1,7 +1,7 @@
 import { ChangeEvent, useContext } from "react";
 import { SlideshowContext } from "./page";
 
-function IntervalShowOption() {
+function OptionShowInterval() {
   const showContext = useContext(SlideshowContext);
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
     showContext.setValues({
@@ -15,4 +15,4 @@ function IntervalShowOption() {
   );
 }
 
-export default IntervalShowOption;
+export default OptionShowInterval;

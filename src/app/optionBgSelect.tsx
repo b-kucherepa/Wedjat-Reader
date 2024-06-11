@@ -2,7 +2,7 @@ import { ChangeEvent, ReactElement, useContext } from "react";
 import { BgContext } from "./page";
 import { formatBytes } from "./utils";
 
-function BgSelect(): JSX.Element {
+function OptionBgSelect(): JSX.Element {
   const bgContext = useContext(BgContext);
 
   const options: ReactElement[] = bgContext.values.bgImages.map(
@@ -42,4 +42,4 @@ function BgSelect(): JSX.Element {
   );
 }
 
-export default BgSelect;
+export default OptionBgSelect;

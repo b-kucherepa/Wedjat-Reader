@@ -1,7 +1,7 @@
 import { ChangeEvent, ReactElement, useContext } from "react";
 import { BgContext } from "./page";
 
-function BgSize(): JSX.Element {
+function OptionBgSize(): JSX.Element {
   const bgContext = useContext(BgContext);
 
   enum Size {
@@ -61,4 +61,4 @@ function BgSize(): JSX.Element {
   );
 }
 
-export default BgSize;
+export default OptionBgSize;

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { SlideshowContext } from "./page";
 
-function ShowStart(props: any) {
+function OptionShowStart(props: any) {
   const showContext = useContext(SlideshowContext);
 
   return (
@@ -21,4 +21,4 @@ function ShowStart(props: any) {
   );
 }
 
-export default ShowStart;
+export default OptionShowStart;
