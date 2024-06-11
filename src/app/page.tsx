@@ -7,15 +7,15 @@ import MenuCurtain from "./menuCurtain";
 import RenderArea from "./renderArea";
 
 const DEFAULT_TEXT_VALUES: {
-  text: string,
-  color: string,
-  size: number,
-  family: string,
+  text: string;
+  color: string;
+  size: number;
+  family: string;
 } = {
   text: `Swipe right or click the left side of screen to open menu, then click "select text file - Choose files" to load a text file`,
   color: "#FFFFFF",
   size: 16,
-  family: "Times New Roman"
+  family: "Times New Roman",
 };
 
 const DEFAULT_BG_IMAGE: BgImage = new BgImage(
@@ -28,9 +28,13 @@ const DEFAULT_BG_IMAGE: BgImage = new BgImage(
 const DEFAULT_BG_VALUES: {
   bgImages: BgImage[];
   imageIndex: number;
+  size: string;
+  repeat: string;
 } = {
   bgImages: [DEFAULT_BG_IMAGE],
   imageIndex: 0,
+  size: "cover",
+  repeat: "no-repeat"
 };
 
 const DEFAULT_SLIDESHOW_VALUES: {
@@ -92,6 +96,8 @@ export default function Main() {
     document.body.style.backgroundImage =
       `url(${bgValues.bgImages[bgValues.imageIndex]?.file})` ??
       DEFAULT_BG_IMAGE;
+    document.body.style.backgroundSize = bgValues.size ?? "cover";
+    document.body.style.backgroundRepeat = bgValues.repeat ?? "cover";
   });
 
   useEffect(() => {
@@ -114,6 +120,7 @@ export default function Main() {
         );
 
         setBgValues({
+          ...bgValues,
           bgImages: bgValues.bgImages,
           imageIndex: newImageIndex,
         });

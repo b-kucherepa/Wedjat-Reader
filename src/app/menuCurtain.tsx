@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import TextLoadBtn from "./btnLoadText";
-import BgLoadBtn from "./btnLoadBg";
-import BgSelect from "./optionBgSelect";
-import ShowStart from "./optionShowStart";
-import RandomShowOption from "./optionShowRandom";
-import BgSort from "./optionBgSort";
-import IntervalShowOption from "./optionShowInterval";
+import BtnLoadBg from "./btnLoadBg";
+import BtnLoadText from "./btnLoadText";
+import OptionBgSelect from "./optionBgSelect";
+import OptionBgSort from "./optionBgSort";
+import OptionShowInterval from "./optionShowInterval";
+import OptionShowRandom from "./optionShowRandom";
+import OptionShowStart from "./optionShowStart";
 import OptionTextColor from "./optionTextColor";
 import OptionTextSize from "./optionTextSize";
+import OptionBgSize from "./optionBgSize";
 
 function MenuCurtain() {
   const EXPANDED_WIDTH: number = 100;
@@ -123,12 +124,12 @@ function MenuCurtain() {
 
         <label>text:</label>
         <div className="col-span-2">
-          <TextLoadBtn />
+          <BtnLoadText />
         </div>
 
         <label>back&shy;ground:</label>
         <div className="col-span-2">
-          <BgLoadBtn />
+          <BtnLoadBg />
         </div>
 
         <hr className="col-span-4" />
@@ -147,16 +148,21 @@ function MenuCurtain() {
 
         <hr className="col-span-4" />
 
-        <label className="shrink-0 row-span-2">Back&shy;ground:</label>
+        <label className="shrink-0 row-span-3">Back&shy;ground:</label>
 
         <label>sort by:</label>
         <div className="col-span-2 flex flex-row justify-between items-start">
-          <BgSort />
+          <OptionBgSort />
         </div>
 
         <label>select:</label>
         <div className="col-span-2 h-[50vh]	row-span-auto">
-          <BgSelect />
+          <OptionBgSelect />
+        </div>
+
+        <label>layout and size:</label>
+        <div className="col-span-2">
+          <OptionBgSize />
         </div>
 
         <hr className="col-span-4" />
@@ -165,17 +171,17 @@ function MenuCurtain() {
 
         <label>inter&shy;val (s):</label>
         <div className="col-span-2">
-          <IntervalShowOption />
+          <OptionShowInterval />
         </div>
 
         <label>rando&shy;mize:</label>
         <div className="col-span-2">
-          <RandomShowOption />
+          <OptionShowRandom />
         </div>
 
         <label>launch:</label>
         <div className="col-span-2">
-          <ShowStart onClick={() => setCurtainWidth(COLLAPSED_WIDTH)} />
+          <OptionShowStart onClick={() => setCurtainWidth(COLLAPSED_WIDTH)} />
         </div>
       </div>
 
