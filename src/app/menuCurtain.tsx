@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import TextLoadBtn from "./textLoadBtn";
-import BgLoadBtn from "./bgLoadBtn";
-import BgSelect from "./bgSelect";
-import ShowStart from "./showStart";
-import RandomShowOption from "./randomShowOption";
-import BgSort from "./bgSort";
-import IntervalShowOption from "./intervalShowOption";
+import TextLoadBtn from "./btnLoadText";
+import BgLoadBtn from "./btnLoadBg";
+import BgSelect from "./optionBgSelect";
+import ShowStart from "./optionShowStart";
+import RandomShowOption from "./optionShowRandom";
+import BgSort from "./optionBgSort";
+import IntervalShowOption from "./optionShowInterval";
 
 function MenuCurtain() {
   const EXPANDED_WIDTH: number = 100;
