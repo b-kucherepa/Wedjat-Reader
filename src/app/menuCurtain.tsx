@@ -6,6 +6,8 @@ import ShowStart from "./optionShowStart";
 import RandomShowOption from "./optionShowRandom";
 import BgSort from "./optionBgSort";
 import IntervalShowOption from "./optionShowInterval";
+import OptionTextColor from "./optionTextColor";
+import OptionTextSize from "./optionTextSize";
 
 function MenuCurtain() {
   const EXPANDED_WIDTH: number = 100;
@@ -127,6 +129,20 @@ function MenuCurtain() {
         <label>back&shy;ground:</label>
         <div className="col-span-2">
           <BgLoadBtn />
+        </div>
+
+        <hr className="col-span-4" />
+
+        <label className="shrink-0 row-span-2">Text:</label>
+
+        <label>color:</label>
+        <div className="col-span-2">
+          <OptionTextColor />
+        </div>
+
+        <label>size:</label>
+        <div className="col-span-2">
+          <OptionTextSize />
         </div>
 
         <hr className="col-span-4" />

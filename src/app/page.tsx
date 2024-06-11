@@ -7,9 +7,15 @@ import MenuCurtain from "./menuCurtain";
 import RenderArea from "./renderArea";
 
 const DEFAULT_TEXT_VALUES: {
-  text: string;
+  text: string,
+  color: string,
+  size: number,
+  family: string,
 } = {
   text: `Swipe right or click the left side of screen to open menu, then click "select text file - Choose files" to load a text file`,
+  color: "#FFFFFF",
+  size: 16,
+  family: "Times New Roman"
 };
 
 const DEFAULT_BG_IMAGE: BgImage = new BgImage(

@@ -5,8 +5,15 @@ function RenderArea() {
   const textContext = useContext(TextContext);
 
   return (
-    <div id="renderArea" className="text">
-      <pre className="whitespace-pre-wrap">{textContext.values.text}</pre>
+    <div
+      id="renderArea"
+      className="text whitespace-pre-wrap"
+      style={{
+        color: textContext.values.color ?? "#FFFFFF",
+        fontSize: textContext.values.size ?? 16
+      }}
+    >
+      {textContext.values.text}
     </div>
   );
 }
