@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import BtnLoadBg from "./btnLoadBg";
 import BtnLoadText from "./btnLoadText";
 import OptionBgSelect from "./optionBgSelect";
-import OptionBgSort from "./optionBgSort";
+import OptionBgSortBy from "./optionBgSortBy";
 import OptionShowInterval from "./optionShowInterval";
 import OptionShowRandom from "./optionShowRandom";
 import OptionShowStart from "./optionShowStart";
@@ -115,7 +115,7 @@ function MenuCurtain() {
       }}
     >
       <div
-        className="grid grid-cols-4 auto-rows-min gap-2 justify-stretch items-start relative text-left w-full h-full px-8 py-16 duration-500"
+        className="grid grid-cols-4 auto-rows-min gap-2 relative w-full h-full px-8 py-16 duration-500"
         style={{
           scale: curtainWidth > HINT_WIDTH ? curtainWidth / 100 : 0,
         }}
@@ -151,8 +151,8 @@ function MenuCurtain() {
         <label className="shrink-0 row-span-3">Back&shy;ground:</label>
 
         <label>sort by:</label>
-        <div className="col-span-2 flex flex-row justify-between items-start">
-          <OptionBgSort />
+        <div className="col-span-2 grid grid-cols-3 justify-items-start	">
+          <OptionBgSortBy />
         </div>
 
         <label>select:</label>

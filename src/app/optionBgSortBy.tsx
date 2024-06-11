@@ -22,7 +22,6 @@ function OptionBgSortBy() {
     }[] = bgContext.values.bgImages.map((image, index) => {
       return { imageData: image, prevIndex: index };
     });
-    console.log(indexedImageArray);
 
     if (sortParameter === sortBy) {
       setAscOrder(!ascOrder);
@@ -76,8 +75,9 @@ function OptionBgSortBy() {
       return "";
     }
   }
+  
   return (
-    <div className="flex flex-col items-start justify-between">
+    <>
       <button
         type="button"
         className="font-bold"
@@ -99,7 +99,7 @@ function OptionBgSortBy() {
       >
         modified {getSortIcon(SortBy.Modified)}
       </button>
-    </div>
+    </>
   );
 }
 
