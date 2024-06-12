@@ -151,7 +151,7 @@ function MenuCurtain() {
         <label className="shrink-0 row-span-3">Back&shy;ground:</label>
 
         <label>sort by:</label>
-        <div className="col-span-2 grid grid-cols-3 justify-items-start	">
+        <div className="col-span-2">
           <OptionBgSortBy />
         </div>
 

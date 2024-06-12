@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import { BgContext } from "./page";
 import { BgImage } from "./customClasses";
 
@@ -6,16 +6,15 @@ function OptionBgSortBy() {
   const bgContext = useContext(BgContext);
 
   enum SortBy {
-    Name,
-    Size,
-    Modified,
-    None,
+    NameAsc,
+    NameDesc,
+    SizeAsc,
+    SizeDesc,
+    ModifiedAsc,
+    ModifiedDesc,
   }
 
-  const [ascOrder, setAscOrder] = useState(true);
-  const [sortBy, setSortBy] = useState(SortBy.None);
-
-  function sortImages(sortParameter: SortBy) {
+  function handleDropdownSelect(e: ChangeEvent<HTMLSelectElement>) {
     const indexedImageArray: {
       imageData: BgImage;
       prevIndex: number;
@@ -23,35 +22,41 @@ function OptionBgSortBy() {
       return { imageData: image, prevIndex: index };
     });
 
-    if (sortParameter === sortBy) {
-      setAscOrder(!ascOrder);
-    } else {
-      setSortBy(sortParameter);
-
-      switch (sortParameter) {
-        case SortBy.Name:
+      switch (e.target.value) {
+        case SortBy.NameAsc.toString():
           indexedImageArray.sort(
             (a: any, b: any) => a.imageData.name - b.imageData.name
           );
           break;
-        case SortBy.Size:
+          case SortBy.NameDesc.toString():
+            indexedImageArray.sort(
+              (a: any, b: any) => b.imageData.name - a.imageData.name
+            );
+            break;
+          
+        case SortBy.SizeAsc.toString():
           indexedImageArray.sort(
             (a: any, b: any) => a.imageData.size - b.imageData.size
           );
           break;
-        case SortBy.Modified:
+          case SortBy.SizeDesc.toString():
+            indexedImageArray.sort(
+              (a: any, b: any) => b.imageData.size - a.imageData.size
+            );
+            break;
+        case SortBy.ModifiedAsc.toString():
           indexedImageArray.sort(
             (a: any, b: any) => a.imageData.modified - b.imageData.modified
           );
           break;
+          case SortBy.ModifiedDesc.toString():
+            indexedImageArray.sort(
+              (a: any, b: any) => b.imageData.modified - a.imageData.modified
+            );
+            break;
         default:
           throw "Error: wrong sort type (that shouldn't happen)!";
       }
-    }
-
-    if (!ascOrder) {
-      indexedImageArray.reverse();
-    }
 
     const newImageIndex = indexedImageArray.findIndex(
       (indexedImage) => indexedImage.prevIndex === bgContext.values.imageIndex
@@ -67,39 +72,19 @@ function OptionBgSortBy() {
       imageIndex: newImageIndex,
     });
   }
-
-  function getSortIcon(sortParameter: SortBy): string {
-    if (sortParameter === sortBy) {
-      return ascOrder ? "↑" : "↓";
-    } else {
-      return "";
-    }
-  }
   
   return (
-    <>
-      <button
-        type="button"
-        className="font-bold"
-        onClick={() => sortImages(SortBy.Name)}
-      >
-        name {getSortIcon(SortBy.Name)}
-      </button>
-      <button
-        type="button"
-        className="font-bold"
-        onClick={() => sortImages(SortBy.Size)}
-      >
-        size {getSortIcon(SortBy.Size)}
-      </button>
-      <button
-        type="button"
-        className="font-bold"
-        onClick={() => sortImages(SortBy.Modified)}
-      >
-        modified {getSortIcon(SortBy.Modified)}
-      </button>
-    </>
+    <select
+    className="w-full bg-black shrink text-pretty truncate grow"
+    onChange={handleDropdownSelect}
+  >
+    <option value={SortBy.NameAsc}>name ↓</option>
+    <option value={SortBy.NameDesc}>name ↑</option>
+    <option value={SortBy.SizeAsc}>size ↓</option>
+    <option value={SortBy.SizeDesc}>size ↑</option>
+    <option value={SortBy.ModifiedAsc}>modified ↓</option>
+    <option value={SortBy.ModifiedDesc}>modified ↑</option>
+  </select>
   );
 }
 
