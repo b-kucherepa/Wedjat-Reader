@@ -1,6 +1,6 @@
 import { ChangeEvent, ReactElement, useContext } from "react";
-import { BgContext } from "./page";
-import { formatBytes } from "./utils";
+import { formatBytes } from "../app/utils";
+import { BgContext } from "@/contexts/bgContext";
 
 function OptionBgSelect(): JSX.Element {
   const bgContext = useContext(BgContext);

@@ -1,6 +1,6 @@
 import languageEncoding from "detect-file-encoding-and-language";
 import { ChangeEvent, useContext } from "react";
-import { TextContext } from "./page";
+import { TextContext } from "@/contexts/textContext";
 
 function TextLoadBtn() {
   const textContext = useContext(TextContext);

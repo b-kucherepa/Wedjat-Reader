@@ -1,6 +1,6 @@
 import { ChangeEvent, useContext, useState } from "react";
-import { BgContext } from "./page";
-import { BgImage } from "./customClasses";
+import { BgImage } from "../common/customClasses";
+import { BgContext } from "@/contexts/bgContext";
 
 function OptionBgSortBy() {
   const bgContext = useContext(BgContext);

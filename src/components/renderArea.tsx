@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import { BgContext, TextContext } from "./page";
+import { BgContext } from "../contexts/bgContext";
+import { TextContext } from "../contexts/textContext";
 
 function RenderArea(props: any) {
   const textContext = useContext(TextContext);

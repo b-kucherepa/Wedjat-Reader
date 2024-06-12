@@ -1,5 +1,5 @@
 import { ChangeEvent, ReactElement, useContext } from "react";
-import { BgContext } from "./page";
+import { BgContext } from "@/contexts/bgContext";
 
 function OptionBgSize(): JSX.Element {
   const bgContext = useContext(BgContext);

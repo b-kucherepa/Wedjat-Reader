@@ -1,5 +1,5 @@
 import { ChangeEvent, useContext } from "react";
-import { SlideshowContext } from "./page";
+import { SlideshowContext } from "@/contexts/slideshowContext";
 
 function OptionShowRandom() {
   const showContext = useContext(SlideshowContext);

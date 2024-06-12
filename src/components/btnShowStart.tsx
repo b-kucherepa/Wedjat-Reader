@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { SlideshowContext } from "./page";
+import { SlideshowContext } from "@/contexts/slideshowContext";
 
 function BtnShowStart(props: any) {
   const showContext = useContext(SlideshowContext);

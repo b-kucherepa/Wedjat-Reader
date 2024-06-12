@@ -1,5 +1,5 @@
 import { ChangeEvent, useContext } from "react";
-import { TextContext } from "./page";
+import { TextContext } from "@/contexts/textContext";
 
 function OptionTextSize (props: any) {
   const textContext = useContext(TextContext);
