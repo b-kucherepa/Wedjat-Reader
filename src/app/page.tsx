@@ -93,14 +93,6 @@ export default function Main() {
   const slideshowTimer = useRef(setTimeout(() => {}, 0));
 
   useEffect(() => {
-    document.body.style.backgroundImage =
-      `url(${bgValues.bgImages[bgValues.imageIndex]?.file})` ??
-      DEFAULT_BG_IMAGE;
-    document.body.style.backgroundSize = bgValues.size ?? "cover";
-    document.body.style.backgroundRepeat = bgValues.repeat ?? "cover";
-  });
-
-  useEffect(() => {
     clearInterval(slideshowTimer.current);
 
     if (slideshowValues.isEnabled) {

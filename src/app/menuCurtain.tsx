@@ -109,7 +109,7 @@ function MenuCurtain() {
   return (
     <div
       id="navCurtain"
-      className="h-full w-0 fixed z-1 top-0 left-0  bg-black overflow-x-hidden duration-500"
+      className="h-full w-0 fixed z-9 top-0 left-0  bg-black overflow-x-hidden duration-500"
       style={{
         width: `${curtainWidth}%`,
       }}
