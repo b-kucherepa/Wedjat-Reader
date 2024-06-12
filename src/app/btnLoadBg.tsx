@@ -51,7 +51,8 @@ function BgLoadBtn() {
       type="file"
       id="bg-files-input"
       multiple={true}
-      accept="image/png, image/jpeg"
+      accept="image/*"
+      className="w-full"
     />
   );
 }

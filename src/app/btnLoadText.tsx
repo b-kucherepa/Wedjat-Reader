@@ -48,7 +48,15 @@ function TextLoadBtn() {
     alert(content);
   }*/
 
-  return <input onChange={handleFileSelect} type="file" id="text-file-input"/>;
+  return (
+    <input
+      onChange={handleFileSelect}
+      type="file"
+      id="text-file-input"
+      accept="text/*"
+      className="w-full"
+    />
+  );
 }
 
 export default TextLoadBtn;
