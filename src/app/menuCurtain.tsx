@@ -5,7 +5,7 @@ import OptionBgSelect from "./optionBgSelect";
 import OptionBgSortBy from "./optionBgSortBy";
 import OptionShowInterval from "./optionShowInterval";
 import OptionShowRandom from "./optionShowRandom";
-import OptionShowStart from "./optionShowStart";
+import BtnShowStart from "./btnShowStart";
 import OptionTextColor from "./optionTextColor";
 import OptionTextSize from "./optionTextSize";
 import OptionBgSize from "./optionBgSize";
@@ -156,7 +156,7 @@ function MenuCurtain() {
         </div>
 
         <label>select:</label>
-        <div className="col-span-2 h-[50vh]	row-span-auto">
+        <div className="col-span-2 h-[40vh]	row-span-auto">
           <OptionBgSelect />
         </div>
 
@@ -181,8 +181,10 @@ function MenuCurtain() {
 
         <label>launch:</label>
         <div className="col-span-2">
-          <OptionShowStart onClick={() => setCurtainWidth(COLLAPSED_WIDTH)} />
+          <BtnShowStart onClick={() => setCurtainWidth(COLLAPSED_WIDTH)} />
         </div>
+
+        <hr className="col-span-4 invisible" />
       </div>
 
       <button

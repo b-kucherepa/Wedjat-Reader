@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { SlideshowContext } from "./page";
 
-function OptionShowStart(props: any) {
+function BtnShowStart(props: any) {
   const showContext = useContext(SlideshowContext);
 
   return (
     <button
       id="start-slideshow-button"
-      className="font-bold"
+      className="border-black bg-white text-black px-2 py-0.5"
       type="button"
       onClick={() =>
         showContext.setValues({
@@ -16,9 +16,9 @@ function OptionShowStart(props: any) {
         })
       }
     >
-      {showContext.values.isEnabled ? "stop" : "start"}
+      {showContext.values.isEnabled ? "Stop" : "Start"}
     </button>
   );
 }
 
-export default OptionShowStart;
+export default BtnShowStart;
