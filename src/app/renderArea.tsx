@@ -8,7 +8,7 @@ function RenderArea(props: any) {
   return (
     <div
       id="renderArea"
-      className="text whitespace-pre-wrap break-all	w-full z-8 top-0 left-0 bg-fixed"
+      className="text whitespace-pre-wrap break-all size-full min-h-screen z-5 top-0 left-0 bg-fixed"
       style={{
         backgroundImage: `url(${
           bgContext.values.bgImages[bgContext.values.imageIndex].file
@@ -20,7 +20,7 @@ function RenderArea(props: any) {
         fontSize: textContext.values.size,
       }}
     >
-      {textContext.values.text}
+      <div>{textContext.values.text}</div>
     </div>
   );
 }

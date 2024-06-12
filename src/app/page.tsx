@@ -121,7 +121,7 @@ export default function Main() {
   }, [slideshowValues, bgValues]);
 
   return (
-    <main id="mainText" className={`size-full	bg-cover`}>
+    <main id="mainText">
       <TextContext.Provider value={textContextHook}>
         <BgContext.Provider value={bgContextHook}>
           <SlideshowContext.Provider value={slideshowContextHook}>
