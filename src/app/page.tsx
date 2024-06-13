@@ -1,72 +1,15 @@
 "use client";
-import { createContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
 import { shiftArrayIndexInLoop, generateRandomBetween } from "./utils";
-import { BgImage } from "./customClasses";
+import { DEFAULT_BG_VALUES, DEFAULT_SLIDESHOW_VALUES, DEFAULT_TEXT_VALUES } from "../common/constants";
 
-import MenuCurtain from "./menuCurtain";
-import RenderArea from "./renderArea";
+import MenuCurtain from "../components/menuCurtain";
+import RenderArea from "../components/renderArea";
 
-const DEFAULT_TEXT_VALUES: {
-  text: string;
-  color: string;
-  size: number;
-  family: string;
-} = {
-  text: `Swipe right or click the left side of screen to open menu, then click "select text file - Choose files" to load a text file`,
-  color: "#FFFFFF",
-  size: 16,
-  family: "Times New Roman",
-};
-
-const DEFAULT_BG_IMAGE: BgImage = new BgImage(
-  "/back.jpg",
-  "default image",
-  378940,
-  0
-);
-
-const DEFAULT_BG_VALUES: {
-  bgImages: BgImage[];
-  imageIndex: number;
-  size: string;
-  repeat: string;
-} = {
-  bgImages: [DEFAULT_BG_IMAGE],
-  imageIndex: 0,
-  size: "cover",
-  repeat: "no-repeat"
-};
-
-const DEFAULT_SLIDESHOW_VALUES: {
-  interval: number;
-  isRandom: boolean;
-  isEnabled: boolean;
-} = {
-  interval: 5000,
-  isRandom: false,
-  isEnabled: false,
-};
-
-export const TextContext = createContext({
-  values: DEFAULT_TEXT_VALUES,
-  setValues: (_: any) => {
-    _;
-  },
-});
-
-export const BgContext = createContext({
-  values: DEFAULT_BG_VALUES,
-  setValues: (_: any) => {
-    _;
-  },
-});
-
-export const SlideshowContext = createContext({
-  values: DEFAULT_SLIDESHOW_VALUES,
-  setValues: (_: any) => {
-    _;
-  },
-});
+import { BgContext } from "../contexts/bgContext";
+import { SlideshowContext } from "../contexts/slideshowContext";
+import { TextContext } from "../contexts/textContext";
 
 export default function Main() {
   const [textValues, setTextValues] = useState(DEFAULT_TEXT_VALUES);
