@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
-import { shiftArrayIndexInLoop, generateRandomBetween } from "./utils";
+import { shiftArrayIndexInLoop, generateRandomBetween } from "../common/utils";
 import { DEFAULT_BG_VALUES, DEFAULT_SLIDESHOW_VALUES, DEFAULT_TEXT_VALUES } from "../common/constants";
 
 import MenuCurtain from "../components/menuCurtain";

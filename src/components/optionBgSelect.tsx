@@ -1,5 +1,5 @@
 import { ChangeEvent, ReactElement, useContext } from "react";
-import { formatBytes } from "../app/utils";
+import { formatBytes } from "../common/utils";
 import { BgContext } from "@/contexts/bgContext";
 
 function OptionBgSelect(): JSX.Element {
