@@ -11,6 +11,8 @@ import OptionTextSize from "./optionTextSize";
 import OptionBgSize from "./optionBgSize";
 
 import { getScreenPercentSize} from "@/common/utils";
+import OptionTextHMargin from "./optionTextHMargin";
+import OptionTextVMargin from "./optionTextVMargin";
 
 function MenuCurtain() {
   const EXPANDED_WIDTH: number = 100;
@@ -78,7 +80,7 @@ function MenuCurtain() {
 
         <hr className="col-span-4" />
 
-        <label className="shrink-0 row-span-2">Text:</label>
+        <label className="shrink-0 row-span-4">Text:</label>
 
         <label>color:</label>
         <div className="col-span-2">
@@ -88,6 +90,16 @@ function MenuCurtain() {
         <label>size:</label>
         <div className="col-span-2">
           <OptionTextSize />
+        </div>
+
+        <label>hori&shy;zontal margin:</label>
+        <div className="col-span-2">
+          <OptionTextHMargin />
+        </div>
+
+        <label>verti&shy;cal margin:</label>
+        <div className="col-span-2">
+          <OptionTextVMargin/>
         </div>
 
         <hr className="col-span-4" />
@@ -100,7 +112,7 @@ function MenuCurtain() {
         </div>
 
         <label>select:</label>
-        <div className="col-span-2 h-[40vh]	row-span-auto">
+        <div className="col-span-2 h-[30vh]	row-span-auto">
           <OptionBgSelect />
         </div>
 

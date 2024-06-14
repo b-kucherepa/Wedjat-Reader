@@ -5,11 +5,15 @@ export const DEFAULT_TEXT_VALUES: {
   color: string;
   size: number;
   family: string;
+  hMargin: number;
+  vMargin: number;
 } = {
   text: `Click the left side of screen to open menu, then click "select text file - Choose files" to load a text file`,
   color: "#FFFFFF",
   size: 16,
   family: "Times New Roman",
+  hMargin: 15,
+  vMargin: 15
 };
 
 export const DEFAULT_BG_IMAGE: BgImage = new BgImage(

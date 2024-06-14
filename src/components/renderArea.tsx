@@ -10,7 +10,6 @@ function RenderArea(props: any) {
   const bgContextRef = useRef(bgContext);
   bgContextRef.current = bgContext;
 
-
   useEffect(() => {
     const SWIPE_WIDTH: number = 35;
 
@@ -49,7 +48,7 @@ function RenderArea(props: any) {
   return (
     <div
       id="renderArea"
-      className="text whitespace-pre-wrap break-all size-full min-h-screen z-5 top-0 left-0 bg-fixed bg-center"
+      className="text whitespace-pre-wrap break-word overflow-x-hidden	size-full min-h-screen z-5 top-0 left-0 bg-fixed bg-center"
       style={{
         backgroundImage: `url(${
           bgContext.values.bgImages[bgContext.values.imageIndex].file
@@ -59,9 +58,15 @@ function RenderArea(props: any) {
 
         color: textContext.values.color,
         fontSize: textContext.values.size,
+        paddingLeft: `${textContext.values.hMargin}px`,
+        paddingRight: `${textContext.values.hMargin}px`,
+        paddingTop: `${textContext.values.vMargin}px`,
+        paddingBottom: `${textContext.values.vMargin}px`,
       }}
     >
-      <div>{textContext.values.text}</div>
+      <div>
+        {textContext.values.text}
+      </div>
     </div>
   );
 }
