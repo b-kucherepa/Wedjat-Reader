@@ -1,10 +1,50 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { BgContext } from "../contexts/bgContext";
 import { TextContext } from "../contexts/textContext";
+import { Swipe, SwipeHandler } from "@/common/customClasses";
+import { getScreenPercentSize, shiftArrayIndexInLoop } from "@/common/utils";
 
 function RenderArea(props: any) {
   const textContext = useContext(TextContext);
   const bgContext = useContext(BgContext);
+  const bgContextRef = useRef(bgContext);
+  bgContextRef.current = bgContext;
+
+
+  useEffect(() => {
+    const SWIPE_WIDTH: number = 35;
+
+    const swipeHandler = new SwipeHandler();
+
+    function handleSwipeEnd(e: CustomEvent): void {
+      console.log(bgContextRef.current.values);
+      if (Math.abs(e.detail.xDistance) > getScreenPercentSize(SWIPE_WIDTH)) {
+        if (e.detail.swipe === Swipe.Right) {
+          bgContext.setValues({
+            ...bgContextRef.current.values,
+            imageIndex: shiftArrayIndexInLoop(
+              bgContextRef.current.values.bgImages.length,
+              bgContextRef.current.values.imageIndex,
+              1
+            ),
+          });
+        } else if (e.detail.swipe === Swipe.Left) {
+          bgContext.setValues({
+            ...bgContextRef.current.values,
+            imageIndex: shiftArrayIndexInLoop(
+              bgContextRef.current.values.bgImages.length,
+              bgContextRef.current.values.imageIndex,
+              -1
+            ),
+          });
+        }
+      }
+    }
+
+    document.addEventListener("swipeend", (e) =>
+      handleSwipeEnd(e as CustomEvent)
+    );
+  }, []);
 
   return (
     <div

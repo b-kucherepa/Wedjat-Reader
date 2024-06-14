@@ -6,7 +6,7 @@ export const DEFAULT_TEXT_VALUES: {
   size: number;
   family: string;
 } = {
-  text: `Swipe right or click the left side of screen to open menu, then click "select text file - Choose files" to load a text file`,
+  text: `Click the left side of screen to open menu, then click "select text file - Choose files" to load a text file`,
   color: "#FFFFFF",
   size: 16,
   family: "Times New Roman",

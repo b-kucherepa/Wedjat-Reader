@@ -40,3 +40,7 @@ export function formatBytes(bytes: number) {
     UNITS[power]
   }`;
 }
+
+export function getScreenPercentSize(percent: number): number {
+  return (window.innerWidth * percent) / 100;
+}

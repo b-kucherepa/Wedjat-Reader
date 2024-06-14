@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import BtnLoadBg from "./btnLoadBg";
 import BtnLoadText from "./btnLoadText";
 import OptionBgSelect from "./optionBgSelect";
@@ -9,11 +9,11 @@ import BtnShowStart from "./btnShowStart";
 import OptionTextColor from "./optionTextColor";
 import OptionTextSize from "./optionTextSize";
 import OptionBgSize from "./optionBgSize";
-import { Swipe, SwipeHandler } from "@/common/customClasses";
+
+import { getScreenPercentSize} from "@/common/utils";
 
 function MenuCurtain() {
   const EXPANDED_WIDTH: number = 100;
-  const SWIPE_WIDTH: number = 35;
   const HINT_WIDTH: number = 15;
   const COLLAPSED_WIDTH: number = 0;
 
@@ -22,24 +22,7 @@ function MenuCurtain() {
   curtainWidthRef.current = curtainWidth;
 
   useEffect(() => {
-    const swipeHandler = new SwipeHandler();
-
-    function getScreenPercentSize(percent: number): number {
-      return (window.innerWidth * percent) / 100;
-    }
-
-    function handleSwipeEnd(e: CustomEvent): void {
-      if (Math.abs(e.detail.xDistance) > getScreenPercentSize(SWIPE_WIDTH)) {
-        if (e.detail.swipe === Swipe.Right) {
-          setCurtainWidth(EXPANDED_WIDTH);
-        } else if (e.detail.swipe === Swipe.Left) {
-          setCurtainWidth(COLLAPSED_WIDTH);
-        }
-      }
-    }
-
     function handleClick(e: MouseEvent): void {
-      console.log(e);
       const isLeftSideTouch: boolean =
         e.clientX <= getScreenPercentSize(HINT_WIDTH);
       if (isLeftSideTouch) {
@@ -58,16 +41,10 @@ function MenuCurtain() {
       }
     }
 
-    document.addEventListener("swipeend", (e) =>
-      handleSwipeEnd(e as CustomEvent)
-    );
     document.addEventListener("click", handleClick);
     document.addEventListener("mousemove", handleMouseMove);
 
     return () => {
-      document.removeEventListener("swipeend", (e) =>
-        handleSwipeEnd(e as CustomEvent)
-      );
       document.removeEventListener("click", handleClick);
       document.removeEventListener("mousemove", handleMouseMove);
     };
