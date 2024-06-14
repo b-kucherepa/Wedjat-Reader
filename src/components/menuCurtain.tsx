@@ -92,12 +92,12 @@ function MenuCurtain() {
           <OptionTextSize />
         </div>
 
-        <label>hori&shy;zontal margin:</label>
+        <label>hori&shy;zontal margin (px):</label>
         <div className="col-span-2">
           <OptionTextHMargin />
         </div>
 
-        <label>verti&shy;cal margin:</label>
+        <label>verti&shy;cal margin (px):</label>
         <div className="col-span-2">
           <OptionTextVMargin/>
         </div>
