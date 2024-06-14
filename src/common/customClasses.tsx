@@ -31,16 +31,17 @@ export enum Swipe {
 }
 
 export class SwipeHandler {
+  element: any;
   startPoint: Point | null;
   endPoint: Point | null;
 
-
-  constructor() {
+  constructor(element: Node) {
+    this.element = element;
     this.startPoint = null;
     this.endPoint = null;
-    document.addEventListener("touchstart", (e) => this.handleTouchStart(e));
-    document.addEventListener("touchmove", (e) => this.handleTouchMove(e));
-    document.addEventListener("touchend", (e) => this.handleTouchEnd(e));
+    this.element.addEventListener("touchstart", (e: TouchEvent) => this.handleTouchStart(e));
+    this.element.addEventListener("touchmove", (e: TouchEvent) => this.handleTouchMove(e));
+    this.element.addEventListener("touchend", (e: TouchEvent) => this.handleTouchEnd(e));
   }
 
   getSwipe(): Swipe {
@@ -76,7 +77,7 @@ export class SwipeHandler {
     if (!this.startPoint || !this.endPoint) {
       return;
     }
-    document.dispatchEvent(
+    this.element.dispatchEvent(
       new CustomEvent("swipe", {
         detail: {
           startPoint: this.startPoint,
@@ -93,7 +94,7 @@ export class SwipeHandler {
     if (!this.startPoint || !this.endPoint) {
       return;
     }
-    document.dispatchEvent(
+    this.element.dispatchEvent(
       new CustomEvent("swipeend", {
         detail: {
           startPoint: this.startPoint,

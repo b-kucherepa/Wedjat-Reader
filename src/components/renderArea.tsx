@@ -14,7 +14,7 @@ function RenderArea(props: any) {
   useEffect(() => {
     const SWIPE_WIDTH: number = 35;
 
-    const swipeHandler = new SwipeHandler();
+    const swipeHandler = new SwipeHandler(document);
 
     function handleSwipeEnd(e: CustomEvent): void {
       console.log(bgContextRef.current.values);
