@@ -17,7 +17,7 @@ export const DEFAULT_TEXT_VALUES: {
 };
 
 export const DEFAULT_BG_IMAGE: BgImage = new BgImage(
-  "/back.jpg",
+  "/default.png",
   "default image",
   378940,
   0
