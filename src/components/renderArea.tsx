@@ -49,7 +49,7 @@ function RenderArea(props: any) {
   return (
     <div
       id="renderArea"
-      className="text whitespace-pre-wrap break-all size-full min-h-screen z-5 top-0 left-0 bg-fixed"
+      className="text whitespace-pre-wrap break-all size-full min-h-screen z-5 top-0 left-0 bg-fixed bg-center"
       style={{
         backgroundImage: `url(${
           bgContext.values.bgImages[bgContext.values.imageIndex].file

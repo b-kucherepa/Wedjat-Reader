@@ -27,7 +27,7 @@ function OptionBgSelect(): JSX.Element {
   return (
     <select
       id="bgList"
-      className="w-full h-full bg-black shrink text-pretty truncate grow"
+      className="w-full h-full bg-black bg-center shrink text-pretty truncate grow"
       style={{
         backgroundSize: "cover",
         backgroundImage: `url(${
