@@ -9,10 +9,11 @@ import BtnShowStart from "./btnShowStart";
 import OptionTextColor from "./optionTextColor";
 import OptionTextSize from "./optionTextSize";
 import OptionBgSize from "./optionBgSize";
+import { Swipe, SwipeHandler } from "@/common/customClasses";
 
 function MenuCurtain() {
   const EXPANDED_WIDTH: number = 100;
-  const SWIPE_WIDTH: number = 20;
+  const SWIPE_WIDTH: number = 35;
   const HINT_WIDTH: number = 15;
   const COLLAPSED_WIDTH: number = 0;
 
@@ -21,63 +22,28 @@ function MenuCurtain() {
   curtainWidthRef.current = curtainWidth;
 
   useEffect(() => {
-    let touchStart: number | null = null;
-    let touchEnd: number | null = null;
-    let touchStartWidth: number = curtainWidthRef.current;
-
-    function getTouchDistance(): number {
-      return touchStart && touchEnd ? touchStart - touchEnd : 0;
-    }
+    const swipeHandler = new SwipeHandler();
 
     function getScreenPercentSize(percent: number): number {
       return (window.innerWidth * percent) / 100;
     }
 
-    function handleTouchStart(e: TouchEvent): void {
-      touchEnd = null;
-      touchStartWidth = curtainWidthRef.current;
-
-      const isPressedNearTheEdge =
-        getScreenPercentSize(curtainWidthRef.current - HINT_WIDTH) <
-          e.touches[0].clientX &&
-        e.touches[0].clientX <
-          getScreenPercentSize(curtainWidthRef.current + HINT_WIDTH);
-
-      if (isPressedNearTheEdge) {
-        touchStart = e.touches[0].clientX;
+    function handleSwipeEnd(e: CustomEvent): void {
+      if (Math.abs(e.detail.xDistance) > getScreenPercentSize(SWIPE_WIDTH)) {
+        if (e.detail.swipe === Swipe.Right) {
+          setCurtainWidth(EXPANDED_WIDTH);
+        } else if (e.detail.swipe === Swipe.Left) {
+          setCurtainWidth(COLLAPSED_WIDTH);
+        }
       }
-    }
-
-    function handleTouchMove(e: TouchEvent): void {
-      touchEnd = e.touches[0].clientX;
-      setCurtainWidth(
-        touchStartWidth - (100 * getTouchDistance()) / window.innerWidth
-      );
-    }
-
-    function handleTouchEnd(): void {
-      const isLeftSwipe =
-        getTouchDistance() > getScreenPercentSize(SWIPE_WIDTH);
-      const isRightSwipe =
-        getTouchDistance() < -getScreenPercentSize(SWIPE_WIDTH);
-
-      if (isRightSwipe) {
-        setCurtainWidth(EXPANDED_WIDTH);
-      } else if (isLeftSwipe) {
-        setCurtainWidth(COLLAPSED_WIDTH);
-      } else {
-        setCurtainWidth(touchStartWidth);
-      }
-
-      touchStart = null;
     }
 
     function handleClick(e: MouseEvent): void {
+      console.log(e);
       const isLeftSideTouch: boolean =
         e.clientX <= getScreenPercentSize(HINT_WIDTH);
       if (isLeftSideTouch) {
         setCurtainWidth(EXPANDED_WIDTH);
-        touchStartWidth = EXPANDED_WIDTH;
       }
     }
 
@@ -92,17 +58,18 @@ function MenuCurtain() {
       }
     }
 
-    window.addEventListener("touchstart", handleTouchStart);
-    window.addEventListener("touchmove", handleTouchMove);
-    window.addEventListener("touchend", handleTouchEnd);
-    window.addEventListener("click", handleClick);
-    window.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("swipeend", (e) =>
+      handleSwipeEnd(e as CustomEvent)
+    );
+    document.addEventListener("click", handleClick);
+    document.addEventListener("mousemove", handleMouseMove);
+
     return () => {
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
-      window.removeEventListener("touchend", handleTouchEnd);
-      window.removeEventListener("click", handleClick);
-      window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("swipeend", (e) =>
+        handleSwipeEnd(e as CustomEvent)
+      );
+      document.removeEventListener("click", handleClick);
+      document.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
