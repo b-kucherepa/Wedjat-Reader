@@ -1,12 +1,14 @@
 :root {
-  --foreground-color: black;
-  --background-color: white;
+  --foreground-color: #000;
+  --background-color: #fff;
+  --selected-color: #444;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-color: white;
-    --background-color: black;
+    --foreground-color: #fff;
+    --background-color: #000;
+    --selected-color: #bbb;
   }
 }
 
@@ -52,7 +54,10 @@ body {
   display: grid;
   gap: 0.5rem;
   grid-auto-rows: min-content;
-  grid-template-columns: minmax(min-content, 1fr) minmax(min-content, 1fr) minmax(0, 2fr);
+  grid-template-columns: minmax(min-content, 1fr) minmax(min-content, 1fr) minmax(
+      0,
+      2fr
+    );
   height: 100%;
   padding: 5rem 2rem;
   position: relative;
@@ -65,7 +70,7 @@ body {
   border-style: none;
   color: var(--foreground-color);
   font-size: 4rem;
-  font-weight:lighter;
+  font-weight: lighter;
   line-height: 0;
   position: absolute;
   right: 0.5rem;
@@ -96,10 +101,10 @@ body {
   width: 100%;
 }
 
-button, input[type=file] {
-  font-weight: bold;;
+button,
+input[type="file"] {
+  font-weight: bold;
   background-color: var(--background-color);
-  box-sizing: border-box;
   color: var(--foreground-color);
   display: block;
   max-width: 100%;
@@ -107,8 +112,13 @@ button, input[type=file] {
   text-align: center;
 }
 
-input[type=file]::file-selector-button {
+input[type="file"]::file-selector-button {
   display: none;
+}
+
+.menu-option:hover, input[type="file"]:hover, button:hover{
+  color:var(--selected-color);
+  transition: 0.25s;
 }
 
 .bordered {
