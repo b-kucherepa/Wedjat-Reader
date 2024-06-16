@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Wedjat Reader",
   description: "A text reader with interactive background slideshow",
-  icons: {shortcut: "wedjat-eye.svg"}
+  icons: {shortcut: "wedjat-eye-icon.svg"}
 };
 
 export default function RootLayout({
