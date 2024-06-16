@@ -49,7 +49,7 @@ function OptionBgSize(): JSX.Element {
 
   return (
     <select
-      className="w-full bg-black shrink text-pretty truncate grow"
+      className="menu-option"
       onChange={handleDropdownSelect}
     >
       <option value={Size.Cover}>cover</option>

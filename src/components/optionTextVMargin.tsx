@@ -12,7 +12,7 @@ function OptionTextVMargin() {
   }
 
   return (
-    <input id="interval-number" type="number" value={textContext.values.vMargin} min={0} max={150} onChange={handleChange} className="bg-black"/>
+    <input id="interval-number" type="number" value={textContext.values.vMargin} min={0} max={150} onChange={handleChange} className="menu-option"/>
   );
 }
 

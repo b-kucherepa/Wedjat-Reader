@@ -11,7 +11,7 @@ function OptionShowInterval() {
   }
 
   return (
-    <input id="interval-number" type="number" value={showContext.values.interval/1000} min={1} max={3600} onChange={handleChange} className="bg-black"/>
+    <input id="interval-number" type="number" value={showContext.values.interval/1000} min={1} max={3600} onChange={handleChange} className="menu-option"/>
   );
 }
 

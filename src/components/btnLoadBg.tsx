@@ -52,7 +52,7 @@ function BgLoadBtn() {
       id="bg-files-input"
       multiple={true}
       accept="image/*"
-      className="w-full"
+      className="menu-item bordered"
     />
   );
 }

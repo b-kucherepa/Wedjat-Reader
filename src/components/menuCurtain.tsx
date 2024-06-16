@@ -55,96 +55,92 @@ function MenuCurtain() {
   return (
     <div
       id="navCurtain"
-      className="h-full w-0 fixed z-9 top-0 left-0  bg-black overflow-x-hidden duration-500"
+      className="curtain"
       style={{
         width: `${curtainWidth}%`,
       }}
     >
       <div
-        className="grid grid-cols-4 auto-rows-min gap-2 relative w-full h-full px-8 py-16 duration-500"
+        className="menu-content"
         style={{
           scale: curtainWidth > HINT_WIDTH ? curtainWidth / 100 : 0,
         }}
       >
-        <label className="shrink-0 row-span-2">Select files for:</label>
+        <label className="menu-section-text">Text:</label>
 
-        <label>text:</label>
-        <div className="col-span-2">
+        <label>load:</label>
+        <div>
           <BtnLoadText />
         </div>
 
-        <label>back&shy;ground:</label>
-        <div className="col-span-2">
-          <BtnLoadBg />
-        </div>
-
-        <hr className="col-span-4" />
-
-        <label className="shrink-0 row-span-4">Text:</label>
-
         <label>color:</label>
-        <div className="col-span-2">
+        <div>
           <OptionTextColor />
         </div>
 
         <label>size:</label>
-        <div className="col-span-2">
+        <div>
           <OptionTextSize />
         </div>
 
-        <label>hori&shy;zontal margin (px):</label>
-        <div className="col-span-2">
-          <OptionTextHMargin />
+        <label>hori&shy;zontal margin:</label>
+        <div>
+          <OptionTextHMargin /> (px)
         </div>
 
-        <label>verti&shy;cal margin (px):</label>
-        <div className="col-span-2">
-          <OptionTextVMargin/>
+        <label>verti&shy;cal margin:</label>
+        <div>
+          <OptionTextVMargin/> (px)
         </div>
 
-        <hr className="col-span-4" />
+        <hr className="menu-separator" />
 
-        <label className="shrink-0 row-span-3">Back&shy;ground:</label>
+        <label className="menu-section-bg">Back&shy;ground:</label>
+
+        <label>load:</label>
+        <div>
+          <BtnLoadBg />
+        </div>
 
         <label>sort by:</label>
-        <div className="col-span-2">
+        <div>
           <OptionBgSortBy />
         </div>
 
         <label>select:</label>
-        <div className="col-span-2 h-[30vh]	row-span-auto">
+        <div>
           <OptionBgSelect />
         </div>
 
         <label>layout and size:</label>
-        <div className="col-span-2">
+        <div>
           <OptionBgSize />
         </div>
 
-        <hr className="col-span-4" />
+        <hr className="menu-separator" />
 
-        <label className="shrink-0 row-span-3">Slide&shy;show:</label>
+        <label className="menu-section-slideshow">Slide&shy;show:</label>
 
-        <label>inter&shy;val (s):</label>
-        <div className="col-span-2">
-          <OptionShowInterval />
+        <label>inter&shy;val:</label>
+        <div>
+          <OptionShowInterval /> (s)
         </div>
 
         <label>rando&shy;mize:</label>
-        <div className="col-span-2">
+        <div>
           <OptionShowRandom />
         </div>
 
         <label>launch:</label>
-        <div className="col-span-2">
+        <div>
           <BtnShowStart onClick={() => setCurtainWidth(COLLAPSED_WIDTH)} />
         </div>
 
-        <hr className="col-span-4 invisible" />
+        <hr className="hidden" />
       </div>
 
       <button
-        className="absolute top-2 right-8 text-6xl text-center z-5"
+        className="btn-curtain-close"
         onClick={() => setCurtainWidth(COLLAPSED_WIDTH)}
       >
         &times;

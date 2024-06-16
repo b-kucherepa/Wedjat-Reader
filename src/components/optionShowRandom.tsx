@@ -11,7 +11,7 @@ function OptionShowRandom() {
   }
 
   return (
-    <input id="randomize-button" type="checkbox" onChange={handleChange} />
+    <input id="randomize-button" type="checkbox" className="menu-option" onChange={handleChange} />
   );
 }
 

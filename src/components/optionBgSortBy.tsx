@@ -75,7 +75,7 @@ function OptionBgSortBy() {
   
   return (
     <select
-    className="w-full bg-black shrink text-pretty truncate grow"
+    className="menu-option"
     onChange={handleDropdownSelect}
   >
     <option value={SortBy.NameAsc}>name ↓</option>
@@ -89,5 +89,3 @@ function OptionBgSortBy() {
 }
 
 export default OptionBgSortBy;
-
-//font-bold bg-sky-300 p-1 border-cyan-700 border-solid border-4 rounded-lg

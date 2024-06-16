@@ -54,7 +54,7 @@ function TextLoadBtn() {
       type="file"
       id="text-file-input"
       accept="text/*"
-      className="w-full"
+      className="menu-item bordered"
     />
   );
 }

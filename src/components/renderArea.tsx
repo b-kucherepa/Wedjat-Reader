@@ -48,7 +48,7 @@ function RenderArea(props: any) {
   return (
     <div
       id="renderArea"
-      className="text whitespace-pre-wrap break-word overflow-x-hidden	size-full min-h-screen z-5 top-0 left-0 bg-fixed bg-center"
+      className="render-area"
       style={{
         backgroundImage: `url(${
           bgContext.values.bgImages[bgContext.values.imageIndex].file

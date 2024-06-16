@@ -11,7 +11,7 @@ function OptionTextSize (props: any) {
   }
 
   return (
-    <input id="interval-number" type="number" value={textContext.values.size} min={4} max={256} onChange={handleChange} className="bg-black"/>
+    <input id="interval-number" type="number" value={textContext.values.size} min={4} max={256} onChange={handleChange} className="menu-option"/>
   );
 }
 

@@ -7,7 +7,7 @@ function BtnShowStart(props: any) {
   return (
     <button
       id="start-slideshow-button"
-      className="border-black bg-white text-black px-2 py-0.5"
+      className="menu-item bordered"
       type="button"
       onClick={() =>
         showContext.setValues({

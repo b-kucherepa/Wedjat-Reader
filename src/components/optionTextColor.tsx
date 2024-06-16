@@ -11,7 +11,7 @@ function OptionTextColor (props: any) {
   }
 
   return (
-    <input id="interval-number" type="color" onChange={handleChange} className="bg-black"/>
+    <input id="interval-number" type="color" onChange={handleChange} className="menu-option"/>
   );
 }
 

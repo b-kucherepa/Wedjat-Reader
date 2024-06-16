@@ -12,7 +12,7 @@ function OptionTextHMargin() {
   }
 
   return (
-    <input id="interval-number" type="number" value={textContext.values.hMargin} min={0} max={150} onChange={handleChange} className="bg-black"/>
+    <input id="interval-number" type="number" value={textContext.values.hMargin} min={0} max={150} onChange={handleChange} className="menu-option"/>
   );
 }
 
