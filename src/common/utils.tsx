@@ -41,6 +41,13 @@ export function formatBytes(bytes: number) {
   }`;
 }
 
-export function getScreenPercentSize(percent: number): number {
-  return (window.innerWidth * percent) / 100;
+export function getScreenPercentSize(
+  percent: number, isHeight: boolean): number {
+  const screenSize = isHeight ? window.innerHeight : window.innerWidth;
+
+  if (percent >= 0) {
+    return (screenSize * percent) / 100;
+  } else {
+    return screenSize - (screenSize * percent) / 100;
+  }
 }

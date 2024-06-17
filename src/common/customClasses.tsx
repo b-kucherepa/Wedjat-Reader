@@ -1,3 +1,5 @@
+import { getScreenPercentSize } from "./utils";
+
 export class Point {
   readonly x: number;
   readonly y: number;
@@ -31,17 +33,25 @@ export enum Swipe {
 }
 
 export class SwipeHandler {
+  swipeLength: number;
   element: any;
   startPoint: Point | null;
   endPoint: Point | null;
 
-  constructor(element: Node) {
+  constructor(element: Node, swipeLengthScreenPercentage: number) {
     this.element = element;
     this.startPoint = null;
     this.endPoint = null;
-    this.element.addEventListener("touchstart", (e: TouchEvent) => this.handleTouchStart(e));
-    this.element.addEventListener("touchmove", (e: TouchEvent) => this.handleTouchMove(e));
-    this.element.addEventListener("touchend", (e: TouchEvent) => this.handleTouchEnd(e));
+    this.swipeLength = swipeLengthScreenPercentage;
+    this.element.addEventListener("touchstart", (e: TouchEvent) =>
+      this.handleTouchStart(e)
+    );
+    this.element.addEventListener("touchmove", (e: TouchEvent) =>
+      this.handleTouchMove(e)
+    );
+    this.element.addEventListener("touchend", (e: TouchEvent) =>
+      this.handleTouchEnd(e)
+    );
   }
 
   getSwipe(): Swipe {
@@ -49,8 +59,16 @@ export class SwipeHandler {
       return Swipe.None;
     }
 
-    const xDistance = this.endPoint.x-this.startPoint.x;
-    const yDistance = this.endPoint.y-this.startPoint.y;
+    const xDistance: number = this.endPoint.x - this.startPoint.x;
+    const yDistance: number = this.endPoint.y - this.startPoint.y;
+
+    const isLongEnough: boolean =
+      Math.abs(xDistance) > getScreenPercentSize(this.swipeLength, false) ||
+      Math.abs(yDistance) > getScreenPercentSize(this.swipeLength, true);
+
+    if (!isLongEnough) {
+      return Swipe.None;
+    }
 
     if (Math.abs(xDistance) > Math.abs(yDistance)) {
       if (xDistance > 0) {
@@ -82,8 +100,8 @@ export class SwipeHandler {
         detail: {
           startPoint: this.startPoint,
           currentPoint: this.endPoint,
-          xDistance: this.endPoint.x-this.startPoint.x,
-          yDistance: this.endPoint.y-this.startPoint.y,
+          xDistance: this.endPoint.x - this.startPoint.x,
+          yDistance: this.endPoint.y - this.startPoint.y,
           swipe: this.getSwipe(),
         },
       })
@@ -99,8 +117,8 @@ export class SwipeHandler {
         detail: {
           startPoint: this.startPoint,
           endPoint: this.endPoint,
-          xDistance: this.endPoint.x-this.startPoint.x,
-          yDistance: this.endPoint.y-this.startPoint.y,
+          xDistance: this.endPoint.x - this.startPoint.x,
+          yDistance: this.endPoint.y - this.startPoint.y,
           swipe: this.getSwipe(),
         },
       })

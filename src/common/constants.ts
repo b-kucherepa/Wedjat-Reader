@@ -1,5 +1,8 @@
 import { BgImage } from "./customClasses";
 
+export const SWIPE_PERCENTAGE: number = 40;
+export const CLICK_MARGIN_PERCENTAGE: number = 15;
+
 export const DEFAULT_TEXT_VALUES: {
   text: string;
   color: string;
@@ -8,7 +11,7 @@ export const DEFAULT_TEXT_VALUES: {
   hMargin: number;
   vMargin: number;
 } = {
-  text: `Click the left side of screen to open menu, then click "select text file - Choose files" to load a text file`,
+  text: `Click the upper side of screen, or swipe down, to open menu, then click "Text -> load -> No file chosen" to load a text file`,
   color: "#FFFFFF",
   size: 16,
   family: "Times New Roman",

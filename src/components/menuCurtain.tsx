@@ -10,43 +10,67 @@ import OptionTextColor from "./optionTextColor";
 import OptionTextSize from "./optionTextSize";
 import OptionBgSize from "./optionBgSize";
 
-import { getScreenPercentSize} from "@/common/utils";
+import { getScreenPercentSize } from "@/common/utils";
 import OptionTextHMargin from "./optionTextHMargin";
 import OptionTextVMargin from "./optionTextVMargin";
+import { Swipe } from "@/common/customClasses";
+import { CLICK_MARGIN_PERCENTAGE } from "@/common/constants";
 
 function MenuCurtain() {
-  const EXPANDED_WIDTH: number = 100;
-  const HINT_WIDTH: number = 15;
-  const COLLAPSED_WIDTH: number = 0;
+  const EXPANDED_HEIGHT: number = 100;
+  const COLLAPSED_HEIGHT: number = 0;
 
-  const [curtainWidth, setCurtainWidth] = useState(COLLAPSED_WIDTH);
-  const curtainWidthRef = useRef(curtainWidth);
-  curtainWidthRef.current = curtainWidth;
+  const [curtainHeight, setCurtainHeight] = useState(COLLAPSED_HEIGHT);
+  const curtainHeightRef = useRef(curtainHeight);
+  curtainHeightRef.current = curtainHeight;
 
   useEffect(() => {
+    function handleSwipeEnd(e: CustomEvent): void {
+      if (e.detail.swipe === Swipe.Down) {
+        setCurtainHeight(EXPANDED_HEIGHT);
+      } else if (e.detail.swipe === Swipe.Up) {
+        setCurtainHeight(COLLAPSED_HEIGHT);
+      }
+    }
+
     function handleClick(e: MouseEvent): void {
-      const isLeftSideTouch: boolean =
-        e.clientX <= getScreenPercentSize(HINT_WIDTH);
-      if (isLeftSideTouch) {
-        setCurtainWidth(EXPANDED_WIDTH);
+      const isUpperSideTouch: boolean =
+        e.clientY <= getScreenPercentSize(CLICK_MARGIN_PERCENTAGE, true);
+
+      const isCurtainCollapsed: boolean =
+        curtainHeightRef.current <= CLICK_MARGIN_PERCENTAGE;
+
+      if (isUpperSideTouch && isCurtainCollapsed) {
+        setCurtainHeight(EXPANDED_HEIGHT);
       }
     }
 
     function handleMouseMove(e: MouseEvent): void {
-      const isLeftSideHover: boolean =
-        e.clientX <= getScreenPercentSize(HINT_WIDTH);
+      const isUpperSideHover: boolean =
+        e.clientY <= getScreenPercentSize(CLICK_MARGIN_PERCENTAGE, true);
 
-      if (curtainWidthRef.current <= HINT_WIDTH) {
-        setCurtainWidth(
-          isLeftSideHover ? COLLAPSED_WIDTH + HINT_WIDTH : COLLAPSED_WIDTH
+      const isCurtainCollapsed: boolean =
+        curtainHeightRef.current <= CLICK_MARGIN_PERCENTAGE;
+
+      if (isCurtainCollapsed) {
+        setCurtainHeight(
+          isUpperSideHover
+            ? COLLAPSED_HEIGHT + CLICK_MARGIN_PERCENTAGE
+            : COLLAPSED_HEIGHT
         );
       }
     }
 
+    document.addEventListener("swipeend", (e) =>
+      handleSwipeEnd(e as CustomEvent)
+    );
     document.addEventListener("click", handleClick);
     document.addEventListener("mousemove", handleMouseMove);
 
     return () => {
+      document.removeEventListener("swipeend", (e) =>
+        handleSwipeEnd(e as CustomEvent)
+      );
       document.removeEventListener("click", handleClick);
       document.removeEventListener("mousemove", handleMouseMove);
     };
@@ -57,13 +81,15 @@ function MenuCurtain() {
       id="navCurtain"
       className="curtain"
       style={{
-        width: `${curtainWidth}%`,
+        height: `${curtainHeight}%`,
+        overflowY: curtainHeight > CLICK_MARGIN_PERCENTAGE ? "auto" : "hidden",
       }}
     >
       <div
         className="menu-content"
         style={{
-          scale: curtainWidth > HINT_WIDTH ? curtainWidth / 100 : 0,
+          scale:
+            curtainHeight > CLICK_MARGIN_PERCENTAGE ? curtainHeight / 100 : 0,
         }}
       >
         <label className="menu-section-text">Text:</label>
@@ -90,7 +116,7 @@ function MenuCurtain() {
 
         <label>verti&shy;cal margin:</label>
         <div>
-          <OptionTextVMargin/> (px)
+          <OptionTextVMargin /> (px)
         </div>
 
         <hr className="menu-separator" />
@@ -132,19 +158,23 @@ function MenuCurtain() {
         </div>
 
         <label>launch:</label>
-        <div>
-          <BtnShowStart onClick={() => setCurtainWidth(COLLAPSED_WIDTH)} />
+        <div
+          onClick={() => {
+            setCurtainHeight(COLLAPSED_HEIGHT);
+          }}
+        >
+          <BtnShowStart />
         </div>
 
-        <hr className="hidden" />
-      </div>
+        <hr className="menu-separator" />
 
-      <button
-        className="btn-curtain-close"
-        onClick={() => setCurtainWidth(COLLAPSED_WIDTH)}
-      >
-        &times;
-      </button>
+        <button
+          className="btn-curtain-close"
+          onClick={() => setCurtainHeight(COLLAPSED_HEIGHT)}
+        >
+          &times;
+        </button>
+      </div>
     </div>
   );
 }

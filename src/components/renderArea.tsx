@@ -1,8 +1,9 @@
 import { useContext, useEffect, useRef } from "react";
 import { BgContext } from "../contexts/bgContext";
 import { TextContext } from "../contexts/textContext";
-import { Swipe, SwipeHandler } from "@/common/customClasses";
+import { Swipe } from "@/common/customClasses";
 import { getScreenPercentSize, shiftArrayIndexInLoop } from "@/common/utils";
+import { CLICK_MARGIN_PERCENTAGE } from "@/common/constants";
 
 function RenderArea(props: any) {
   const textContext = useContext(TextContext);
@@ -11,38 +12,54 @@ function RenderArea(props: any) {
   bgContextRef.current = bgContext;
 
   useEffect(() => {
-    const SWIPE_WIDTH: number = 35;
 
-    const swipeHandler = new SwipeHandler(document);
+    function setNextImage(isReversed: boolean) {
+      const step = isReversed ? -1 : 1;
+
+      bgContext.setValues({
+        ...bgContextRef.current.values,
+        imageIndex: shiftArrayIndexInLoop(
+          bgContextRef.current.values.bgImages.length,
+          bgContextRef.current.values.imageIndex,
+          step
+        ),
+      });
+    }
 
     function handleSwipeEnd(e: CustomEvent): void {
-      console.log(bgContextRef.current.values);
-      if (Math.abs(e.detail.xDistance) > getScreenPercentSize(SWIPE_WIDTH)) {
         if (e.detail.swipe === Swipe.Right) {
-          bgContext.setValues({
-            ...bgContextRef.current.values,
-            imageIndex: shiftArrayIndexInLoop(
-              bgContextRef.current.values.bgImages.length,
-              bgContextRef.current.values.imageIndex,
-              1
-            ),
-          });
+          setNextImage(false);
         } else if (e.detail.swipe === Swipe.Left) {
-          bgContext.setValues({
-            ...bgContextRef.current.values,
-            imageIndex: shiftArrayIndexInLoop(
-              bgContextRef.current.values.bgImages.length,
-              bgContextRef.current.values.imageIndex,
-              -1
-            ),
-          });
+          setNextImage(true);
         }
+    }
+
+    function handleClick(e: MouseEvent): void {
+      const isLeftSideTouch: boolean =
+        e.clientX <= getScreenPercentSize(CLICK_MARGIN_PERCENTAGE, false);
+      const isRightSideTouch: boolean =
+        e.clientX >= getScreenPercentSize(-CLICK_MARGIN_PERCENTAGE, false);
+
+      if (isLeftSideTouch) {
+        setNextImage(true);
+      }
+
+      if (isRightSideTouch) {
+        setNextImage(false);
       }
     }
 
     document.addEventListener("swipeend", (e) =>
       handleSwipeEnd(e as CustomEvent)
     );
+    document.addEventListener("click", handleClick);
+
+    return () => {
+      document.removeEventListener("swipeend", (e) =>
+        handleSwipeEnd(e as CustomEvent)
+      );
+      document.removeEventListener("click", handleClick);
+    };
   }, []);
 
   return (
@@ -64,9 +81,7 @@ function RenderArea(props: any) {
         paddingBottom: `${textContext.values.vMargin}px`,
       }}
     >
-      <div>
-        {textContext.values.text}
-      </div>
+      <div>{textContext.values.text}</div>
     </div>
   );
 }

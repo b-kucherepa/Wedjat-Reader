@@ -1,8 +1,17 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
-import { shiftArrayIndexInLoop, generateRandomBetween } from "../common/utils";
-import { DEFAULT_BG_VALUES, DEFAULT_SLIDESHOW_VALUES, DEFAULT_TEXT_VALUES } from "../common/constants";
+import {
+  shiftArrayIndexInLoop,
+  generateRandomBetween,
+  getScreenPercentSize,
+} from "../common/utils";
+import {
+  DEFAULT_BG_VALUES,
+  DEFAULT_SLIDESHOW_VALUES,
+  DEFAULT_TEXT_VALUES,
+  SWIPE_PERCENTAGE,
+} from "../common/constants";
 
 import MenuCurtain from "../components/menuCurtain";
 import RenderArea from "../components/renderArea";
@@ -10,6 +19,7 @@ import RenderArea from "../components/renderArea";
 import { BgContext } from "../contexts/bgContext";
 import { SlideshowContext } from "../contexts/slideshowContext";
 import { TextContext } from "../contexts/textContext";
+import { SwipeHandler } from "@/common/customClasses";
 
 export default function Main() {
   const [textValues, setTextValues] = useState(DEFAULT_TEXT_VALUES);
@@ -34,6 +44,10 @@ export default function Main() {
   };
 
   const slideshowTimer = useRef(setTimeout(() => {}, 0));
+
+  useEffect(() => {
+    const swipeHandler = new SwipeHandler(document, SWIPE_PERCENTAGE);
+  }, []);
 
   useEffect(() => {
     clearInterval(slideshowTimer.current);
