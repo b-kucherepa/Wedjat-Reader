@@ -57,3 +57,21 @@ export function getScreenPercentSize(
 export function clampNumber(number: number, min: number, max: number) {
   return Math.min(Math.max(number, min), max);
 }
+
+export function loadState (itemName: string): unknown {
+  try {
+    const serializedState = localStorage.getItem(itemName);
+    return serializedState? JSON.parse(serializedState) : undefined;
+  } catch (err) {
+    return undefined;
+  }
+};
+
+export function saveState (itemName: string, data: unknown): void {
+  try {
+    const serializedState = JSON.stringify(data);
+    localStorage.setItem(itemName, serializedState);
+  } catch (err) {
+    console.log(err);
+  }
+};

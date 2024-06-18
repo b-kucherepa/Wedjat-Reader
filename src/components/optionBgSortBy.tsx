@@ -1,5 +1,4 @@
 import { ChangeEvent } from "react";
-import { BgImage } from "../common/customClasses";
 import { useSelector, useDispatch } from "react-redux";
 import { set as setImageFiles } from "@/store/bgImageFilesSlice";
 import { set as setImageIndex } from "@/store/bgImageIndexSlice";
@@ -20,11 +19,21 @@ function OptionBgSortBy() {
 
   function handleDropdownSelect(e: ChangeEvent<HTMLSelectElement>) {
     const indexedImageArray: {
-      imageData: BgImage;
+      imageData: any;
       prevIndex: number;
-    }[] = imageFiles.map((image: BgImage, index: number) => {
-      return { imageData: image, prevIndex: index };
-    });
+    }[] = imageFiles.map(
+      (
+        image: {
+          file: string;
+          name: string;
+          size: number;
+          modified: number;
+        },
+        index: number
+      ) => {
+        return { imageData: image, prevIndex: index };
+      }
+    );
 
     switch (e.target.value) {
       case SortBy.NameAsc.toString():
@@ -66,9 +75,12 @@ function OptionBgSortBy() {
       (indexedImage) => indexedImage.prevIndex === imageIndex
     );
 
-    const sortedBgArray: BgImage[] = indexedImageArray.map(
-      (image) => image.imageData
-    );
+    const sortedBgArray: {
+      file: string;
+      name: string;
+      size: number;
+      modified: number;
+    }[] = indexedImageArray.map((image) => image.imageData);
 
     dispatch(setImageFiles(sortedBgArray));
     dispatch(setImageIndex(newImageIndex));

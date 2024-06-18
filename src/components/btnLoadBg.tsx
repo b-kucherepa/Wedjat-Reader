@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { BgImage } from "../common/customClasses";
+//import { BgImage } from "../common/customClasses";
 import { useDispatch } from "react-redux";
 import { push as pushImageFiles } from "@/store/bgImageFilesSlice";
 import { set as setImageFiles } from "@/store/bgImageFilesSlice";
@@ -21,7 +21,7 @@ function BgLoadBtn() {
     if (result) {
       dispatch(
         pushImageFiles(
-          new BgImage(result, fileName, fileSize, fileLastModified)
+          {file: result, name: fileName, size: fileSize, modified: fileLastModified}
         )
       );
       dispatch(setImageIndex(0));

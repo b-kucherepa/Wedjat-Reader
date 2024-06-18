@@ -1,11 +1,18 @@
-import { BgImage } from "./customClasses";
+//import { BgImage } from "./customClasses";
+
+export const STORE_ITEM_NAME: string = "config";
 
 export const SWIPE_PERCENTAGE: number = 40;
 export const CLICK_MARGIN_PERCENTAGE: number = 15;
 
-export const DEFAULT_BG_IMAGE: BgImage = new BgImage(
-  "/default.png",
-  "default image",
-  378940,
-  0
-);
+export const DEFAULT_BG_IMAGE: {
+  file: string;
+  name: string;
+  size: number;
+  modified: number;
+} = {
+  file: "default.png",
+  name: "default image",
+  size: 378940,
+  modified: 0,
+};

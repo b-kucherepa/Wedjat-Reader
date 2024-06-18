@@ -11,6 +11,8 @@ import bgImageIndexSlice from "./bgImageIndexSlice";
 import bgImageFilesSlice from "./bgImageFilesSlice";
 import bgImageSizeSlice from "./bgImageSizeSlice";
 import bgImageRepeatSlice from "./bgImageRepeatSlice";
+import { loadState } from "@/common/utils";
+import { STORE_ITEM_NAME } from "@/common/constants";
 
 export default configureStore({
   reducer: {
@@ -27,4 +29,5 @@ export default configureStore({
     showIsRandom: showIsRandomSlice,
     showInterval: showIntervalSlice
   },
+  preloadedState: loadState(STORE_ITEM_NAME)
 });
