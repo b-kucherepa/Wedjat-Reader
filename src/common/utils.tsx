@@ -50,7 +50,7 @@ export function getScreenPercentSize(
   if (percent >= 0) {
     return (screenSize * percent) / 100;
   } else {
-    return screenSize - (screenSize * percent) / 100;
+    return screenSize + (screenSize * percent) / 100;
   }
 }
 
