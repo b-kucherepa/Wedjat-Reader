@@ -9,7 +9,6 @@ import {
 import {
   DEFAULT_BG_VALUES,
   DEFAULT_SLIDESHOW_VALUES,
-  DEFAULT_TEXT_VALUES,
   SWIPE_PERCENTAGE,
 } from "../common/constants";
 
@@ -18,22 +17,15 @@ import RenderArea from "../components/renderArea";
 
 import { BgContext } from "../contexts/bgContext";
 import { SlideshowContext } from "../contexts/slideshowContext";
-import { TextContext } from "../contexts/textContext";
 import { SwipeHandler } from "@/common/customClasses";
 import { Provider } from "react-redux";
 import store from "@/store/store";
 
 export default function Main() {
-  const [textValues, setTextValues] = useState(DEFAULT_TEXT_VALUES);
   const [bgValues, setBgValues] = useState(DEFAULT_BG_VALUES);
   const [slideshowValues, setSlideshowValues] = useState(
     DEFAULT_SLIDESHOW_VALUES
   );
-
-  const textContextHook = {
-    values: textValues,
-    setValues: setTextValues,
-  };
 
   const bgContextHook = {
     values: bgValues,
@@ -82,14 +74,12 @@ export default function Main() {
   return (
     <main id="mainText">
       <Provider store={store}>
-        <TextContext.Provider value={textContextHook}>
           <BgContext.Provider value={bgContextHook}>
             <SlideshowContext.Provider value={slideshowContextHook}>
               <MenuCurtain></MenuCurtain>
               <RenderArea></RenderArea>
             </SlideshowContext.Provider>
           </BgContext.Provider>
-        </TextContext.Provider>
       </Provider>
     </main>
   );

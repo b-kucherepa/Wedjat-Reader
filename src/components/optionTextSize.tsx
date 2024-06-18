@@ -1,18 +1,13 @@
-import { ChangeEvent, useContext } from "react";
-import { TextContext } from "@/contexts/textContext";
+import { ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { decrement, increment, set } from "@/store/textSizeSlice";
 
 function OptionTextSize(props: any) {
-  const textContext = useContext(TextContext);
   const size = useSelector((state: any) => state.textSize.value);
   const dispatch = useDispatch();
+
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
     dispatch(set(parseInt(e.target.value)));
-    textContext.setValues({
-      ...textContext.values,
-      size: parseInt(e.target.value),
-    });
   }
 
   function handleDecrement(): void {

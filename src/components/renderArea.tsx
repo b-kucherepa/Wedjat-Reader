@@ -1,6 +1,5 @@
 import { useContext, useEffect, useRef } from "react";
 import { BgContext } from "../contexts/bgContext";
-import { TextContext } from "../contexts/textContext";
 import { Swipe } from "@/common/customClasses";
 import { getScreenPercentSize, shiftArrayIndexInLoop } from "@/common/utils";
 import { CLICK_MARGIN_PERCENTAGE } from "@/common/constants";
@@ -10,8 +9,9 @@ function RenderArea(props: any) {
   const text = useSelector((state: any) => state.text.value);
   const textColor = useSelector((state: any) => state.textColor.value);
   const textSize = useSelector((state: any) => state.textSize.value);
+  const textHMargin = useSelector((state: any) => state.textHMargin.value);
+  const textVMargin = useSelector((state: any) => state.textVMargin.value)
 
-  const textContext = useContext(TextContext);
   const bgContext = useContext(BgContext);
   const bgContextRef = useRef(bgContext);
   bgContextRef.current = bgContext;
@@ -79,10 +79,10 @@ function RenderArea(props: any) {
 
         color: textColor,
         fontSize: textSize,
-        paddingLeft: `${textContext.values.hMargin}px`,
-        paddingRight: `${textContext.values.hMargin}px`,
-        paddingTop: `${textContext.values.vMargin}px`,
-        paddingBottom: `${textContext.values.vMargin}px`,
+        paddingLeft: `${textHMargin}px`,
+        paddingRight: `${textHMargin}px`,
+        paddingTop: `${textVMargin}px`,
+        paddingBottom: `${textVMargin}px`,
       }}
     >
       <div>{text}</div>
