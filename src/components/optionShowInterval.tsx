@@ -1,17 +1,37 @@
-import { ChangeEvent, useContext } from "react";
-import { SlideshowContext } from "@/contexts/slideshowContext";
+import { ChangeEvent } from "react";
+import { decrement, increment, set } from "@/store/showIntervalSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 function OptionShowInterval() {
-  const showContext = useContext(SlideshowContext);
+  const interval = useSelector((state: any) => state.showInterval.value);
+  const dispatch = useDispatch();
+
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
-    showContext.setValues({
-      ...showContext.values,
-      interval: parseInt(e.target.value)*1000,
-    });
+    dispatch(set(parseInt(e.target.value)*1000));
+  }
+
+  function handleDecrement(): void {
+    dispatch(decrement());
+  }
+
+  function handleIncrement(): void {
+    dispatch(increment());
   }
 
   return (
-    <input id="interval-number" type="number" value={showContext.values.interval/1000} min={1} max={3600} onChange={handleChange} className="menu-option"/>
+    <div className="inline">
+      <button className="menu-option" onClick={handleDecrement}>{"←"}</button>
+      <input
+        id="interval-number"
+        type="number"
+        value={interval/1000}
+        min={1}
+        max={9999}
+        onChange={handleChange}
+        className="menu-option center"
+      />
+      <button className="menu-option" onClick={handleIncrement}>{"→"}</button>
+    </div>
   );
 }
 

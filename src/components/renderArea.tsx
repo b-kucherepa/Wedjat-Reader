@@ -1,37 +1,51 @@
-import { useContext, useEffect, useRef } from "react";
-import { BgContext } from "../contexts/bgContext";
-import { TextContext } from "../contexts/textContext";
+import { useEffect, useRef } from "react";
 import { Swipe } from "@/common/customClasses";
-import { getScreenPercentSize, shiftArrayIndexInLoop } from "@/common/utils";
-import { CLICK_MARGIN_PERCENTAGE } from "@/common/constants";
+import {
+  generateRandomBetween,
+  getScreenPercentSize,
+  shiftArrayIndexInLoop,
+} from "@/common/utils";
+import { CLICK_MARGIN_PERCENTAGE, DEFAULT_BG_IMAGE } from "@/common/constants";
+import { useSelector, useDispatch } from "react-redux";
+import { set as setImageIndex } from "@/store/bgImageIndexSlice";
 
-function RenderArea(props: any) {
-  const textContext = useContext(TextContext);
-  const bgContext = useContext(BgContext);
-  const bgContextRef = useRef(bgContext);
-  bgContextRef.current = bgContext;
+function RenderArea() {
+  const dispatch = useDispatch();
+  
+  const text = useSelector((state: any) => state.text.value);
+  const textColor = useSelector((state: any) => state.textColor.value);
+  const textSize = useSelector((state: any) => state.textSize.value);
+  const textHMargin = useSelector((state: any) => state.textHMargin.value);
+  const textVMargin = useSelector((state: any) => state.textVMargin.value);
+
+  const bgImageFiles = useSelector((state: any) => state.bgImageFiles.value);
+  const bgImageIndex = useSelector((state: any) => state.bgImageIndex.value);
+  const bgImageSize = useSelector((state: any) => state.bgImageSize.value);
+  const bgImageRepeat = useSelector((state: any) => state.bgImageRepeat.value);
+
+  const showIsEnabled = useSelector((state: any) => state.showIsEnabled.value);
+  const showIsRandom = useSelector((state: any) => state.showIsRandom.value);
+  const showInterval = useSelector((state: any) => state.showInterval.value);
+
+  const slideshowTimer = useRef(setTimeout(() => {}, 0));
 
   useEffect(() => {
-
     function setNextImage(isReversed: boolean) {
-      const step = isReversed ? -1 : 1;
+      const newImageIndex = shiftArrayIndexInLoop(
+        bgImageFiles.length,
+        bgImageIndex,
+        isReversed ? -1 : 1
+      );
 
-      bgContext.setValues({
-        ...bgContextRef.current.values,
-        imageIndex: shiftArrayIndexInLoop(
-          bgContextRef.current.values.bgImages.length,
-          bgContextRef.current.values.imageIndex,
-          step
-        ),
-      });
+      dispatch(setImageIndex(newImageIndex));
     }
 
     function handleSwipeEnd(e: CustomEvent): void {
-        if (e.detail.swipe === Swipe.Right) {
-          setNextImage(false);
-        } else if (e.detail.swipe === Swipe.Left) {
-          setNextImage(true);
-        }
+      if (e.detail.swipe === Swipe.Right) {
+        setNextImage(false);
+      } else if (e.detail.swipe === Swipe.Left) {
+        setNextImage(true);
+      }
     }
 
     function handleClick(e: MouseEvent): void {
@@ -62,26 +76,48 @@ function RenderArea(props: any) {
     };
   }, []);
 
+  useEffect(() => {
+    clearInterval(slideshowTimer.current);
+
+    if (showIsEnabled) {
+      slideshowTimer.current = setTimeout(() => {
+        let indexShift = 0;
+
+        if (showIsRandom) {
+          indexShift = generateRandomBetween(1, bgImageFiles.length);
+        } else {
+          indexShift = 1;
+        }
+
+        const newImageIndex = shiftArrayIndexInLoop(
+          bgImageFiles.length,
+          bgImageIndex,
+          indexShift
+        );
+
+        setImageIndex(newImageIndex);
+      }, showInterval);
+    }
+  }, [showInterval, showIsEnabled, showIsRandom, bgImageFiles, bgImageIndex]);
+
   return (
     <div
       id="renderArea"
       className="render-area"
       style={{
-        backgroundImage: `url(${
-          bgContext.values.bgImages[bgContext.values.imageIndex].file
-        })`,
-        backgroundSize: bgContext.values.size,
-        backgroundRepeat: bgContext.values.repeat,
+        backgroundImage: `url(${bgImageFiles.length>0?bgImageFiles[bgImageIndex].file:DEFAULT_BG_IMAGE.file})`,
+        backgroundSize: bgImageSize,
+        backgroundRepeat: bgImageRepeat,
 
-        color: textContext.values.color,
-        fontSize: textContext.values.size,
-        paddingLeft: `${textContext.values.hMargin}px`,
-        paddingRight: `${textContext.values.hMargin}px`,
-        paddingTop: `${textContext.values.vMargin}px`,
-        paddingBottom: `${textContext.values.vMargin}px`,
+        color: textColor,
+        fontSize: textSize,
+        paddingLeft: `${textHMargin}px`,
+        paddingRight: `${textHMargin}px`,
+        paddingTop: `${textVMargin}px`,
+        paddingBottom: `${textVMargin}px`,
       }}
     >
-      <div>{textContext.values.text}</div>
+      <div>{text}</div>
     </div>
   );
 }

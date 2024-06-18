@@ -65,60 +65,19 @@ body {
   width: 100%;
 }
 
-.btn-curtain-close {
-  background-color: transparent;
-  border-style: none;
-  color: var(--foreground-color);
-  font-size: 5rem;
-  font-weight: lighter;
-  grid-column: span 3;
-  padding-bottom: 1rem;
-  text-align: center;
-}
-
 .menu-option {
   background-color: var(--background-color);
   border-style: none;
   color: var(--foreground-color);
-  flex-grow: 1;
-  flex-shrink: 1;
+  display: inline;
   font-size: 1rem;
   margin: 0;
   max-width: 100%;
   overflow: hidden;
   padding: 0;
-  text-align: left;
   text-overflow: ellipsis;
   text-wrap: pretty;
   width: minmax(fit-content, 100%);
-}
-
-.bg-list {
-  height: 30vh;
-  text-align: start;
-  width: 100%;
-}
-
-button,
-input[type="file"] {
-  font-weight: bold;
-  background-color: var(--background-color);
-  color: var(--foreground-color);
-  display: block;
-  max-width: 100%;
-  padding: 0.25rem 0.5rem;
-  text-align: center;
-}
-
-input[type="file"]::file-selector-button {
-  display: none;
-}
-
-.menu-option:hover,
-input[type="file"]:hover,
-button:hover {
-  color: var(--selected-color);
-  transition: 0.2s;
 }
 
 .bordered {
@@ -129,6 +88,19 @@ button:hover {
   border-width: 0.05rem;
 }
 
+.inline {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+.center {
+  text-align: center;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
 .menu-separator {
   background-color: var(--foreground-color);
   border-color: var(--foreground-color);
@@ -136,8 +108,10 @@ button:hover {
   width: 100%;
 }
 
-.hidden {
-  visibility: hidden;
+.bg-list {
+  height: 30vh;
+  text-align: start;
+  width: 100%;
 }
 
 .menu-section-text {
@@ -152,8 +126,51 @@ button:hover {
   grid-row: span 3;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+menu-section-other {
+  grid-row: span 1;
+}
+
+.btn-curtain-close {
+  background-color: transparent;
+  border-style: none;
+  color: var(--foreground-color);
+  font-size: 5rem;
+  font-weight: lighter;
+  grid-column: span 3;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+
+button,
+input[type="file"] {
+  font-weight: bold;
+  background-color: var(--background-color);
+  box-sizing: border-box;
+  color: var(--foreground-color);
+  display: block;
+  max-width: 100%;
+  padding: 0.25rem 0.5rem;
+  text-align: center;
+}
+
+
+input[type="file"]::file-selector-button {
+  display: none;
+}
+
+.menu-option:hover,
+input[type="file"]:hover,
+button:hover {
+  color: var(--selected-color);
+  transition: 0.2s;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }

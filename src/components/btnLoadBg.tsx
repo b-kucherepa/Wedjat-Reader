@@ -1,13 +1,15 @@
-import { ChangeEvent, useContext } from "react";
-import { BgImage } from "../common/customClasses";
-import { BgContext } from "../contexts/bgContext";
+import { ChangeEvent } from "react";
+//import { BgImage } from "../common/customClasses";
+import { useDispatch } from "react-redux";
+import { push as pushImageFiles } from "@/store/bgImageFilesSlice";
+import { set as setImageFiles } from "@/store/bgImageFilesSlice";
+import { set as setImageIndex } from "@/store/bgImageIndexSlice";
 
 function BgLoadBtn() {
-  const bgContext = useContext(BgContext);
+  const dispatch = useDispatch();
 
   function handleFileRead(
     e: ProgressEvent<FileReader>,
-    readFiles: BgImage[],
     fileName: string,
     fileSize: number,
     fileLastModified: number
@@ -17,14 +19,13 @@ function BgLoadBtn() {
     ).result?.toString();
 
     if (result) {
-      readFiles.push(new BgImage(result, fileName, fileSize, fileLastModified));
+      dispatch(
+        pushImageFiles(
+          {file: result, name: fileName, size: fileSize, modified: fileLastModified}
+        )
+      );
+      dispatch(setImageIndex(0));
     }
-
-    bgContext.setValues({
-      ...bgContext.values,
-      bgImages: readFiles,
-      imageIndex: 0,
-    });
   }
 
   function handleFileSelect(e: ChangeEvent<HTMLInputElement>) {
@@ -34,12 +35,12 @@ function BgLoadBtn() {
       alert("Please, select a file...");
       return;
     } else {
-      const readFiles: BgImage[] = [];
+      dispatch(setImageFiles([]));
 
       for (let f of files) {
         let reader = new FileReader();
         reader.onload = (e) =>
-          handleFileRead(e, readFiles, f.name, f.size, f.lastModified);
+          handleFileRead(e, f.name, f.size, f.lastModified);
         reader.readAsDataURL(f);
       }
     }

@@ -42,7 +42,9 @@ export function formatBytes(bytes: number) {
 }
 
 export function getScreenPercentSize(
-  percent: number, isHeight: boolean): number {
+  percent: number,
+  isHeight: boolean
+): number {
   const screenSize = isHeight ? window.innerHeight : window.innerWidth;
 
   if (percent >= 0) {
@@ -51,3 +53,34 @@ export function getScreenPercentSize(
     return screenSize - (screenSize * percent) / 100;
   }
 }
+
+export function clampNumber(number: number, min: number, max: number) {
+  return Math.min(Math.max(number, min), max);
+}
+
+export function loadState (itemName: string): unknown {
+  try {
+    const serializedState = localStorage.getItem(itemName);
+    return serializedState? JSON.parse(serializedState) : undefined;
+  } catch (err) {
+    return undefined;
+  }
+};
+
+export function saveState (itemName: string, data: unknown): void {
+  try {
+    const serializedState = JSON.stringify(data);
+    localStorage.setItem(itemName, serializedState);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export function removeState (itemName: string): void {
+  try {
+    localStorage.removeItem(itemName);
+    location.reload();
+    } catch (err) {
+    console.log(err);
+  }
+};

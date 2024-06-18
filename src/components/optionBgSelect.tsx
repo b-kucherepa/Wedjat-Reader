@@ -1,12 +1,23 @@
-import { ChangeEvent, ReactElement, useContext } from "react";
+import { ChangeEvent, ReactElement } from "react";
 import { formatBytes } from "../common/utils";
-import { BgContext } from "@/contexts/bgContext";
+import { useDispatch, useSelector } from "react-redux";
+import { set } from "@/store/bgImageIndexSlice";
 
 function OptionBgSelect(): JSX.Element {
-  const bgContext = useContext(BgContext);
+  const imageFiles = useSelector((state: any) => state.bgImageFiles.value);
+  const imageIndex = useSelector((state: any) => state.bgImageIndex.value);
+  const dispatch = useDispatch();
 
-  const options: ReactElement[] = bgContext.values.bgImages.map(
-    (image, index) => {
+  const options: ReactElement[] = imageFiles.map(
+    (
+      image: {
+        file: string;
+        name: string;
+        size: number;
+        modified: number;
+      },
+      index: number
+    ) => {
       const date = new Date(image.modified);
       return (
         <option key={`option-${index}`} value={index}>
@@ -18,10 +29,7 @@ function OptionBgSelect(): JSX.Element {
   );
 
   function handleDropdownSelect(e: ChangeEvent<HTMLSelectElement>): void {
-    bgContext.setValues({
-      ...bgContext.values,
-      imageIndex: parseInt(e.target.value),
-    });
+    dispatch(set(parseInt(e.target.value)));
   }
 
   return (
@@ -30,12 +38,10 @@ function OptionBgSelect(): JSX.Element {
       className="menu-option bordered bg-list"
       style={{
         backgroundSize: "cover",
-        backgroundImage: `url(${
-          bgContext.values.bgImages[bgContext.values.imageIndex]?.file ?? ""
-        })`,
+        backgroundImage: `url(${imageFiles[imageIndex]?.file ?? ""})`,
       }}
       onChange={handleDropdownSelect}
-      value={bgContext.values.imageIndex}
+      value={imageIndex}
     >
       {options}
     </select>

@@ -1,22 +1,23 @@
-import { useContext } from "react";
-import { SlideshowContext } from "@/contexts/slideshowContext";
+import { set } from "@/store/showIsEnabledSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-function BtnShowStart(props: any) {
-  const showContext = useContext(SlideshowContext);
+function BtnShowStart() {
+  const isEnabled = useSelector((state: any) => state.showIsEnabled.value);
+  const dispatch = useDispatch();
+
+  function handleClick(): void {
+    dispatch(set(!isEnabled));
+  }
 
   return (
     <button
       id="start-slideshow-button"
       className="menu-item bordered"
       type="button"
-      onClick={() =>
-        showContext.setValues({
-          ...showContext.values,
-          isEnabled: !showContext.values.isEnabled,
-        })
+      onClick={handleClick
       }
     >
-      {showContext.values.isEnabled ? "Stop" : "Start"}
+      {isEnabled ? "Stop" : "Start"}
     </button>
   );
 }
