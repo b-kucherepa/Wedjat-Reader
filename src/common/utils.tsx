@@ -75,3 +75,12 @@ export function saveState (itemName: string, data: unknown): void {
     console.log(err);
   }
 };
+
+export function removeState (itemName: string): void {
+  try {
+    localStorage.removeItem(itemName);
+    location.reload();
+    } catch (err) {
+    console.log(err);
+  }
+};

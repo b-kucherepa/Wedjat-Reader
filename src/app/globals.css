@@ -126,6 +126,10 @@ body {
   grid-row: span 3;
 }
 
+menu-section-other {
+  grid-row: span 1;
+}
+
 .btn-curtain-close {
   background-color: transparent;
   border-style: none;

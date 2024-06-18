@@ -1,20 +1,21 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { getScreenPercentSize } from "@/common/utils";
+import { CLICK_MARGIN_PERCENTAGE } from "@/common/constants";
+import { Swipe } from "@/common/customClasses";
+
 import BtnLoadBg from "./btnLoadBg";
 import BtnLoadText from "./btnLoadText";
+import BtnOptionsReset from "./btnOptionsReset";
+import BtnShowStart from "./btnShowStart";
 import OptionBgSelect from "./optionBgSelect";
+import OptionBgSize from "./optionBgSize";
 import OptionBgSortBy from "./optionBgSortBy";
 import OptionShowInterval from "./optionShowInterval";
 import OptionShowRandom from "./optionShowRandom";
-import BtnShowStart from "./btnShowStart";
 import OptionTextColor from "./optionTextColor";
-import OptionTextSize from "./optionTextSize";
-import OptionBgSize from "./optionBgSize";
-
-import { getScreenPercentSize } from "@/common/utils";
 import OptionTextHMargin from "./optionTextHMargin";
+import OptionTextSize from "./optionTextSize";
 import OptionTextVMargin from "./optionTextVMargin";
-import { Swipe } from "@/common/customClasses";
-import { CLICK_MARGIN_PERCENTAGE } from "@/common/constants";
 
 function MenuCurtain() {
   const EXPANDED_HEIGHT: number = 100;
@@ -164,6 +165,15 @@ function MenuCurtain() {
           }}
         >
           <BtnShowStart />
+        </div>
+
+        <hr className="menu-separator" />
+
+        <label className="menu-section-other">Other:</label>
+
+        <label>reset preferences:</label>
+        <div>
+        <BtnOptionsReset/>
         </div>
 
         <hr className="menu-separator" />
