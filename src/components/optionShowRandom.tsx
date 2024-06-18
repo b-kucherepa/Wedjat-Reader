@@ -1,14 +1,13 @@
-import { ChangeEvent, useContext } from "react";
-import { SlideshowContext } from "@/contexts/slideshowContext";
+import { ChangeEvent } from "react";
+import { set } from "@/store/showIsRandomSlice";
+import { useDispatch } from "react-redux";
 
 function OptionShowRandom() {
-  const showContext = useContext(SlideshowContext);
+  const dispatch = useDispatch();
+
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
-    showContext.setValues({
-      ...showContext.values,
-      isRandom: e.target.checked,
-    });
-  }
+      dispatch(set(e.target.value));
+    }  
 
   return (
     <input id="randomize-button" type="checkbox" className="menu-option" onChange={handleChange} />

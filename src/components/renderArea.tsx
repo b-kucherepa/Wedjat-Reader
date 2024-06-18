@@ -1,16 +1,22 @@
 import { useContext, useEffect, useRef } from "react";
 import { BgContext } from "../contexts/bgContext";
 import { Swipe } from "@/common/customClasses";
-import { getScreenPercentSize, shiftArrayIndexInLoop } from "@/common/utils";
+import { generateRandomBetween, getScreenPercentSize, shiftArrayIndexInLoop } from "@/common/utils";
 import { CLICK_MARGIN_PERCENTAGE } from "@/common/constants";
 import { useSelector } from "react-redux";
 
-function RenderArea(props: any) {
+function RenderArea() {
   const text = useSelector((state: any) => state.text.value);
   const textColor = useSelector((state: any) => state.textColor.value);
   const textSize = useSelector((state: any) => state.textSize.value);
   const textHMargin = useSelector((state: any) => state.textHMargin.value);
   const textVMargin = useSelector((state: any) => state.textVMargin.value)
+
+  const showIsEnabled = useSelector((state: any) => state.showIsEnabled.value);
+  const showIsRandom = useSelector((state: any) => state.showIsRandom.value);
+  const showInterval = useSelector((state: any) => state.showInterval.value);
+
+  const slideshowTimer = useRef(setTimeout(() => {}, 0));
 
   const bgContext = useContext(BgContext);
   const bgContextRef = useRef(bgContext);
@@ -65,6 +71,33 @@ function RenderArea(props: any) {
       document.removeEventListener("click", handleClick);
     };
   }, []);
+
+  useEffect(() => {
+    clearInterval(slideshowTimer.current);
+
+    if (showIsEnabled) {
+      slideshowTimer.current = setTimeout(() => {
+        let indexShift = 0;
+
+        if (showIsRandom) {
+          indexShift = generateRandomBetween(1, bgContext.values.bgImages.length);
+        } else {
+          indexShift = 1;
+        }
+
+        const newImageIndex = shiftArrayIndexInLoop(
+          bgContext.values.bgImages.length,
+          bgContext.values.imageIndex,
+          indexShift
+        );
+
+        bgContext.setValues({
+          ...bgContext.values,
+          imageIndex: newImageIndex,
+        });
+      }, showInterval);
+    }
+  }, [showInterval, showIsEnabled, showIsRandom, bgContext.values]);
 
   return (
     <div
