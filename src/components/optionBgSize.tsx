@@ -1,8 +1,13 @@
-import { ChangeEvent, ReactElement, useContext } from "react";
-import { BgContext } from "@/contexts/bgContext";
+import { set as setSize } from "@/store/bgImageSizeSlice";
+import { set as setRepeat } from "@/store/bgImageRepeatSlice";
+
+import { ChangeEvent } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 function OptionBgSize(): JSX.Element {
-  const bgContext = useContext(BgContext);
+  const size = useSelector((state: any) => state.bgImageSize.value);
+  const repeat = useSelector((state: any) => state.bgImageRepeat.value);
+  const dispatch = useDispatch();
 
   enum Size {
     Cover,
@@ -13,45 +18,34 @@ function OptionBgSize(): JSX.Element {
   }
 
   function handleDropdownSelect(e: ChangeEvent<HTMLSelectElement>): void {
-    let size = "cover";
-    let repeat = "no-repeat";
     switch (e.target.value) {
       case Size.Cover.toString():
-        size = "cover";
-        repeat = "no-repeat";
-        break;
+        dispatch(setSize("cover"));
+        dispatch(setRepeat("no-repeat"));
+        return;
       case Size.Contain.toString():
-        size = "contain";
-        repeat = "no-repeat";
-        break;
+        dispatch(setSize("contain"));
+        dispatch(setRepeat("no-repeat"));
+        return;
       case Size.Original.toString():
-        size = "auto";
-        repeat = "no-repeat";
-        break;
+        dispatch(setSize("auto"));
+        dispatch(setRepeat("no-repeat"));
+        return;
       case Size.Tile.toString():
-        size = "auto";
-        repeat = "repeat";
-        break;
+        dispatch(setSize("auto"));
+        dispatch(setRepeat("repeat"));
+        return;
       case Size.Fill.toString():
-        size = "contain";
-        repeat = "repeat";
-        break;
+        dispatch(setSize("contain"));
+        dispatch(setRepeat("repeat"));
+        return;
       default:
         throw "Error: no such background size type!";
     }
-
-    bgContext.setValues({
-      ...bgContext.values,
-      size: size,
-      repeat: repeat,
-    });
   }
 
   return (
-    <select
-      className="menu-option"
-      onChange={handleDropdownSelect}
-    >
+    <select className="menu-option" onChange={handleDropdownSelect}>
       <option value={Size.Cover}>cover</option>
       <option value={Size.Contain}>contain</option>
       <option value={Size.Original}>original size</option>
