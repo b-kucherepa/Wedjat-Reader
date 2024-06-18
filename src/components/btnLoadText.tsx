@@ -1,8 +1,11 @@
 import languageEncoding from "detect-file-encoding-and-language";
 import { ChangeEvent, useContext } from "react";
 import { TextContext } from "@/contexts/textContext";
+import { useDispatch } from "react-redux";
+import { set } from "@/store/textSlice";
 
 function TextLoadBtn() {
+  const dispatch = useDispatch() 
   const textContext = useContext(TextContext);
 
   async function getEncoding(file: File): Promise<string> {
@@ -17,6 +20,7 @@ function TextLoadBtn() {
     ).result?.toString();
 
     if (result) {
+      dispatch(set(result));
       textContext.setValues({
         ...textContext.values,
         text: result,

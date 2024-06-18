@@ -20,6 +20,8 @@ import { BgContext } from "../contexts/bgContext";
 import { SlideshowContext } from "../contexts/slideshowContext";
 import { TextContext } from "../contexts/textContext";
 import { SwipeHandler } from "@/common/customClasses";
+import { Provider } from "react-redux";
+import store from "@/store/store";
 
 export default function Main() {
   const [textValues, setTextValues] = useState(DEFAULT_TEXT_VALUES);
@@ -79,14 +81,16 @@ export default function Main() {
 
   return (
     <main id="mainText">
-      <TextContext.Provider value={textContextHook}>
-        <BgContext.Provider value={bgContextHook}>
-          <SlideshowContext.Provider value={slideshowContextHook}>
-            <MenuCurtain></MenuCurtain>
-            <RenderArea></RenderArea>
-          </SlideshowContext.Provider>
-        </BgContext.Provider>
-      </TextContext.Provider>
+      <Provider store={store}>
+        <TextContext.Provider value={textContextHook}>
+          <BgContext.Provider value={bgContextHook}>
+            <SlideshowContext.Provider value={slideshowContextHook}>
+              <MenuCurtain></MenuCurtain>
+              <RenderArea></RenderArea>
+            </SlideshowContext.Provider>
+          </BgContext.Provider>
+        </TextContext.Provider>
+      </Provider>
     </main>
   );
 }

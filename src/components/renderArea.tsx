@@ -4,15 +4,19 @@ import { TextContext } from "../contexts/textContext";
 import { Swipe } from "@/common/customClasses";
 import { getScreenPercentSize, shiftArrayIndexInLoop } from "@/common/utils";
 import { CLICK_MARGIN_PERCENTAGE } from "@/common/constants";
+import { useSelector } from "react-redux";
 
 function RenderArea(props: any) {
+  const text = useSelector((state: any) => state.text.value);
+  const textColor = useSelector((state: any) => state.textColor.value);
+  const textSize = useSelector((state: any) => state.textSize.value);
+
   const textContext = useContext(TextContext);
   const bgContext = useContext(BgContext);
   const bgContextRef = useRef(bgContext);
   bgContextRef.current = bgContext;
 
   useEffect(() => {
-
     function setNextImage(isReversed: boolean) {
       const step = isReversed ? -1 : 1;
 
@@ -27,11 +31,11 @@ function RenderArea(props: any) {
     }
 
     function handleSwipeEnd(e: CustomEvent): void {
-        if (e.detail.swipe === Swipe.Right) {
-          setNextImage(false);
-        } else if (e.detail.swipe === Swipe.Left) {
-          setNextImage(true);
-        }
+      if (e.detail.swipe === Swipe.Right) {
+        setNextImage(false);
+      } else if (e.detail.swipe === Swipe.Left) {
+        setNextImage(true);
+      }
     }
 
     function handleClick(e: MouseEvent): void {
@@ -73,15 +77,15 @@ function RenderArea(props: any) {
         backgroundSize: bgContext.values.size,
         backgroundRepeat: bgContext.values.repeat,
 
-        color: textContext.values.color,
-        fontSize: textContext.values.size,
+        color: textColor,
+        fontSize: textSize,
         paddingLeft: `${textContext.values.hMargin}px`,
         paddingRight: `${textContext.values.hMargin}px`,
         paddingTop: `${textContext.values.vMargin}px`,
         paddingBottom: `${textContext.values.vMargin}px`,
       }}
     >
-      <div>{textContext.values.text}</div>
+      <div>{text}</div>
     </div>
   );
 }

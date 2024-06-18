@@ -42,7 +42,9 @@ export function formatBytes(bytes: number) {
 }
 
 export function getScreenPercentSize(
-  percent: number, isHeight: boolean): number {
+  percent: number,
+  isHeight: boolean
+): number {
   const screenSize = isHeight ? window.innerHeight : window.innerWidth;
 
   if (percent >= 0) {
@@ -50,4 +52,8 @@ export function getScreenPercentSize(
   } else {
     return screenSize - (screenSize * percent) / 100;
   }
+}
+
+export function clampNumber(number: number, min: number, max: number) {
+  return Math.min(Math.max(number, min), max);
 }

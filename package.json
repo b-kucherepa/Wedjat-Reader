@@ -13,10 +13,12 @@
     "@capacitor/cli": "^6.1.0",
     "@capacitor/core": "^6.1.0",
     "@capacitor/ios": "^6.1.0",
+    "@reduxjs/toolkit": "^2.2.5",
     "detect-file-encoding-and-language": "^2.4.0",
     "next": "^14.2.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-redux": "^9.1.2"
   },
   "devDependencies": {
     "@capacitor/assets": "^3.0.5",
