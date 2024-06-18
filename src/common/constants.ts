@@ -1,4 +1,4 @@
-//import { BgImage } from "./customClasses";
+export const MILLISECONDS_IN_SECONDS: number = 1000;
 
 export const STORE_ITEM_NAME: string = "config";
 
