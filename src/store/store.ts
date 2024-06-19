@@ -13,6 +13,7 @@ import textColorSlice from "./textColorSlice";
 import textHMarginSlice from "./textHMarginSlice";
 import textSizeSlice from "./textSizeSlice";
 import textSlice from "./textSlice";
+import textSpacingSlice from "./textSpacingSlice";
 import textVMarginSlice from "./textVMarginSlice";
 
 export default configureStore({
@@ -20,6 +21,7 @@ export default configureStore({
     text: textSlice,
     textColor: textColorSlice,
     textSize: textSizeSlice,
+    textSpacing: textSpacingSlice,
     textHMargin: textHMarginSlice,
     textVMargin: textVMarginSlice,
     bgImageFiles: bgImageFilesSlice,

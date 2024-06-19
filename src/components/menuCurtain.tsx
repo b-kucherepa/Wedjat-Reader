@@ -19,6 +19,7 @@ import OptionTextColor from "./optionTextColor";
 import OptionTextHMargin from "./optionTextHMargin";
 import OptionTextSize from "./optionTextSize";
 import OptionTextVMargin from "./optionTextVMargin";
+import OptionTextSpacing from "./optionTextSpacing";
 
 function MenuCurtain() {
   const EXPANDED_HEIGHT: number = 100;
@@ -121,6 +122,11 @@ function MenuCurtain() {
         <label>size:</label>
         <div>
           <OptionTextSize />
+        </div>
+
+        <label>spacing:</label>
+        <div>
+          <OptionTextSpacing />
         </div>
 
         <label>hori&shy;zontal margin:</label>
