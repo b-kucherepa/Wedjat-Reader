@@ -61,6 +61,8 @@ export function clampNumber(number: number, min: number, max: number) {
 export function loadState (itemName: string): unknown {
   try {
     const serializedState = localStorage.getItem(itemName);
+    console.log(serializedState? JSON.parse(serializedState) : undefined);
+
     return serializedState? JSON.parse(serializedState) : undefined;
   } catch (err) {
     return undefined;
@@ -69,6 +71,7 @@ export function loadState (itemName: string): unknown {
 
 export function saveState (itemName: string, data: unknown): void {
   try {
+    console.log("SAVE");
     const serializedState = JSON.stringify(data);
     localStorage.setItem(itemName, serializedState);
   } catch (err) {

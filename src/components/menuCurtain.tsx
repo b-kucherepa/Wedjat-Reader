@@ -32,8 +32,10 @@ function MenuCurtain() {
     setCurtainHeight(EXPANDED_HEIGHT);
   }
 
-  function collapse(): void {
-    saveState(STORE_ITEM_NAME, store.getState());
+  function collapse(isSaving: boolean): void {
+    if (isSaving) {
+      saveState(STORE_ITEM_NAME, store.getState());
+    }
     setCurtainHeight(COLLAPSED_HEIGHT);
   }
 
@@ -46,7 +48,7 @@ function MenuCurtain() {
       if (e.detail.swipe === Swipe.Down) {
         expand();
       } else if (e.detail.swipe === Swipe.Up) {
-        collapse();
+        collapse(true);
       }
     }
 
@@ -70,7 +72,7 @@ function MenuCurtain() {
         curtainHeightRef.current <= CLICK_MARGIN_PERCENTAGE;
 
       if (isCurtainCollapsed) {
-        isUpperSideHover ? hint() : collapse();
+        isUpperSideHover ? hint() : collapse(false);
       }
     }
 
@@ -171,9 +173,7 @@ function MenuCurtain() {
         </div>
 
         <label>launch:</label>
-        <div
-          onClick={collapse}
-        >
+        <div onClick={()=>collapse(true)}>
           <BtnShowStart />
         </div>
 
@@ -188,10 +188,7 @@ function MenuCurtain() {
 
         <hr className="menu-separator" />
 
-        <button
-          className="btn-curtain-close"
-          onClick={collapse}
-        >
+        <button className="btn-curtain-close" onClick={()=>collapse(true)}>
           &times;
         </button>
       </div>
