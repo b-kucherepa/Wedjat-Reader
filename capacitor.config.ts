@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.wedjatreader.app',
-  appName: 'wedjat-reader',
+  appName: 'Wedjat Reader',
   webDir: 'build/'
 };
 
