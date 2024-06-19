@@ -7,6 +7,8 @@ import { set } from "@/store/bgImageIndexSlice";
 function OptionBgSelect(): JSX.Element {
   const imageFiles = useSelector((state: any) => state.bgImageFiles.value);
   const imageIndex = useSelector((state: any) => state.bgImageIndex.value);
+  const textColor = useSelector((state: any) => state.textColor.value);
+
   const dispatch = useDispatch();
 
   const options: ReactElement[] = imageFiles.map(
@@ -40,6 +42,7 @@ function OptionBgSelect(): JSX.Element {
       style={{
         backgroundSize: "cover",
         backgroundImage: `url(${imageFiles[imageIndex]?.file ?? ""})`,
+        color: textColor
       }}
       onChange={handleDropdownSelect}
     >
