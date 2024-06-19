@@ -9,7 +9,7 @@ function OptionShowInterval() {
   const dispatch = useDispatch();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
-    dispatch(set(parseInt(e.target.value)*MILLISECONDS_IN_SECONDS));
+    dispatch(set(parseInt(e.target.value) * MILLISECONDS_IN_SECONDS));
   }
 
   function handleDecrement(): void {
@@ -22,16 +22,20 @@ function OptionShowInterval() {
 
   return (
     <div className="inline">
-      <button className="menu-option" onClick={handleDecrement}>{"←"}</button>
+      <button className="menu-item counter-arrow" onClick={handleDecrement}>
+        {"←"}
+      </button>
       <input
-        type="number"
-        value={interval/MILLISECONDS_IN_SECONDS}
-        min={1}
-        max={9999}
-        className="menu-option center"
+        type="text"
+        pattern="\d*"
+        maxLength={4}
+        value={interval / MILLISECONDS_IN_SECONDS}
+        className="menu-item counter"
         onChange={handleChange}
       />
-      <button className="menu-option" onClick={handleIncrement}>{"→"}</button>
+      <button className="menu-item counter-arrow" onClick={handleIncrement}>
+        {"→"}
+      </button>
     </div>
   );
 }

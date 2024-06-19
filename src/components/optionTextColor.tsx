@@ -11,7 +11,7 @@ function OptionTextColor () {
   }
 
   return (
-    <input type="color" value={color} className="menu-option" onChange={handleChange}/>
+    <input type="color" value={color} className="menu-item color-picker" onChange={handleChange}/>
   );
 }
 

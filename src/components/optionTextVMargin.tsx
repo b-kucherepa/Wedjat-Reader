@@ -20,18 +20,18 @@ function OptionTextVMargin() {
 
   return (
     <div className="inline">
-      <button className="menu-option" onClick={handleDecrement}>
+      <button className="menu-item counter-arrow" onClick={handleDecrement}>
         {"←"}
       </button>
       <input
-        type="number"
+        type="text"
+        pattern="\d*"
+        maxLength={3}
         value={vMargin}
-        min={0}
-        max={999}
-        className="menu-option center"
+        className="menu-item counter"
         onChange={handleChange}
       />
-      <button className="menu-option" onClick={handleIncrement}>
+      <button className="menu-item counter-arrow" onClick={handleIncrement}>
         {"→"}
       </button>
     </div>

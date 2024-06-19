@@ -54,7 +54,7 @@ function BgLoadBtn() {
       type="file"
       multiple={true}
       accept="image/*"
-      className="menu-item bordered"
+      className="menu-item btn bordered"
       onChange={handleFileSelect}
     />
   );

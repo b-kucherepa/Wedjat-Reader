@@ -43,7 +43,7 @@ function OptionBgSize(): JSX.Element {
   }
 
   return (
-    <select className="menu-option" onChange={handleDropdownSelect}>
+    <select className="menu-item select" onChange={handleDropdownSelect}>
       <option value={Size.Cover}>cover</option>
       <option value={Size.Contain}>contain</option>
       <option value={Size.Original}>original size</option>

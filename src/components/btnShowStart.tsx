@@ -10,7 +10,7 @@ function BtnShowStart() {
   }
 
   return (
-    <button type="button" className="menu-item bordered" onClick={handleClick}>
+    <button type="button" className="menu-item btn bordered" onClick={handleClick}>
       {isEnabled ? "Stop" : "Start"}
     </button>
   );

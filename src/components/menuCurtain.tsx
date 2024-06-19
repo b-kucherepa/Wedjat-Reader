@@ -158,7 +158,7 @@ function MenuCurtain() {
           <OptionBgSelect />
         </div>
 
-        <label>layout and size:</label>
+        <label>layout:</label>
         <div>
           <OptionBgSize />
         </div>
@@ -172,7 +172,7 @@ function MenuCurtain() {
           <OptionShowInterval /> (s)
         </div>
 
-        <label>rando&shy;mize:</label>
+        <label>sequence:</label>
         <div>
           <OptionShowRandom />
         </div>
@@ -186,7 +186,7 @@ function MenuCurtain() {
 
         <label className="menu-section-other">Other:</label>
 
-        <label>reset preferences:</label>
+        <label>reset prefe&shy;rences:</label>
         <div>
           <BtnOptionsReset />
         </div>

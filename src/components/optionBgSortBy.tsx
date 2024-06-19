@@ -87,7 +87,7 @@ function OptionBgSortBy() {
   }
 
   return (
-    <select className="menu-option" onChange={handleDropdownSelect}>
+    <select className="menu-item select" onChange={handleDropdownSelect}>
       <option value={SortBy.NameAsc}>name ↓</option>
       <option value={SortBy.NameDesc}>name ↑</option>
       <option value={SortBy.SizeAsc}>size ↓</option>

@@ -36,7 +36,7 @@ function OptionBgSelect(): JSX.Element {
   return (
     <select
       value={imageIndex}
-      className="menu-option bordered bg-list"
+      className="menu-item select bordered bg-list"
       style={{
         backgroundSize: "cover",
         backgroundImage: `url(${imageFiles[imageIndex]?.file ?? ""})`,

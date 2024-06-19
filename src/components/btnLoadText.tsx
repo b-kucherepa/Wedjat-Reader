@@ -40,7 +40,7 @@ function TextLoadBtn() {
     <input
       type="file"
       accept="text/*"
-      className="menu-item bordered"
+      className="menu-item btn bordered"
       onChange={handleFileSelect}
     />
   );

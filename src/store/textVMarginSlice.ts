@@ -7,7 +7,7 @@ const MAX_VALUE = 128;
 export const textVMarginSlice = createSlice({
   name: 'textVMargin',
   initialState: {
-    value: 20,
+    value: 25,
   },
   reducers: {
     increment: (state) => {

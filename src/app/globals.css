@@ -50,9 +50,10 @@ body {
 }
 
 .menu-content {
+  align-items: center;
   box-sizing: border-box;
   display: grid;
-  gap: 0.5rem;
+  gap: 0.25rem;
   grid-auto-rows: min-content;
   grid-template-columns: minmax(min-content, 1fr) minmax(min-content, 1fr) minmax(
       0,
@@ -65,19 +66,78 @@ body {
   width: 100%;
 }
 
-.menu-option {
+.menu-item {
   background-color: var(--background-color);
   border-style: none;
+  box-sizing: border-box;
   color: var(--foreground-color);
-  display: inline;
+  display: block;
   font-size: 1rem;
+  height: min-content;
   margin: 0;
-  max-width: 100%;
+  min-height: 1.5rem;
   overflow: hidden;
   padding: 0;
+  text-align: center;
   text-overflow: ellipsis;
   text-wrap: pretty;
-  width: minmax(fit-content, 100%);
+  width: 8rem;
+}
+
+.menu-separator {
+  background-color: var(--foreground-color);
+  border-color: var(--foreground-color);
+  grid-column: span 3;
+  width: 100%;
+}
+
+.btn-curtain-close {
+  background-color: transparent;
+  border-style: none;
+  color: var(--foreground-color);
+  font-size: 5rem;
+  font-weight: lighter;
+  grid-column: span 3;
+  padding-bottom: 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+.btn {
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+}
+
+input[type="file"]::file-selector-button {
+  display: none;
+}
+
+.counter {
+  width: 5.5rem;
+}
+
+.counter-arrow {
+  width: min-content;
+}
+
+.color-picker {
+  height: 1rem;
+}
+
+.select {
+  text-indent: 1rem;
+}
+
+.bg-list {
+  height: 15vh;
+  max-width: 100%;
+  width: 100%;
+}
+
+.menu-option:hover,
+.btn:hover {
+  color: var(--selected-color);
+  transition: 0.2s;
 }
 
 .bordered {
@@ -93,25 +153,8 @@ body {
   gap: 0.25rem;
 }
 
-.center {
-  text-align: center;
-}
-
 .hidden {
   visibility: hidden;
-}
-
-.menu-separator {
-  background-color: var(--foreground-color);
-  border-color: var(--foreground-color);
-  grid-column: span 3;
-  width: 100%;
-}
-
-.bg-list {
-  height: 20vh;
-  text-align: start;
-  width: 100%;
 }
 
 .menu-section-text {
@@ -130,47 +173,3 @@ body {
   grid-row: span 1;
 }
 
-.btn-curtain-close {
-  background-color: transparent;
-  border-style: none;
-  color: var(--foreground-color);
-  font-size: 5rem;
-  font-weight: lighter;
-  grid-column: span 3;
-  padding-bottom: 1rem;
-  text-align: center;
-}
-
-button,
-input[type="file"] {
-  font-weight: bold;
-  background-color: var(--background-color);
-  box-sizing: border-box;
-  color: var(--foreground-color);
-  display: block;
-  max-width: 100%;
-  padding: 0.25rem 0.5rem;
-  text-align: center;
-}
-
-
-input[type="file"]::file-selector-button {
-  display: none;
-}
-
-.menu-option:hover,
-input[type="file"]:hover,
-button:hover {
-  color: var(--selected-color);
-  transition: 0.2s;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type=number] {
-  -moz-appearance: textfield;
-}
