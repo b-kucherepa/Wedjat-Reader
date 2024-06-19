@@ -1,5 +1,6 @@
-import { ChangeEvent, ReactElement } from "react";
 import { formatBytes } from "../common/utils";
+
+import { ChangeEvent, ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { set } from "@/store/bgImageIndexSlice";
 
@@ -34,14 +35,13 @@ function OptionBgSelect(): JSX.Element {
 
   return (
     <select
-      id="bgList"
+      value={imageIndex}
       className="menu-option bordered bg-list"
       style={{
         backgroundSize: "cover",
         backgroundImage: `url(${imageFiles[imageIndex]?.file ?? ""})`,
       }}
       onChange={handleDropdownSelect}
-      value={imageIndex}
     >
       {options}
     </select>

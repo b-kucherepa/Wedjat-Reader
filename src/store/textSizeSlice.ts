@@ -1,4 +1,5 @@
 import { clampNumber } from '@/common/utils';
+
 import { createSlice } from '@reduxjs/toolkit'
 
 const MIN_VALUE = 0;

@@ -1,3 +1,7 @@
+import { loadState } from "@/common/utils";
+
+import { configureStore } from "@reduxjs/toolkit";
+
 import bgImageFilesSlice from "./bgImageFilesSlice";
 import bgImageIndexSlice from "./bgImageIndexSlice";
 import bgImageRepeatSlice from "./bgImageRepeatSlice";
@@ -10,9 +14,6 @@ import textHMarginSlice from "./textHMarginSlice";
 import textSizeSlice from "./textSizeSlice";
 import textSlice from "./textSlice";
 import textVMarginSlice from "./textVMarginSlice";
-
-import { configureStore } from "@reduxjs/toolkit";
-import { loadState } from "@/common/utils";
 
 export default configureStore({
   reducer: {

@@ -22,13 +22,12 @@ function OptionTextHMargin() {
     <div className="inline">
       <button className="menu-option" onClick={handleDecrement}>{"←"}</button>
       <input
-        id="interval-number"
         type="number"
         value={hMargin}
         min={0}
         max={999}
-        onChange={handleChange}
         className="menu-option center"
+        onChange={handleChange}
       />
       <button className="menu-option" onClick={handleIncrement}>{"→"}</button>
     </div>

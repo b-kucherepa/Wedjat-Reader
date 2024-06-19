@@ -6,13 +6,7 @@ function BtnOptionsReset() {
   }
 
   return (
-    <button
-      id="start-slideshow-button"
-      className="menu-item bordered"
-      type="button"
-      onClick={handleClick
-      }
-    >
+    <button type="button" className="menu-item bordered" onClick={handleClick}>
       Reset
     </button>
   );

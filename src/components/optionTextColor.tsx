@@ -11,7 +11,7 @@ function OptionTextColor () {
   }
 
   return (
-    <input id="interval-number" type="color" value={color} onChange={handleChange} className="menu-option"/>
+    <input type="color" value={color} className="menu-option" onChange={handleChange}/>
   );
 }
 

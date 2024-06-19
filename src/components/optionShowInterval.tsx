@@ -1,7 +1,8 @@
-import { ChangeEvent } from "react";
-import { decrement, increment, set } from "@/store/showIntervalSlice";
-import { useSelector, useDispatch } from "react-redux";
 import { MILLISECONDS_IN_SECONDS } from "@/common/constants";
+
+import { ChangeEvent } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { decrement, increment, set } from "@/store/showIntervalSlice";
 
 function OptionShowInterval() {
   const interval = useSelector((state: any) => state.showInterval.value);
@@ -23,13 +24,12 @@ function OptionShowInterval() {
     <div className="inline">
       <button className="menu-option" onClick={handleDecrement}>{"←"}</button>
       <input
-        id="interval-number"
         type="number"
         value={interval/MILLISECONDS_IN_SECONDS}
         min={1}
         max={9999}
-        onChange={handleChange}
         className="menu-option center"
+        onChange={handleChange}
       />
       <button className="menu-option" onClick={handleIncrement}>{"→"}</button>
     </div>

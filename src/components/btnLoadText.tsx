@@ -1,4 +1,5 @@
 import languageEncoding from "detect-file-encoding-and-language";
+
 import { ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import { set } from "@/store/textSlice";
@@ -35,24 +36,12 @@ function TextLoadBtn() {
     }
   }
 
-  /*function onFileLoaded(e: any) {
-    let match = /^data:(.*);base64,(.*)$/.exec(e.target.result);
-    if (match == null) {
-      throw "Could not parse result"; // should not happen
-    }
-    let mimeType = match[1];
-    let content = match[2];
-    alert(mimeType);
-    alert(content);
-  }*/
-
   return (
     <input
-      onChange={handleFileSelect}
       type="file"
-      id="text-file-input"
       accept="text/*"
       className="menu-item bordered"
+      onChange={handleFileSelect}
     />
   );
 }

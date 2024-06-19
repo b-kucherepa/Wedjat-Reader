@@ -58,6 +58,18 @@ export function clampNumber(number: number, min: number, max: number) {
   return Math.min(Math.max(number, min), max);
 }
 
+export function saveState(data: any): void {
+  try {
+    const itemNames = Object.keys(data);
+    for (let item of itemNames) {
+      const serializedState = JSON.stringify(data[item]);
+      localStorage.setItem(item, serializedState);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export function loadState(): unknown {
   try {
     const itemNames = Object.keys(localStorage);
@@ -75,18 +87,6 @@ export function loadState(): unknown {
   } catch (err) {
     console.log(err);
     return {};
-  }
-}
-
-export function saveState(data: any): void {
-  try {
-    const itemNames = Object.keys(data);
-    for (let item of itemNames) {
-      const serializedState = JSON.stringify(data[item]);
-      localStorage.setItem(item, serializedState);
-    }
-  } catch (err) {
-    console.log(err);
   }
 }
 

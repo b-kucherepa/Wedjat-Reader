@@ -1,11 +1,9 @@
-'use client'
+"use client";
+import { CLICK_MARGIN_PERCENTAGE, DEFAULT_BG_IMAGE } from "@/common/constants";
+import { getScreenPercentSize } from "@/common/utils";
+import { Swipe } from "@/common/customClasses";
 
 import { useEffect, useRef } from "react";
-import { Swipe } from "@/common/customClasses";
-import {
-  getScreenPercentSize,
-} from "@/common/utils";
-import { CLICK_MARGIN_PERCENTAGE, DEFAULT_BG_IMAGE } from "@/common/constants";
 import { useSelector, useDispatch } from "react-redux";
 import {
   increment as incrementImageIndex,
@@ -86,7 +84,6 @@ function RenderArea() {
 
   return (
     <div
-      id="renderArea"
       className="render-area"
       style={{
         backgroundImage: `url(${

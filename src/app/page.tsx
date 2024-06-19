@@ -16,7 +16,7 @@ export default function Main() {
   }, []);
 
   return (
-    <main id="mainText">
+    <main>
       <Provider store={store}>
         <MenuCurtain></MenuCurtain>
         <RenderArea></RenderArea>

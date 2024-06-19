@@ -1,6 +1,6 @@
 import { ChangeEvent } from "react";
-import { set } from "@/store/showIsRandomSlice";
 import { useDispatch } from "react-redux";
+import { set } from "@/store/showIsRandomSlice";
 
 function OptionShowRandom() {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ function OptionShowRandom() {
     }  
 
   return (
-    <input id="randomize-button" type="checkbox" className="menu-option" onChange={handleChange} />
+    <input type="checkbox" className="menu-option" onChange={handleChange} />
   );
 }
 

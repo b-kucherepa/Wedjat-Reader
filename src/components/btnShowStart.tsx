@@ -1,5 +1,5 @@
-import { set } from "@/store/showIsEnabledSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { set } from "@/store/showIsEnabledSlice";
 
 function BtnShowStart() {
   const isEnabled = useSelector((state: any) => state.showIsEnabled.value);
@@ -10,13 +10,7 @@ function BtnShowStart() {
   }
 
   return (
-    <button
-      id="start-slideshow-button"
-      className="menu-item bordered"
-      type="button"
-      onClick={handleClick
-      }
-    >
+    <button type="button" className="menu-item bordered" onClick={handleClick}>
       {isEnabled ? "Stop" : "Start"}
     </button>
   );

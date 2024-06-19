@@ -93,7 +93,6 @@ function MenuCurtain() {
 
   return (
     <div
-      id="navCurtain"
       className="curtain"
       style={{
         height: `${curtainHeight}%`,

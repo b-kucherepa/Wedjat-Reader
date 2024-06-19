@@ -24,13 +24,12 @@ function OptionTextVMargin() {
         {"←"}
       </button>
       <input
-        id="interval-number"
         type="number"
         value={vMargin}
         min={0}
         max={999}
-        onChange={handleChange}
         className="menu-option center"
+        onChange={handleChange}
       />
       <button className="menu-option" onClick={handleIncrement}>
         {"→"}

@@ -20,9 +20,12 @@ function BgLoadBtn() {
 
     if (result) {
       dispatch(
-        pushImageFiles(
-          {file: result, name: fileName, size: fileSize, modified: fileLastModified}
-        )
+        pushImageFiles({
+          file: result,
+          name: fileName,
+          size: fileSize,
+          modified: fileLastModified,
+        })
       );
       dispatch(resetImageIndex());
     }
@@ -48,12 +51,11 @@ function BgLoadBtn() {
 
   return (
     <input
-      onChange={handleFileSelect}
       type="file"
-      id="bg-files-input"
       multiple={true}
       accept="image/*"
       className="menu-item bordered"
+      onChange={handleFileSelect}
     />
   );
 }
