@@ -1,7 +1,10 @@
-import { useEffect, useRef, useState } from "react";
-import { getScreenPercentSize } from "@/common/utils";
-import { CLICK_MARGIN_PERCENTAGE } from "@/common/constants";
+import { CLICK_MARGIN_PERCENTAGE, STORE_ITEM_NAME } from "@/common/constants";
+import { getScreenPercentSize, saveState } from "@/common/utils";
+
 import { Swipe } from "@/common/customClasses";
+
+import { useEffect, useRef, useState } from "react";
+import store from "@/store/store";
 
 import BtnLoadBg from "./btnLoadBg";
 import BtnLoadText from "./btnLoadText";
@@ -25,12 +28,25 @@ function MenuCurtain() {
   const curtainHeightRef = useRef(curtainHeight);
   curtainHeightRef.current = curtainHeight;
 
+  function expand(): void {
+    setCurtainHeight(EXPANDED_HEIGHT);
+  }
+
+  function collapse(): void {
+    saveState(STORE_ITEM_NAME, store.getState());
+    setCurtainHeight(COLLAPSED_HEIGHT);
+  }
+
+  function hint(): void {
+    setCurtainHeight(CLICK_MARGIN_PERCENTAGE);
+  }
+
   useEffect(() => {
     function handleSwipeEnd(e: CustomEvent): void {
       if (e.detail.swipe === Swipe.Down) {
-        setCurtainHeight(EXPANDED_HEIGHT);
+        expand();
       } else if (e.detail.swipe === Swipe.Up) {
-        setCurtainHeight(COLLAPSED_HEIGHT);
+        collapse();
       }
     }
 
@@ -42,7 +58,7 @@ function MenuCurtain() {
         curtainHeightRef.current <= CLICK_MARGIN_PERCENTAGE;
 
       if (isUpperSideTouch && isCurtainCollapsed) {
-        setCurtainHeight(EXPANDED_HEIGHT);
+        expand();
       }
     }
 
@@ -54,11 +70,7 @@ function MenuCurtain() {
         curtainHeightRef.current <= CLICK_MARGIN_PERCENTAGE;
 
       if (isCurtainCollapsed) {
-        setCurtainHeight(
-          isUpperSideHover
-            ? COLLAPSED_HEIGHT + CLICK_MARGIN_PERCENTAGE
-            : COLLAPSED_HEIGHT
-        );
+        isUpperSideHover ? hint() : collapse();
       }
     }
 
@@ -160,9 +172,7 @@ function MenuCurtain() {
 
         <label>launch:</label>
         <div
-          onClick={() => {
-            setCurtainHeight(COLLAPSED_HEIGHT);
-          }}
+          onClick={collapse}
         >
           <BtnShowStart />
         </div>
@@ -173,14 +183,14 @@ function MenuCurtain() {
 
         <label>reset preferences:</label>
         <div>
-        <BtnOptionsReset/>
+          <BtnOptionsReset />
         </div>
 
         <hr className="menu-separator" />
 
         <button
           className="btn-curtain-close"
-          onClick={() => setCurtainHeight(COLLAPSED_HEIGHT)}
+          onClick={collapse}
         >
           &times;
         </button>
