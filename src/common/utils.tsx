@@ -58,28 +58,44 @@ export function clampNumber(number: number, min: number, max: number) {
   return Math.min(Math.max(number, min), max);
 }
 
-export function loadState(itemName: string): unknown {
+export function loadState(): unknown {
   try {
-    const serializedState = localStorage.getItem(itemName);
-    return serializedState ? JSON.parse(serializedState) : {};
+    const itemNames = Object.keys(localStorage);
+    let data = {};
+    for (let item of itemNames) {
+      const serializedState = localStorage.getItem(item);
+      if (serializedState) {
+        const parsedData = JSON.parse(serializedState);
+        data = { ...data, [item]: parsedData };
+      } else {
+        return {};
+      }
+    }
+    return data;
   } catch (err) {
     console.log(err);
     return {};
   }
 }
 
-export function saveState(itemName: string, data: unknown): void {
+export function saveState(data: any): void {
   try {
-    const serializedState = JSON.stringify(data);
-    localStorage.setItem(itemName, serializedState);
+    const itemNames = Object.keys(data);
+    for (let item of itemNames) {
+      const serializedState = JSON.stringify(data[item]);
+      localStorage.setItem(item, serializedState);
+    }
   } catch (err) {
     console.log(err);
   }
 }
 
-export function removeState(itemName: string): void {
+export function removeState(): void {
   try {
-    localStorage.removeItem(itemName);
+    const itemNames = Object.keys(localStorage);
+    for (let item of itemNames) {
+      localStorage.removeItem(item);
+    }
     location.reload();
   } catch (err) {
     console.log(err);

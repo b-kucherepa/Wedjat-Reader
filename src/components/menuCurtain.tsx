@@ -1,4 +1,4 @@
-import { CLICK_MARGIN_PERCENTAGE, STORE_ITEM_NAME } from "@/common/constants";
+import { CLICK_MARGIN_PERCENTAGE } from "@/common/constants";
 import { getScreenPercentSize, saveState } from "@/common/utils";
 
 import { Swipe } from "@/common/customClasses";
@@ -34,7 +34,7 @@ function MenuCurtain() {
 
   function collapse(isSaving: boolean): void {
     if (isSaving) {
-      saveState(STORE_ITEM_NAME,store.getState());
+      saveState(store.getState());
     }
     setCurtainHeight(COLLAPSED_HEIGHT);
   }

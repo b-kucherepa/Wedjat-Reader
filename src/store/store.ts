@@ -13,7 +13,6 @@ import textVMarginSlice from "./textVMarginSlice";
 
 import { configureStore } from "@reduxjs/toolkit";
 import { loadState } from "@/common/utils";
-import { STORE_ITEM_NAME } from "@/common/constants";
 
 export default configureStore({
   reducer: {
@@ -30,5 +29,5 @@ export default configureStore({
     showIsRandom: showIsRandomSlice,
     showInterval: showIntervalSlice
   },
-  preloadedState: loadState(STORE_ITEM_NAME)
+  preloadedState: loadState()
 });
