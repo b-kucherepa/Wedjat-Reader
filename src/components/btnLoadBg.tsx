@@ -1,9 +1,9 @@
 import { ChangeEvent } from "react";
-//import { BgImage } from "../common/customClasses";
 import { useDispatch } from "react-redux";
+
 import { push as pushImageFiles } from "@/store/bgImageFilesSlice";
-import { set as setImageFiles } from "@/store/bgImageFilesSlice";
-import { set as setImageIndex } from "@/store/bgImageIndexSlice";
+import { reset as resetImageFiles } from "@/store/bgImageFilesSlice";
+import { reset as resetImageIndex } from "@/store/bgImageIndexSlice";
 
 function BgLoadBtn() {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ function BgLoadBtn() {
           {file: result, name: fileName, size: fileSize, modified: fileLastModified}
         )
       );
-      dispatch(setImageIndex(0));
+      dispatch(resetImageIndex());
     }
   }
 
@@ -35,7 +35,7 @@ function BgLoadBtn() {
       alert("Please, select a file...");
       return;
     } else {
-      dispatch(setImageFiles([]));
+      dispatch(resetImageFiles());
 
       for (let f of files) {
         let reader = new FileReader();

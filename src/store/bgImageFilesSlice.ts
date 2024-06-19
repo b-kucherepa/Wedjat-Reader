@@ -10,12 +10,15 @@ export const bgImageFilesSlice = createSlice({
     push: (state, action) => {
       state.value = [...state.value, action.payload];
     },
+    reset: (state) => {
+      state.value = [];
+    },
     set: (state, action) => {
       state.value = action.payload;
     },
   },
 })
 
-export const { push, set } = bgImageFilesSlice.actions;
+export const { push, reset, set } = bgImageFilesSlice.actions;
 
 export default bgImageFilesSlice.reducer;
