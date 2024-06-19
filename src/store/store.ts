@@ -1,16 +1,17 @@
-import { configureStore } from "@reduxjs/toolkit";
-import textSlice from "./textSlice";
-import textColorSlice from "./textColorSlice";
-import textSizeSlice from "./textSizeSlice";
-import textVMarginSlice from "./textVMarginSlice";
-import textHMarginSlice from "./textHMarginSlice";
+import bgImageFilesSlice from "./bgImageFilesSlice";
+import bgImageIndexSlice from "./bgImageIndexSlice";
+import bgImageRepeatSlice from "./bgImageRepeatSlice";
+import bgImageSizeSlice from "./bgImageSizeSlice";
+import showIntervalSlice from "./showIntervalSlice";
 import showIsEnabledSlice from "./showIsEnabledSlice";
 import showIsRandomSlice from "./showIsRandomSlice";
-import showIntervalSlice from "./showIntervalSlice";
-import bgImageIndexSlice from "./bgImageIndexSlice";
-import bgImageFilesSlice from "./bgImageFilesSlice";
-import bgImageSizeSlice from "./bgImageSizeSlice";
-import bgImageRepeatSlice from "./bgImageRepeatSlice";
+import textColorSlice from "./textColorSlice";
+import textHMarginSlice from "./textHMarginSlice";
+import textSizeSlice from "./textSizeSlice";
+import textSlice from "./textSlice";
+import textVMarginSlice from "./textVMarginSlice";
+
+import { configureStore } from "@reduxjs/toolkit";
 import { loadState } from "@/common/utils";
 import { STORE_ITEM_NAME } from "@/common/constants";
 

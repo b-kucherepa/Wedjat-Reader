@@ -1,9 +1,9 @@
+'use client'
+
 import { useEffect, useRef } from "react";
 import { Swipe } from "@/common/customClasses";
 import {
-  generateRandomBetween,
   getScreenPercentSize,
-  shiftArrayIndexInLoop,
 } from "@/common/utils";
 import { CLICK_MARGIN_PERCENTAGE, DEFAULT_BG_IMAGE } from "@/common/constants";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,7 +11,6 @@ import {
   increment as incrementImageIndex,
   decrement as decrementImageIndex,
   randomize as randomizeImageIndex,
-  set as setImageIndex,
 } from "@/store/bgImageIndexSlice";
 
 function RenderArea() {

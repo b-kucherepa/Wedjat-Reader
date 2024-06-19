@@ -34,7 +34,7 @@ function MenuCurtain() {
 
   function collapse(isSaving: boolean): void {
     if (isSaving) {
-      saveState(STORE_ITEM_NAME, store.getState());
+      saveState(STORE_ITEM_NAME,store.getState());
     }
     setCurtainHeight(COLLAPSED_HEIGHT);
   }
