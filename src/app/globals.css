@@ -126,7 +126,10 @@ input[type="file"]::file-selector-button {
 }
 
 .select {
+  min-width: 8rem;
+  max-width: 100%;
   text-indent: 1rem;
+  width: max-content;
 }
 
 .bg-list {
@@ -159,7 +162,7 @@ input[type="file"]::file-selector-button {
 }
 
 .menu-section-text {
-  grid-row: span 6;
+  grid-row: span 7;
 }
 
 .menu-section-bg {

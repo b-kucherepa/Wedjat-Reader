@@ -10,16 +10,17 @@ import BtnLoadBg from "./btnLoadBg";
 import BtnLoadText from "./btnLoadText";
 import BtnOptionsReset from "./btnOptionsReset";
 import BtnShowStart from "./btnShowStart";
+import OptionBgLayout from "./optionBgLayout";
 import OptionBgSelect from "./optionBgSelect";
-import OptionBgSize from "./optionBgSize";
 import OptionBgSortBy from "./optionBgSortBy";
 import OptionShowInterval from "./optionShowInterval";
 import OptionShowRandom from "./optionShowRandom";
 import OptionTextColor from "./optionTextColor";
+import OptionTextFont from "./optionTextFont";
 import OptionTextHMargin from "./optionTextHMargin";
 import OptionTextSize from "./optionTextSize";
-import OptionTextVMargin from "./optionTextVMargin";
 import OptionTextSpacing from "./optionTextSpacing";
+import OptionTextVMargin from "./optionTextVMargin";
 
 function MenuCurtain() {
   const EXPANDED_HEIGHT: number = 100;
@@ -129,6 +130,11 @@ function MenuCurtain() {
           <OptionTextSpacing />
         </div>
 
+        <label>font:</label>
+        <div>
+          <OptionTextFont />
+        </div>
+
         <label>hori&shy;zontal margin:</label>
         <div>
           <OptionTextHMargin /> (px)
@@ -160,7 +166,7 @@ function MenuCurtain() {
 
         <label>layout:</label>
         <div>
-          <OptionBgSize />
+          <OptionBgLayout />
         </div>
 
         <hr className="menu-separator" />

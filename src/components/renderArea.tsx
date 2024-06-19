@@ -18,6 +18,7 @@ function RenderArea() {
   const textColor = useSelector((state: any) => state.textColor.value);
   const textSize = useSelector((state: any) => state.textSize.value);
   const textSpacing = useSelector((state: any) => state.textSpacing.value);
+  const textFont = useSelector((state: any) => state.textFont.value);
   const textHMargin = useSelector((state: any) => state.textHMargin.value);
   const textVMargin = useSelector((state: any) => state.textVMargin.value);
 
@@ -98,6 +99,7 @@ function RenderArea() {
         color: textColor,
         fontSize: textSize,
         lineHeight: textSpacing,
+        fontFamily: textFont,
         paddingLeft: `${textHMargin}px`,
         paddingRight: `${textHMargin}px`,
         paddingTop: `${textVMargin}px`,

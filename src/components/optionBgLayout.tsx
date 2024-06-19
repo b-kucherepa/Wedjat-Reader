@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { set as setSize } from "@/store/bgImageSizeSlice";
 import { set as setRepeat } from "@/store/bgImageRepeatSlice";
 
-function OptionBgSize(): JSX.Element {
+function OptionBgLayout(): JSX.Element {
   const dispatch = useDispatch();
 
   enum Size {
@@ -53,4 +53,4 @@ function OptionBgSize(): JSX.Element {
   );
 }
 
-export default OptionBgSize;
+export default OptionBgLayout;

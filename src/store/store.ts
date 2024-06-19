@@ -15,6 +15,7 @@ import textSizeSlice from "./textSizeSlice";
 import textSlice from "./textSlice";
 import textSpacingSlice from "./textSpacingSlice";
 import textVMarginSlice from "./textVMarginSlice";
+import textFontSlice from "./textFontSlice";
 
 export default configureStore({
   reducer: {
@@ -22,6 +23,7 @@ export default configureStore({
     textColor: textColorSlice,
     textSize: textSizeSlice,
     textSpacing: textSpacingSlice,
+    textFont: textFontSlice,
     textHMargin: textHMarginSlice,
     textVMargin: textVMarginSlice,
     bgImageFiles: bgImageFilesSlice,
