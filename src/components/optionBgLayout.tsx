@@ -1,10 +1,13 @@
 import { ChangeEvent } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { set as setSize } from "@/store/bgImageSizeSlice";
 import { set as setRepeat } from "@/store/bgImageRepeatSlice";
 
 export default function OptionBgLayout(): JSX.Element {
+  const OPTION_NAME_SIZE = "bgImageSize";
+  const OPTION_NAME_REPEAT = "bgImageRepeat";
+
   const dispatch = useDispatch();
 
   enum Layout {

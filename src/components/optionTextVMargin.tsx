@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { decrement, increment, set } from "@/store/textVMarginSlice";
 
 export default function OptionTextVMargin() {
-  const vMargin = useSelector((state: any) => state.textVMargin.value);
+  const OPTION_NAME = "textVMargin";
+
+  const vMargin = useSelector((state: any) => state[OPTION_NAME].value);
   const dispatch = useDispatch();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {

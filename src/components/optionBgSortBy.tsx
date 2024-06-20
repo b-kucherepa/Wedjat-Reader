@@ -4,8 +4,11 @@ import { set as setImageFiles } from "@/store/bgImageFilesSlice";
 import { set as setImageIndex } from "@/store/bgImageIndexSlice";
 
 export default function OptionBgSortBy() {
-  const imageFiles = useSelector((state: any) => state.bgImageFiles.value);
-  const imageIndex = useSelector((state: any) => state.bgImageIndex.value);
+  const OPTION_NAME_FILES = "bgImageFiles";
+  const OPTION_NAME_INDEX = "bgImageIndex";
+
+  const imageFiles = useSelector((state: any) => state[OPTION_NAME_FILES].value);
+  const imageIndex = useSelector((state: any) => state[OPTION_NAME_INDEX].value);
   const dispatch = useDispatch();
 
   enum SortBy {

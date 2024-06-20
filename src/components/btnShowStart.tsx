@@ -2,7 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { set } from "@/store/showIsEnabledSlice";
 
 export default function BtnShowStart() {
-  const isEnabled = useSelector((state: any) => state.showIsEnabled.value);
+  const OPTION_NAME = "showIsEnabled";
+
+  const isEnabled = useSelector((state: any) => state[OPTION_NAME].value);
   const dispatch = useDispatch();
 
   function handleClick(): void {

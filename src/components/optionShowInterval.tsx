@@ -5,7 +5,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { decrement, increment, set } from "@/store/showIntervalSlice";
 
 export default function OptionShowInterval() {
-  const interval = useSelector((state: any) => state.showInterval.value);
+  const OPTION_NAME = "showInterval";
+
+  const interval = useSelector((state: any) => state[OPTION_NAME].value);
   const dispatch = useDispatch();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {

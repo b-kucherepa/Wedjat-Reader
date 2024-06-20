@@ -1,5 +1,3 @@
-import { loadState } from "@/common/utils";
-
 import { configureStore } from "@reduxjs/toolkit";
 
 import bgImageFilesSlice from "./bgImageFilesSlice";
@@ -17,7 +15,7 @@ import textSpacingSlice from "./textSpacingSlice";
 import textVMarginSlice from "./textVMarginSlice";
 import textFontSlice from "./textFontSlice";
 
-const reducerList :{} = {
+export const reducerList = {
   text: textSlice,
   textColor: textColorSlice,
   textSize: textSizeSlice,
@@ -37,8 +35,7 @@ const reducerList :{} = {
 export type ReducerList = typeof reducerList;
 
 export const store = configureStore({
-  reducer: reducerList,
-  preloadedState: loadState()
+  reducer: reducerList
 });
 
 export default store;

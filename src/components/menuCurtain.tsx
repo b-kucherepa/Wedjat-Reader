@@ -1,10 +1,9 @@
 import { CLICK_MARGIN_PERCENTAGE } from "@/common/constants";
-import { getScreenPercentSize, saveState } from "@/common/utils";
+import { getScreenPercentSize, saveStates } from "@/common/utils";
 
 import { Swipe } from "@/common/swipeHandler";
 
 import { useEffect, useRef, useState } from "react";
-import store from "@/store/store";
 
 import BtnLoadBg from "./btnLoadBg";
 import BtnLoadText from "./btnLoadText";
@@ -21,6 +20,7 @@ import OptionTextHMargin from "./optionTextHMargin";
 import OptionTextSize from "./optionTextSize";
 import OptionTextSpacing from "./optionTextSpacing";
 import OptionTextVMargin from "./optionTextVMargin";
+import { App } from "@capacitor/app";
 
 export default function MenuCurtain() {
   const EXPANDED_HEIGHT: number = 100;
@@ -34,10 +34,7 @@ export default function MenuCurtain() {
     setCurtainHeight(EXPANDED_HEIGHT);
   }
 
-  function collapse(isSaving: boolean): void {
-    if (isSaving) {
-      saveState(store.getState());
-    }
+  function collapse(): void {
     setCurtainHeight(COLLAPSED_HEIGHT);
   }
 
@@ -46,11 +43,26 @@ export default function MenuCurtain() {
   }
 
   useEffect(() => {
+    function handleStop(e?: Event) {
+      if (e) {
+        e.preventDefault();
+      }
+      saveStates();
+    }
+
+    App.addListener("appStateChange", () => handleStop());
+    App.addListener("pause", () => handleStop());
+    window.addEventListener("beforeunload", handleStop);
+    window.addEventListener("visibilitychange", handleStop);
+  }, []);
+
+  useEffect(() => {
     function handleSwipeEnd(e: CustomEvent): void {
       if (e.detail.swipe === Swipe.Down) {
         expand();
       } else if (e.detail.swipe === Swipe.Up) {
-        collapse(true);
+        saveStates();
+        collapse();
       }
     }
 
@@ -74,7 +86,7 @@ export default function MenuCurtain() {
         curtainHeightRef.current <= CLICK_MARGIN_PERCENTAGE;
 
       if (isCurtainCollapsed) {
-        isUpperSideHover ? hint() : collapse(false);
+        isUpperSideHover ? hint() : collapse();
       }
     }
 
@@ -184,7 +196,12 @@ export default function MenuCurtain() {
         </div>
 
         <label>launch:</label>
-        <div onClick={()=>collapse(true)}>
+        <div
+          onClick={() => {
+            saveStates();
+            collapse();
+          }}
+        >
           <BtnShowStart />
         </div>
 
@@ -199,7 +216,13 @@ export default function MenuCurtain() {
 
         <hr className="menu-separator" />
 
-        <button className="btn-curtain-close" onClick={()=>collapse(true)}>
+        <button
+          className="btn-curtain-close"
+          onClick={() => {
+            saveStates();
+            collapse();
+          }}
+        >
           &times;
         </button>
       </div>

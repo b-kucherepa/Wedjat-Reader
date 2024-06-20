@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { decrement, increment, set } from "@/store/textSpacingSlice";
 
 export default function OptionTextSpacing() {
-  const spacing = useSelector((state: any) => state.textSpacing.value);
+  const OPTION_NAME="textSpacing";
+
+  const spacing = useSelector((state: any) => state[OPTION_NAME].value);
   const dispatch = useDispatch();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {

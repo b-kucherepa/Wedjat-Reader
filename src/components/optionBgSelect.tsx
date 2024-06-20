@@ -1,14 +1,17 @@
-import { formatBytes } from "../common/utils";
+import { formatBytes, normalizeArrayIndex } from "../common/utils";
 
 import { ChangeEvent, ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { set } from "@/store/bgImageIndexSlice";
 
 export default function OptionBgSelect(): JSX.Element {
-  const imageFiles = useSelector((state: any) => state.bgImageFiles.value);
-  const imageIndex = useSelector((state: any) => state.bgImageIndex.value);
-  const textColor = useSelector((state: any) => state.textColor.value);
+  const OPTION_NAME_FILES = "bgImageFiles";
+  const OPTION_NAME_INDEX = "bgImageIndex";
+  const OPTION_NAME_COLOR = "textColor";
 
+  const imageFiles = useSelector((state: any) => state[OPTION_NAME_FILES].value);
+  const imageIndex = useSelector((state: any) => state[OPTION_NAME_INDEX].value);
+  const textColor = useSelector((state: any) => state[OPTION_NAME_COLOR].value);
   const dispatch = useDispatch();
 
   const options: ReactElement[] = imageFiles.map(

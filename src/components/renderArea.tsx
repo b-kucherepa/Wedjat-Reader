@@ -1,6 +1,10 @@
 "use client";
 import { CLICK_MARGIN_PERCENTAGE, DEFAULT_BG_IMAGE } from "@/common/constants";
-import { getScreenPercentSize } from "@/common/utils";
+import {
+  getScreenPercentSize,
+  loadStates,
+  normalizeArrayIndex,
+} from "@/common/utils";
 import { Swipe } from "@/common/swipeHandler";
 
 import { useEffect, useRef } from "react";
@@ -9,14 +13,21 @@ import {
   increment as incrementImageIndex,
   decrement as decrementImageIndex,
   randomize as randomizeImageIndex,
+  set as setImageIndex,
 } from "@/store/bgImageIndexSlice";
 
 export default function RenderArea() {
+  const OPTION_NAME_INDEX = "bgImageIndex";
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    loadStates(dispatch);
+  }, []);
 
   const text = useSelector((state: any) => state.text.value);
   const textColor = useSelector((state: any) => state.textColor.value);
-  const textSize= useSelector((state: any) => state.textSize.value);
+  const textSize = useSelector((state: any) => state.textSize.value);
   const textSpacing = useSelector((state: any) => state.textSpacing.value);
   const textFont = useSelector((state: any) => state.textFont.value);
   const textHMargin = useSelector((state: any) => state.textHMargin.value);
@@ -32,13 +43,15 @@ export default function RenderArea() {
   const showInterval = useSelector((state: any) => state.showInterval.value);
 
   const slideshowTimer = useRef(setInterval(() => {}, 0));
+  const bgImageFilesLengthRef = useRef(bgImageFiles.length);
+  bgImageFilesLengthRef.current = bgImageFiles.length;
 
   useEffect(() => {
     function handleSwipeEnd(e: CustomEvent): void {
       if (e.detail.swipe === Swipe.Right) {
-        dispatch(decrementImageIndex(bgImageFiles.length));
+        dispatch(decrementImageIndex(bgImageFilesLengthRef.current));
       } else if (e.detail.swipe === Swipe.Left) {
-        dispatch(incrementImageIndex(bgImageFiles.length));
+        dispatch(incrementImageIndex(bgImageFilesLengthRef.current));
       }
     }
 
@@ -49,11 +62,11 @@ export default function RenderArea() {
         e.clientX >= getScreenPercentSize(-CLICK_MARGIN_PERCENTAGE, false);
 
       if (isLeftSideTouch) {
-        dispatch(decrementImageIndex(bgImageFiles.length));
+        dispatch(decrementImageIndex(bgImageFilesLengthRef.current));
       }
 
       if (isRightSideTouch) {
-        dispatch(incrementImageIndex(bgImageFiles.length));
+        dispatch(incrementImageIndex(bgImageFilesLengthRef.current));
       }
     }
 
@@ -76,13 +89,20 @@ export default function RenderArea() {
     if (showIsEnabled) {
       slideshowTimer.current = setInterval(() => {
         if (showIsRandom) {
-          dispatch(randomizeImageIndex(bgImageFiles.length));
+          dispatch(randomizeImageIndex(bgImageFilesLengthRef.current));
         } else {
-          dispatch(incrementImageIndex(bgImageFiles.length));
+          dispatch(incrementImageIndex(bgImageFilesLengthRef.current));
         }
       }, showInterval);
     }
   }, [showInterval, showIsEnabled, showIsRandom, bgImageFiles]);
+
+  const normalizedIndex: number = normalizeArrayIndex(
+    bgImageIndex,
+    bgImageFiles.length
+  );
+  console.log(bgImageIndex, normalizedIndex, bgImageFiles.length);
+  dispatch(setImageIndex(normalizedIndex >= 0 ? normalizedIndex : 0));
 
   return (
     <div
@@ -90,7 +110,7 @@ export default function RenderArea() {
       style={{
         backgroundImage: `url(${
           bgImageFiles.length > 0
-            ? bgImageFiles[bgImageIndex].file
+            ? bgImageFiles[normalizedIndex].file
             : DEFAULT_BG_IMAGE.file
         })`,
         backgroundSize: bgImageSize,

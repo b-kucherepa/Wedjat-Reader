@@ -1,4 +1,4 @@
-import { generateRandomBetween, shiftArrayIndexInLoop } from '@/common/utils';
+import { generateRandomBetween } from '@/common/utils';
 import { createSlice } from '@reduxjs/toolkit'
 
 export const bgImageIndexSlice = createSlice({
@@ -7,14 +7,14 @@ export const bgImageIndexSlice = createSlice({
     value: 0,
   },
   reducers: {
-    increment: (state, action) => {
-      state.value = shiftArrayIndexInLoop(action.payload, state.value, 1);
+    increment: (state) => {
+      state.value +=1;
     },
-    decrement: (state, action) => {
-      state.value = shiftArrayIndexInLoop(action.payload, state.value, -1);
+    decrement: (state) => {
+      state.value -=1;
     },
-    randomize: (state, action) => {
-      state.value = generateRandomBetween(0, action.payload);
+    randomize: (state) => {
+      state.value = generateRandomBetween(0, 1000);
     },
     reset: (state) => {
       state.value = 0;

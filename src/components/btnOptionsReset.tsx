@@ -1,8 +1,8 @@
-import { removeState } from "@/common/utils";
+import { removeStates } from "@/common/utils";
 
 export default function BtnOptionsReset() {
   function handleClick(): void {
-    removeState();
+    removeStates();
   }
 
   return (

@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { decrement, increment, set } from "@/store/textSizeSlice";
 
 export default function OptionTextSize() {
-  const size = useSelector((state: any) => state.textSize.value);
+  const OPTION_NAME="textSize";
+
+  const size = useSelector((state: any) => state[OPTION_NAME].value);
   const dispatch = useDispatch();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {

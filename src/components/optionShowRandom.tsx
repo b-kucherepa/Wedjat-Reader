@@ -2,7 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { set } from "@/store/showIsRandomSlice";
 
 export default function OptionShowRandom() {
-  const isRandom = useSelector((state: any) => state.showIsRandom.value);
+  const OPTION_NAME = "showIsRandom";
+
+  const isRandom = useSelector((state: any) => state[OPTION_NAME].value);
   const dispatch = useDispatch();
 
   function handleChange(): void {

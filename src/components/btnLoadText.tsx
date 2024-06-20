@@ -1,10 +1,12 @@
 import languageEncoding from "detect-file-encoding-and-language";
 
 import { ChangeEvent } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { set } from "@/store/textSlice";
 
 export default function TextLoadBtn() {
+  const OPTION_NAME = "text";
+
   const dispatch = useDispatch();
 
   async function getEncoding(file: File): Promise<string> {

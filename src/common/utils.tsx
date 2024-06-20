@@ -1,11 +1,11 @@
-import { ReducerList } from "@/store/store";
+import store, { reducerList } from "@/store/store";
+import { Preferences } from "@capacitor/preferences";
 
-export function shiftArrayIndexInLoop(
-  arrayLength: number,
+export function normalizeArrayIndex (
   currentIndex: number,
-  shiftBy: number
+  arrayLength: number
 ): number {
-  const rawNewIndex: number = (currentIndex + shiftBy) % arrayLength;
+  const rawNewIndex: number = currentIndex % arrayLength;
 
   if (rawNewIndex < 0) {
     return arrayLength - 1 + rawNewIndex;
@@ -14,13 +14,13 @@ export function shiftArrayIndexInLoop(
   }
 }
 
-export function generateRandomBetween(min: number, max: number) {
+export function generateRandomBetween(min: number, max: number): number {
   const minCeiled: number = Math.ceil(min);
   const maxFloored: number = Math.floor(max);
   return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
 }
 
-export function formatBytes(bytes: number) {
+export function formatBytes(bytes: number): string {
   const KILO: number = 1024;
   const UNITS: string[] = [
     "Bytes",
@@ -36,7 +36,7 @@ export function formatBytes(bytes: number) {
 
   if (!+bytes) return `0 ${UNITS[0]}`;
 
-  const power:number = Math.floor(Math.log(bytes) / Math.log(KILO));
+  const power: number = Math.floor(Math.log(bytes) / Math.log(KILO));
 
   return `${parseFloat((bytes / Math.pow(KILO, power)).toFixed(2))} ${
     UNITS[power]
@@ -56,50 +56,54 @@ export function getScreenPercentSize(
   }
 }
 
-export function clampNumber(number: number, min: number, max: number) {
+export function clampNumber(number: number, min: number, max: number): number {
   return Math.min(Math.max(number, min), max);
 }
 
-export function saveState(data: ReducerList): void {
-  try {
-    const itemNames: string[] = Object.keys(data);
-    for (let item of itemNames) {
-      const serializedState: string = JSON.stringify(data[item as keyof ReducerList]);
-      localStorage.setItem(item, serializedState);
-    }
-  } catch (err) {
-    console.log(err);
+export async function saveStates(): Promise<void> {
+  const storeState: any = store.getState();
+
+  for (let state in storeState) {
+    const serializedState: string = JSON.stringify(storeState[state].value);
+    Preferences.set({
+      key: state,
+      value: serializedState,
+    }).catch((error) => console.log(error));
   }
 }
 
-export function loadState(): ReducerList {
-  try {
-    const itemNames: string[] = Object.keys(localStorage);
-    let data: ReducerList = {};
-    for (let item of itemNames) {
-      const serializedState: string | null = localStorage.getItem(item);
-      if (serializedState) {
-        const parsedData: Object = JSON.parse(serializedState);
-        data = { ...data, [item as keyof ReducerList]: parsedData };
-      } else {
-        return {};
-      }
-    }
-    return data;
-  } catch (err) {
-    console.log(err);
-    return {};
+export async function loadStates(dispatch: any): Promise<void> {
+  const storeState: any = store.getState();
+
+  for (let state in storeState) {
+    Preferences.get({
+      key: state,
+    })
+      .then((result) => result.value)
+      .then((serializedState) => {
+        if (serializedState) {
+          return JSON.parse(serializedState);
+        }
+      })
+      .then((readyData) => {
+        if (readyData) {
+          dispatch({ type: `${state}/set`, payload: readyData });
+        }
+      })
+      .catch((error) => console.log(error));
   }
 }
 
-export function removeState(): void {
+export async function removeStates(): Promise<void> {
   try {
-    const itemNames: string[] = Object.keys(localStorage);
+    const itemNames: string[] = await Preferences.keys().then(
+      (result) => result.keys
+    );
     for (let item of itemNames) {
-      localStorage.removeItem(item);
+      Preferences.remove({ key: item });
     }
     location.reload();
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 }
