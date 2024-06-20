@@ -31,7 +31,7 @@ export default function RenderArea() {
   const showIsRandom = useSelector((state: any) => state.showIsRandom.value);
   const showInterval = useSelector((state: any) => state.showInterval.value);
 
-  const slideshowTimer = useRef(setTimeout(() => {}, 0));
+  const slideshowTimer = useRef(setInterval(() => {}, 0));
 
   useEffect(() => {
     function handleSwipeEnd(e: CustomEvent): void {
@@ -74,7 +74,7 @@ export default function RenderArea() {
     clearInterval(slideshowTimer.current);
 
     if (showIsEnabled) {
-      slideshowTimer.current = setTimeout(() => {
+      slideshowTimer.current = setInterval(() => {
         if (showIsRandom) {
           dispatch(randomizeImageIndex(bgImageFiles.length));
         } else {
@@ -82,7 +82,7 @@ export default function RenderArea() {
         }
       }, showInterval);
     }
-  }, [showInterval, showIsEnabled, showIsRandom, bgImageFiles, bgImageIndex]);
+  }, [showInterval, showIsEnabled, showIsRandom, bgImageFiles]);
 
   return (
     <div
