@@ -111,3 +111,5 @@ export class SwipeHandler {
     );
   }
 }
+
+export default SwipeHandler;

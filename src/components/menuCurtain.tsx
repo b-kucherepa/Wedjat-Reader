@@ -1,7 +1,7 @@
 import { CLICK_MARGIN_PERCENTAGE } from "@/common/constants";
 import { getScreenPercentSize, saveState } from "@/common/utils";
 
-import { Swipe } from "@/common/customClasses";
+import { Swipe } from "@/common/swipeHandler";
 
 import { useEffect, useRef, useState } from "react";
 import store from "@/store/store";
@@ -22,7 +22,7 @@ import OptionTextSize from "./optionTextSize";
 import OptionTextSpacing from "./optionTextSpacing";
 import OptionTextVMargin from "./optionTextVMargin";
 
-function MenuCurtain() {
+export default function MenuCurtain() {
   const EXPANDED_HEIGHT: number = 100;
   const COLLAPSED_HEIGHT: number = 0;
 
@@ -206,5 +206,3 @@ function MenuCurtain() {
     </div>
   );
 }
-
-export default MenuCurtain;

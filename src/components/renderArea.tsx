@@ -1,7 +1,7 @@
 "use client";
 import { CLICK_MARGIN_PERCENTAGE, DEFAULT_BG_IMAGE } from "@/common/constants";
 import { getScreenPercentSize } from "@/common/utils";
-import { Swipe } from "@/common/customClasses";
+import { Swipe } from "@/common/swipeHandler";
 
 import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,12 +11,12 @@ import {
   randomize as randomizeImageIndex,
 } from "@/store/bgImageIndexSlice";
 
-function RenderArea() {
+export default function RenderArea() {
   const dispatch = useDispatch();
 
   const text = useSelector((state: any) => state.text.value);
   const textColor = useSelector((state: any) => state.textColor.value);
-  const textSize = useSelector((state: any) => state.textSize.value);
+  const textSize= useSelector((state: any) => state.textSize.value);
   const textSpacing = useSelector((state: any) => state.textSpacing.value);
   const textFont = useSelector((state: any) => state.textFont.value);
   const textHMargin = useSelector((state: any) => state.textHMargin.value);
@@ -110,5 +110,3 @@ function RenderArea() {
     </div>
   );
 }
-
-export default RenderArea;

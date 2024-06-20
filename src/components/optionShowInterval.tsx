@@ -4,7 +4,7 @@ import { ChangeEvent } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { decrement, increment, set } from "@/store/showIntervalSlice";
 
-function OptionShowInterval() {
+export default function OptionShowInterval() {
   const interval = useSelector((state: any) => state.showInterval.value);
   const dispatch = useDispatch();
 
@@ -39,5 +39,3 @@ function OptionShowInterval() {
     </div>
   );
 }
-
-export default OptionShowInterval;

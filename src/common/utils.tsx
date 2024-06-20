@@ -1,3 +1,5 @@
+import { ReducerList } from "@/store/store";
+
 export function shiftArrayIndexInLoop(
   arrayLength: number,
   currentIndex: number,
@@ -19,8 +21,8 @@ export function generateRandomBetween(min: number, max: number) {
 }
 
 export function formatBytes(bytes: number) {
-  const KILO = 1024;
-  const UNITS = [
+  const KILO: number = 1024;
+  const UNITS: string[] = [
     "Bytes",
     "KiB",
     "MiB",
@@ -34,7 +36,7 @@ export function formatBytes(bytes: number) {
 
   if (!+bytes) return `0 ${UNITS[0]}`;
 
-  const power = Math.floor(Math.log(bytes) / Math.log(KILO));
+  const power:number = Math.floor(Math.log(bytes) / Math.log(KILO));
 
   return `${parseFloat((bytes / Math.pow(KILO, power)).toFixed(2))} ${
     UNITS[power]
@@ -45,7 +47,7 @@ export function getScreenPercentSize(
   percent: number,
   isHeight: boolean
 ): number {
-  const screenSize = isHeight ? window.innerHeight : window.innerWidth;
+  const screenSize: number = isHeight ? window.innerHeight : window.innerWidth;
 
   if (percent >= 0) {
     return (screenSize * percent) / 100;
@@ -58,11 +60,11 @@ export function clampNumber(number: number, min: number, max: number) {
   return Math.min(Math.max(number, min), max);
 }
 
-export function saveState(data: any): void {
+export function saveState(data: ReducerList): void {
   try {
-    const itemNames = Object.keys(data);
+    const itemNames: string[] = Object.keys(data);
     for (let item of itemNames) {
-      const serializedState = JSON.stringify(data[item]);
+      const serializedState: string = JSON.stringify(data[item as keyof ReducerList]);
       localStorage.setItem(item, serializedState);
     }
   } catch (err) {
@@ -70,15 +72,15 @@ export function saveState(data: any): void {
   }
 }
 
-export function loadState(): unknown {
+export function loadState(): ReducerList {
   try {
-    const itemNames = Object.keys(localStorage);
-    let data = {};
+    const itemNames: string[] = Object.keys(localStorage);
+    let data: ReducerList = {};
     for (let item of itemNames) {
-      const serializedState = localStorage.getItem(item);
+      const serializedState: string | null = localStorage.getItem(item);
       if (serializedState) {
-        const parsedData = JSON.parse(serializedState);
-        data = { ...data, [item]: parsedData };
+        const parsedData: Object = JSON.parse(serializedState);
+        data = { ...data, [item as keyof ReducerList]: parsedData };
       } else {
         return {};
       }
@@ -92,7 +94,7 @@ export function loadState(): unknown {
 
 export function removeState(): void {
   try {
-    const itemNames = Object.keys(localStorage);
+    const itemNames: string[] = Object.keys(localStorage);
     for (let item of itemNames) {
       localStorage.removeItem(item);
     }

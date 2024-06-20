@@ -17,22 +17,28 @@ import textSpacingSlice from "./textSpacingSlice";
 import textVMarginSlice from "./textVMarginSlice";
 import textFontSlice from "./textFontSlice";
 
-export default configureStore({
-  reducer: {
-    text: textSlice,
-    textColor: textColorSlice,
-    textSize: textSizeSlice,
-    textSpacing: textSpacingSlice,
-    textFont: textFontSlice,
-    textHMargin: textHMarginSlice,
-    textVMargin: textVMarginSlice,
-    bgImageFiles: bgImageFilesSlice,
-    bgImageIndex: bgImageIndexSlice,
-    bgImageSize: bgImageSizeSlice,
-    bgImageRepeat: bgImageRepeatSlice,
-    showIsEnabled: showIsEnabledSlice,
-    showIsRandom: showIsRandomSlice,
-    showInterval: showIntervalSlice
-  },
+const reducerList :{} = {
+  text: textSlice,
+  textColor: textColorSlice,
+  textSize: textSizeSlice,
+  textSpacing: textSpacingSlice,
+  textFont: textFontSlice,
+  textHMargin: textHMarginSlice,
+  textVMargin: textVMarginSlice,
+  bgImageFiles: bgImageFilesSlice,
+  bgImageIndex: bgImageIndexSlice,
+  bgImageSize: bgImageSizeSlice,
+  bgImageRepeat: bgImageRepeatSlice,
+  showIsEnabled: showIsEnabledSlice,
+  showIsRandom: showIsRandomSlice,
+  showInterval: showIntervalSlice
+};
+
+export type ReducerList = typeof reducerList;
+
+export const store = configureStore({
+  reducer: reducerList,
   preloadedState: loadState()
 });
+
+export default store;

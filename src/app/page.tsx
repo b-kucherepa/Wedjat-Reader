@@ -6,7 +6,7 @@ import { SWIPE_PERCENTAGE } from "../common/constants";
 import MenuCurtain from "../components/menuCurtain";
 import RenderArea from "../components/renderArea";
 
-import { SwipeHandler } from "@/common/customClasses";
+import SwipeHandler from "@/common/swipeHandler";
 import { Provider } from "react-redux";
 import store from "@/store/store";
 

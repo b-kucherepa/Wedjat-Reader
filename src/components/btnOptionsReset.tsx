@@ -1,6 +1,6 @@
 import { removeState } from "@/common/utils";
 
-function BtnOptionsReset() {
+export default function BtnOptionsReset() {
   function handleClick(): void {
     removeState();
   }
@@ -11,5 +11,3 @@ function BtnOptionsReset() {
     </button>
   );
 }
-
-export default BtnOptionsReset;

@@ -4,7 +4,7 @@ import { ChangeEvent, ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { set } from "@/store/bgImageIndexSlice";
 
-function OptionBgSelect(): JSX.Element {
+export default function OptionBgSelect(): JSX.Element {
   const imageFiles = useSelector((state: any) => state.bgImageFiles.value);
   const imageIndex = useSelector((state: any) => state.bgImageIndex.value);
   const textColor = useSelector((state: any) => state.textColor.value);
@@ -50,5 +50,3 @@ function OptionBgSelect(): JSX.Element {
     </select>
   );
 }
-
-export default OptionBgSelect;

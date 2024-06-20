@@ -5,7 +5,7 @@ import { push as pushImageFiles } from "@/store/bgImageFilesSlice";
 import { reset as resetImageFiles } from "@/store/bgImageFilesSlice";
 import { reset as resetImageIndex } from "@/store/bgImageIndexSlice";
 
-function BgLoadBtn() {
+export default function BgLoadBtn() {
   const dispatch = useDispatch();
 
   function handleFileRead(
@@ -59,5 +59,3 @@ function BgLoadBtn() {
     />
   );
 }
-
-export default BgLoadBtn;

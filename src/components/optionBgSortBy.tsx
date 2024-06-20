@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { set as setImageFiles } from "@/store/bgImageFilesSlice";
 import { set as setImageIndex } from "@/store/bgImageIndexSlice";
 
-function OptionBgSortBy() {
+export default function OptionBgSortBy() {
   const imageFiles = useSelector((state: any) => state.bgImageFiles.value);
   const imageIndex = useSelector((state: any) => state.bgImageIndex.value);
   const dispatch = useDispatch();
@@ -68,7 +68,7 @@ function OptionBgSortBy() {
         );
         break;
       default:
-        throw "Error: wrong sort type (that shouldn't happen)!";
+        throw TypeError("Wrong sort type!");
     }
 
     const newImageIndex = indexedImageArray.findIndex(
@@ -97,5 +97,3 @@ function OptionBgSortBy() {
     </select>
   );
 }
-
-export default OptionBgSortBy;

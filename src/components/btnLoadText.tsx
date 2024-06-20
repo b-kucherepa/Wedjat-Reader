@@ -4,7 +4,7 @@ import { ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import { set } from "@/store/textSlice";
 
-function TextLoadBtn() {
+export default function TextLoadBtn() {
   const dispatch = useDispatch();
 
   async function getEncoding(file: File): Promise<string> {
@@ -45,5 +45,3 @@ function TextLoadBtn() {
     />
   );
 }
-
-export default TextLoadBtn;

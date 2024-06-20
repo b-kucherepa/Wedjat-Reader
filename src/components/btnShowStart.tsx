@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { set } from "@/store/showIsEnabledSlice";
 
-function BtnShowStart() {
+export default function BtnShowStart() {
   const isEnabled = useSelector((state: any) => state.showIsEnabled.value);
   const dispatch = useDispatch();
 
@@ -15,5 +15,3 @@ function BtnShowStart() {
     </button>
   );
 }
-
-export default BtnShowStart;

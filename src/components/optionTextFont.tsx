@@ -2,7 +2,7 @@ import { set } from "@/store/textFontSlice";
 import { ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 
-function OptionTextFont(): JSX.Element {
+export default function OptionTextFont(): JSX.Element {
   const dispatch = useDispatch();
 
   function handleDropdownSelect(e: ChangeEvent<HTMLSelectElement>): void {
@@ -46,5 +46,3 @@ function OptionTextFont(): JSX.Element {
     </select>
   );
 }
-
-export default OptionTextFont;

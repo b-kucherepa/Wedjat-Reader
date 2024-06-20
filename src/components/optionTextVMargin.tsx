@@ -2,7 +2,7 @@ import { ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { decrement, increment, set } from "@/store/textVMarginSlice";
 
-function OptionTextVMargin() {
+export default function OptionTextVMargin() {
   const vMargin = useSelector((state: any) => state.textVMargin.value);
   const dispatch = useDispatch();
 
@@ -37,5 +37,3 @@ function OptionTextVMargin() {
     </div>
   );
 }
-
-export default OptionTextVMargin;
