@@ -1,0 +1,7 @@
+ignore_theme_config: true
+
+baseurl: /wedjat-reader/
+
+include:
+  - .nojekyll
+

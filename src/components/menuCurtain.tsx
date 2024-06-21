@@ -52,7 +52,6 @@ export default function MenuCurtain() {
       saveStates();
     }
 
-    App.addListener("appStateChange", () => handleStop());
     App.addListener("pause", () => handleStop());
     window.addEventListener("beforeunload", handleStop);
     window.addEventListener("visibilitychange", handleStop);
