@@ -1,10 +1,12 @@
 import { generateRandomBetween } from '@/common/utils';
 import { createSlice } from '@reduxjs/toolkit'
 
+const DEFAULT_VALUE = 0;
+
 export const bgImageIndexSlice = createSlice({
   name: 'bgImageIndex',
   initialState: {
-    value: 0,
+    value: DEFAULT_VALUE,
   },
   reducers: {
     increment: (state) => {
@@ -16,15 +18,15 @@ export const bgImageIndexSlice = createSlice({
     randomize: (state) => {
       state.value = generateRandomBetween(0, 1000);
     },
-    reset: (state) => {
-      state.value = 0;
-    },
     set: (state, action) => {
       state.value = action.payload;
+    },
+    reset: (state) => {
+      state.value = DEFAULT_VALUE;
     },
   },
 })
 
-export const { increment, decrement, randomize, reset, set } = bgImageIndexSlice.actions;
+export const { increment, decrement, randomize, set, reset } = bgImageIndexSlice.actions;
 
 export default bgImageIndexSlice.reducer;

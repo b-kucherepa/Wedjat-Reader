@@ -1,8 +1,11 @@
 import { removeStates } from "@/common/utils";
+import { useDispatch } from "react-redux";
 
 export default function BtnOptionsReset() {
+  const dispatch = useDispatch();
+
   function handleClick(): void {
-    removeStates();
+    removeStates(dispatch);
   }
 
   return (

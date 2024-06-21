@@ -1,13 +1,14 @@
 import { clampNumber } from '@/common/utils';
 import { createSlice } from '@reduxjs/toolkit'
 
+const DEFAULT_VALUE = 25;
 const MIN_VALUE = 0;
 const MAX_VALUE = 128;
 
 export const textVMarginSlice = createSlice({
   name: 'textVMargin',
   initialState: {
-    value: 25,
+    value: DEFAULT_VALUE,
   },
   reducers: {
     increment: (state) => {
@@ -18,10 +19,13 @@ export const textVMarginSlice = createSlice({
     },
     set: (state, action) => {
       state.value = clampNumber(action.payload, MIN_VALUE, MAX_VALUE);
+    }, 
+    reset: (state) => {
+      state.value = DEFAULT_VALUE;
     },
   },
 })
 
-export const { increment, decrement, set } = textVMarginSlice.actions;
+export const { increment, decrement, set, reset } = textVMarginSlice.actions;
 
 export default textVMarginSlice.reducer;

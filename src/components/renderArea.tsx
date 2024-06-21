@@ -101,7 +101,6 @@ export default function RenderArea() {
     bgImageIndex,
     bgImageFiles.length
   );
-  console.log(bgImageIndex, normalizedIndex, bgImageFiles.length);
   dispatch(setImageIndex(normalizedIndex >= 0 ? normalizedIndex : 0));
 
   return (

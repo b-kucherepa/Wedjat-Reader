@@ -2,13 +2,14 @@ import { clampNumber } from '@/common/utils';
 
 import { createSlice } from '@reduxjs/toolkit'
 
+const DEFAULT_VALUE = 16;
 const MIN_VALUE = 0;
 const MAX_VALUE = 128;
 
 export const textSizeSlice = createSlice({
   name: 'textSize',
   initialState: {
-    value: 16,
+    value: DEFAULT_VALUE,
   },
   reducers: {
     increment: (state) => {
@@ -20,9 +21,12 @@ export const textSizeSlice = createSlice({
     set: (state, action) => {
       state.value = clampNumber(action.payload, MIN_VALUE, MAX_VALUE);
     },
+    reset: (state) => {
+      state.value = DEFAULT_VALUE;
+    },
   },
 })
 
-export const { increment, decrement, set } = textSizeSlice.actions;
+export const { increment, decrement, set, reset } = textSizeSlice.actions;
 
 export default textSizeSlice.reducer;

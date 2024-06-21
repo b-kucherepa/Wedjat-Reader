@@ -94,15 +94,15 @@ export async function loadStates(dispatch: any): Promise<void> {
   }
 }
 
-export async function removeStates(): Promise<void> {
+export async function removeStates(dispatch: any): Promise<void> {
   try {
     const itemNames: string[] = await Preferences.keys().then(
       (result) => result.keys
     );
     for (let item of itemNames) {
       Preferences.remove({ key: item });
+      dispatch({ type: `${item}/reset`})
     }
-    location.reload();
   } catch (error) {
     console.log(error);
   }

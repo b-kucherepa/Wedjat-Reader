@@ -61,7 +61,6 @@ export default function MenuCurtain() {
       if (e.detail.swipe === Swipe.Down) {
         expand();
       } else if (e.detail.swipe === Swipe.Up) {
-        saveStates();
         collapse();
       }
     }
@@ -198,7 +197,6 @@ export default function MenuCurtain() {
         <label>launch:</label>
         <div
           onClick={() => {
-            saveStates();
             collapse();
           }}
         >
@@ -219,7 +217,6 @@ export default function MenuCurtain() {
         <button
           className="btn-curtain-close"
           onClick={() => {
-            saveStates();
             collapse();
           }}
         >
