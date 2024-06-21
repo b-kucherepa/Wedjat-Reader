@@ -1,4 +1,5 @@
 "use client";
+
 import { CLICK_MARGIN_PERCENTAGE, DEFAULT_BG_IMAGE } from "@/common/constants";
 import {
   getScreenPercentSize,

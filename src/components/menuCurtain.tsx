@@ -1,3 +1,5 @@
+"use client";
+
 import { CLICK_MARGIN_PERCENTAGE } from "@/common/constants";
 import { getScreenPercentSize, saveStates } from "@/common/utils";
 

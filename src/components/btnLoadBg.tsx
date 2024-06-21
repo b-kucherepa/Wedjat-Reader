@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { push as pushImageFiles } from "@/store/bgImageFilesSlice";
-import { reset as resetImageFiles } from "@/store/bgImageFilesSlice";
+import { wipe as wipeImageFiles } from "@/store/bgImageFilesSlice";
 import { reset as resetImageIndex } from "@/store/bgImageIndexSlice";
 
 export default function BgLoadBtn() {
@@ -41,7 +41,7 @@ export default function BgLoadBtn() {
       return;
     } else {
       dispatch(resetImageIndex());
-      dispatch(resetImageFiles());
+      dispatch(wipeImageFiles());
 
       for (let f of files) {
         let reader = new FileReader();
