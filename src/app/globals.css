@@ -53,13 +53,14 @@ body {
   box-sizing: border-box;
   display: grid;
   gap: 0.25rem;
-  grid-auto-rows: min-content;
+  grid-auto-rows: auto;
   grid-template-columns: minmax(min-content, 1fr) minmax(min-content, 1fr) minmax(
       0,
       2fr
     );
   height: 100%;
   padding: 2rem;
+  padding-bottom: 0;
   position: relative;
   transition: 0.5s;
   width: 100%;
@@ -142,6 +143,7 @@ input[type="file"]::file-selector-button {
 
 .bg-list {
   height: 12vh;
+  max-height: 100%;
   max-width: 100%;
   text-wrap: pretty;
   width: 100%;

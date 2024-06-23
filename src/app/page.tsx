@@ -28,6 +28,7 @@ export default function Main() {
   return (
     <main>
       <Provider store={store}>
+        <RenderArea></RenderArea>
         <Curtain>
           <div className="menu-content">
             <label className="menu-section-text">Text:</label>
@@ -124,7 +125,6 @@ export default function Main() {
             <BtnMenuClose />
           </div>
         </Curtain>
-        <RenderArea></RenderArea>
       </Provider>
     </main>
   );
