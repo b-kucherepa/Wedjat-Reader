@@ -14,3 +14,18 @@ export const DEFAULT_BG_IMAGE: {
   size: 378940,
   modified: 0,
 };
+
+export const OPTION_NAME_BG_FILES = "bgFiles";
+export const OPTION_NAME_BG_INDEX = "bgIndex";
+export const OPTION_NAME_BG_REPEAT = "bgRepeat";
+export const OPTION_NAME_BG_SIZE = "bgSize";
+export const OPTION_NAME_SHOW_INTERVAL = "showInterval";
+export const OPTION_NAME_SHOW_IS_ENABLED = "showIsEnabled";
+export const OPTION_NAME_SHOW_IS_RANDOM = "showIsRandom";
+export const OPTION_NAME_TEXT_COLOR = "textColor";
+export const OPTION_NAME_TEXT_DATA = "textData";
+export const OPTION_NAME_TEXT_FONT = "textFont";
+export const OPTION_NAME_TEXT_MARGIN_H = "textMarginH";
+export const OPTION_NAME_TEXT_MARGIN_V = "textMarginV";
+export const OPTION_NAME_TEXT_SIZE = "textSize";
+export const OPTION_NAME_TEXT_SPACING = "textSpacing";

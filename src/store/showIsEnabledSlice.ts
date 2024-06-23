@@ -1,9 +1,10 @@
+import { OPTION_NAME_SHOW_IS_ENABLED } from '@/common/constants';
 import { createSlice } from '@reduxjs/toolkit'
 
 const DEFAULT_VALUE = false;
 
 export const showIsEnabledSlice = createSlice({
-  name: 'showIsEnabled',
+  name: OPTION_NAME_SHOW_IS_ENABLED,
   initialState: {
     value: DEFAULT_VALUE,
   },

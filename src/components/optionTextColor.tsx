@@ -1,12 +1,12 @@
+import { OPTION_NAME_TEXT_COLOR } from "@/common/constants";
+
 import { ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { set } from "@/store/textColorSlice";
 
 export default function OptionTextColor() {
-  const OPTION_NAME = "textColor";
-
-  const color = useSelector((state: any) => state[OPTION_NAME].value);
+  const color = useSelector((state: any) => state[OPTION_NAME_TEXT_COLOR].value);
   const dispatch = useDispatch();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {

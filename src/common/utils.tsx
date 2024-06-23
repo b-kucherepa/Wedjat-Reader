@@ -1,4 +1,4 @@
-import store, { reducerList } from "@/store/store";
+import store from "@/store/store";
 import { Preferences } from "@capacitor/preferences";
 
 export function normalizeArrayIndex (

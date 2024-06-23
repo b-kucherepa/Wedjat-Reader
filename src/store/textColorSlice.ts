@@ -1,9 +1,10 @@
+import { OPTION_NAME_TEXT_COLOR } from '@/common/constants';
 import { createSlice } from '@reduxjs/toolkit'
 
 const DEFAULT_VALUE = "#FFFFFF";
 
 export const textColorSlice = createSlice({
-  name: 'textColor',
+  name: OPTION_NAME_TEXT_COLOR,
   initialState: {
     value: DEFAULT_VALUE,
   },

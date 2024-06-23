@@ -1,14 +1,11 @@
-import { ChangeEvent, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { ChangeEvent } from "react";
+import { useDispatch } from "react-redux";
 
-import { push as pushImageFiles } from "@/store/bgImageFilesSlice";
-import { wipe as wipeImageFiles } from "@/store/bgImageFilesSlice";
-import { reset as resetImageIndex } from "@/store/bgImageIndexSlice";
+import { push as pushImageFiles } from "@/store/bgFilesSlice";
+import { wipe as wipeImageFiles } from "@/store/bgFilesSlice";
+import { reset as resetImageIndex } from "@/store/bgIndexSlice";
 
-export default function BgLoadBtn() {
-  const OPTION_NAME_FILES = "bgImageFiles";
-  const OPTION_NAME_INDEX = "bgImageIndex";
-
+export default function BtnLoadBgFiles() {
   const dispatch = useDispatch();
 
   function handleFileRead(

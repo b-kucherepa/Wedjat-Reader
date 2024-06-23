@@ -1,9 +1,10 @@
+import { OPTION_NAME_BG_REPEAT } from '@/common/constants';
 import { createSlice } from '@reduxjs/toolkit'
 
 const DEFAULT_VALUE = "repeat";
 
 export const bgImageRepeatSlice = createSlice({
-  name: 'bgImageRepeat',
+  name: OPTION_NAME_BG_REPEAT,
   initialState: {
     value: DEFAULT_VALUE
   },

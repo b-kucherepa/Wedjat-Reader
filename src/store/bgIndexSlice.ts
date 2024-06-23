@@ -1,10 +1,11 @@
+import { OPTION_NAME_BG_INDEX } from '@/common/constants';
 import { generateRandomBetween } from '@/common/utils';
 import { createSlice } from '@reduxjs/toolkit'
 
 const DEFAULT_VALUE = 0;
 
 export const bgImageIndexSlice = createSlice({
-  name: 'bgImageIndex',
+  name: OPTION_NAME_BG_INDEX,
   initialState: {
     value: DEFAULT_VALUE,
   },

@@ -1,9 +1,10 @@
+import { OPTION_NAME_SHOW_IS_RANDOM } from '@/common/constants';
 import { createSlice } from '@reduxjs/toolkit'
 
 const DEFAULT_VALUE = false;
 
 export const showIsRandomSlice = createSlice({
-  name: 'showIsRandom',
+  name: OPTION_NAME_SHOW_IS_RANDOM,
   initialState: {
     value: DEFAULT_VALUE,
   },

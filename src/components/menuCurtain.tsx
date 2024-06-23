@@ -7,21 +7,21 @@ import { Swipe } from "@/common/swipeHandler";
 
 import { useEffect, useRef, useState } from "react";
 
-import BtnLoadBg from "./btnLoadBg";
-import BtnLoadText from "./btnLoadText";
+import BtnLoadBg from "./btnLoadBgFiles";
+import BtnLoadText from "./btnLoadTextData";
 import BtnOptionsReset from "./btnOptionsReset";
-import BtnShowStart from "./btnShowStart";
+import BtnShowStart from "./btnShowEnable";
 import OptionBgLayout from "./optionBgLayout";
 import OptionBgSelect from "./optionBgSelect";
 import OptionBgSortBy from "./optionBgSortBy";
 import OptionShowInterval from "./optionShowInterval";
-import OptionShowRandom from "./optionShowRandom";
+import OptionShowRandom from "./optionShowIsRandom";
 import OptionTextColor from "./optionTextColor";
 import OptionTextFont from "./optionTextFont";
-import OptionTextHMargin from "./optionTextHMargin";
+import OptionTextHMargin from "./optionTextMarginH";
 import OptionTextSize from "./optionTextSize";
 import OptionTextSpacing from "./optionTextSpacing";
-import OptionTextVMargin from "./optionTextVMargin";
+import OptionTextVMargin from "./optionTextMarginV";
 import { App } from "@capacitor/app";
 
 export default function MenuCurtain() {

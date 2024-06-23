@@ -1,11 +1,31 @@
 "use client";
 
-import { CLICK_MARGIN_PERCENTAGE, DEFAULT_BG_IMAGE, SWIPE_PERCENTAGE } from "@/common/constants";
+import {
+  CLICK_MARGIN_PERCENTAGE,
+  DEFAULT_BG_IMAGE,
+  OPTION_NAME_BG_FILES,
+  OPTION_NAME_BG_INDEX,
+  OPTION_NAME_BG_REPEAT,
+  OPTION_NAME_BG_SIZE,
+  OPTION_NAME_SHOW_IS_ENABLED,
+  OPTION_NAME_SHOW_INTERVAL,
+  OPTION_NAME_SHOW_IS_RANDOM,
+  OPTION_NAME_TEXT_DATA,
+  OPTION_NAME_TEXT_COLOR,
+  OPTION_NAME_TEXT_FONT,
+  OPTION_NAME_TEXT_MARGIN_H,
+  OPTION_NAME_TEXT_SIZE,
+  OPTION_NAME_TEXT_SPACING,
+  OPTION_NAME_TEXT_MARGIN_V,
+  SWIPE_PERCENTAGE,
+} from "@/common/constants";
+
 import {
   getScreenPercentSize,
   loadStates,
   normalizeArrayIndex,
 } from "@/common/utils";
+
 import SwipeHandler, { Swipe } from "@/common/swipeHandler";
 
 import { useEffect, useRef } from "react";
@@ -15,33 +35,57 @@ import {
   decrement as decrementImageIndex,
   randomize as randomizeImageIndex,
   set as setImageIndex,
-} from "@/store/bgImageIndexSlice";
+} from "@/store/bgIndexSlice";
 
 export default function RenderArea() {
-  const OPTION_NAME_INDEX = "bgImageIndex";
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     loadStates(dispatch);
   }, []);
 
-  const text = useSelector((state: any) => state.text.value);
-  const textColor = useSelector((state: any) => state.textColor.value);
-  const textSize = useSelector((state: any) => state.textSize.value);
-  const textSpacing = useSelector((state: any) => state.textSpacing.value);
-  const textFont = useSelector((state: any) => state.textFont.value);
-  const textHMargin = useSelector((state: any) => state.textHMargin.value);
-  const textVMargin = useSelector((state: any) => state.textVMargin.value);
+  const text = useSelector((state: any) => state[OPTION_NAME_TEXT_DATA].value);
+  const textColor = useSelector(
+    (state: any) => state[OPTION_NAME_TEXT_COLOR].value
+  );
+  const textSize = useSelector(
+    (state: any) => state[OPTION_NAME_TEXT_SIZE].value
+  );
+  const textSpacing = useSelector(
+    (state: any) => state[OPTION_NAME_TEXT_SPACING].value
+  );
+  const textFont = useSelector(
+    (state: any) => state[OPTION_NAME_TEXT_FONT].value
+  );
+  const textHMargin = useSelector(
+    (state: any) => state[OPTION_NAME_TEXT_MARGIN_H].value
+  );
+  const textVMargin = useSelector(
+    (state: any) => state[OPTION_NAME_TEXT_MARGIN_V].value
+  );
 
-  const bgImageFiles = useSelector((state: any) => state.bgImageFiles.value);
-  const bgImageIndex = useSelector((state: any) => state.bgImageIndex.value);
-  const bgImageSize = useSelector((state: any) => state.bgImageSize.value);
-  const bgImageRepeat = useSelector((state: any) => state.bgImageRepeat.value);
+  const bgImageFiles = useSelector(
+    (state: any) => state[OPTION_NAME_BG_FILES].value
+  );
+  const bgImageIndex = useSelector(
+    (state: any) => state[OPTION_NAME_BG_INDEX].value
+  );
+  const bgImageSize = useSelector(
+    (state: any) => state[OPTION_NAME_BG_SIZE].value
+  );
+  const bgImageRepeat = useSelector(
+    (state: any) => state[OPTION_NAME_BG_REPEAT].value
+  );
 
-  const showIsEnabled = useSelector((state: any) => state.showIsEnabled.value);
-  const showIsRandom = useSelector((state: any) => state.showIsRandom.value);
-  const showInterval = useSelector((state: any) => state.showInterval.value);
+  const showIsEnabled = useSelector(
+    (state: any) => state[OPTION_NAME_SHOW_IS_ENABLED].value
+  );
+  const showIsRandom = useSelector(
+    (state: any) => state[OPTION_NAME_SHOW_IS_RANDOM].value
+  );
+  const showInterval = useSelector(
+    (state: any) => state[OPTION_NAME_SHOW_INTERVAL].value
+  );
 
   const slideshowTimer = useRef(setInterval(() => {}, 0));
   const bgImageFilesLengthRef = useRef(bgImageFiles.length);
@@ -98,7 +142,7 @@ export default function RenderArea() {
         }
       }, showInterval);
     }
-  }, [showInterval, showIsEnabled, showIsRandom, bgImageFiles]);
+  }, [showInterval, showIsEnabled]);
 
   const normalizedIndex: number = normalizeArrayIndex(
     bgImageIndex,

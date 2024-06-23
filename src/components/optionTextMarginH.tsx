@@ -1,11 +1,11 @@
+import { OPTION_NAME_TEXT_MARGIN_H } from "@/common/constants";
+
 import { ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { decrement, increment, set } from "@/store/textVMarginSlice";
+import { decrement, increment, set } from "@/store/textMarginHSlice";
 
-export default function OptionTextVMargin() {
-  const OPTION_NAME = "textVMargin";
-
-  const vMargin = useSelector((state: any) => state[OPTION_NAME].value);
+export default function OptionTextHMargin() {
+  const hMargin = useSelector((state: any) => state[OPTION_NAME_TEXT_MARGIN_H].value);
   const dispatch = useDispatch();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
@@ -29,7 +29,7 @@ export default function OptionTextVMargin() {
         type="text"
         pattern="\d*"
         maxLength={3}
-        value={vMargin}
+        value={hMargin}
         className="menu-item counter"
         onChange={handleChange}
       />

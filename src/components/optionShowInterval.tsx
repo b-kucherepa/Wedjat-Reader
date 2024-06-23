@@ -1,13 +1,11 @@
-import { MILLISECONDS_IN_SECONDS } from "@/common/constants";
+import { MILLISECONDS_IN_SECONDS, OPTION_NAME_SHOW_INTERVAL } from "@/common/constants";
 
 import { ChangeEvent } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { decrement, increment, set } from "@/store/showIntervalSlice";
 
 export default function OptionShowInterval() {
-  const OPTION_NAME = "showInterval";
-
-  const interval = useSelector((state: any) => state[OPTION_NAME].value);
+  const interval = useSelector((state: any) => state[OPTION_NAME_SHOW_INTERVAL].value);
   const dispatch = useDispatch();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {

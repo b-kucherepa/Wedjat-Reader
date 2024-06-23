@@ -1,5 +1,5 @@
+import { OPTION_NAME_TEXT_SIZE } from '@/common/constants';
 import { clampNumber } from '@/common/utils';
-
 import { createSlice } from '@reduxjs/toolkit'
 
 const DEFAULT_VALUE = 16;
@@ -7,7 +7,7 @@ const MIN_VALUE = 0;
 const MAX_VALUE = 128;
 
 export const textSizeSlice = createSlice({
-  name: 'textSize',
+  name: OPTION_NAME_TEXT_SIZE,
   initialState: {
     value: DEFAULT_VALUE,
   },

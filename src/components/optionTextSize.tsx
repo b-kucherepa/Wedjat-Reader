@@ -1,11 +1,11 @@
+import { OPTION_NAME_TEXT_SIZE } from "@/common/constants";
+
 import { ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { decrement, increment, set } from "@/store/textSizeSlice";
 
 export default function OptionTextSize() {
-  const OPTION_NAME="textSize";
-
-  const size = useSelector((state: any) => state[OPTION_NAME].value);
+    const size = useSelector((state: any) => state[OPTION_NAME_TEXT_SIZE].value);
   const dispatch = useDispatch();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {

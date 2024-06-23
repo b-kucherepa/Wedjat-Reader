@@ -1,9 +1,10 @@
+import { OPTION_NAME_TEXT_DATA } from '@/common/constants';
 import { createSlice } from '@reduxjs/toolkit'
 
 const DEFAULT_VALUE = `Click the upper side of screen, or swipe down, to open menu, then click "Text -> load -> No file chosen" to load a text file`;
 
 export const textSlice = createSlice({
-  name: 'text',
+  name: OPTION_NAME_TEXT_DATA,
   initialState: {
     value: DEFAULT_VALUE,
   },

@@ -1,11 +1,10 @@
 import languageEncoding from "detect-file-encoding-and-language";
 
 import { ChangeEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { set } from "@/store/textSlice";
+import { useDispatch } from "react-redux";
+import { set } from "@/store/textDataSlice";
 
-export default function TextLoadBtn() {
-  const OPTION_NAME = "text";
+export default function BtnLoadTextData() {
 
   const dispatch = useDispatch();
 

@@ -1,10 +1,10 @@
+import { OPTION_NAME_SHOW_IS_ENABLED } from "@/common/constants";
+
 import { useDispatch, useSelector } from "react-redux";
 import { set } from "@/store/showIsEnabledSlice";
 
-export default function BtnShowStart() {
-  const OPTION_NAME = "showIsEnabled";
-
-  const isEnabled = useSelector((state: any) => state[OPTION_NAME].value);
+export default function BtnShowEnable() {
+  const isEnabled = useSelector((state: any) => state[OPTION_NAME_SHOW_IS_ENABLED].value);
   const dispatch = useDispatch();
 
   function handleClick(): void {
