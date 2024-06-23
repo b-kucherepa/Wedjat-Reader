@@ -90,7 +90,7 @@ body {
   width: 100%;
 }
 
-.btn-curtain-close {
+.btn-menu-close {
   background-color: transparent;
   border-style: none;
   color: var(--foreground-color);

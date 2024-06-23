@@ -15,6 +15,7 @@ export const DEFAULT_BG_IMAGE: {
   modified: 0,
 };
 
+export const NAME_MENU_STATE = "menuState"
 export const OPTION_NAME_BG_FILES = "bgFiles";
 export const OPTION_NAME_BG_INDEX = "bgIndex";
 export const OPTION_NAME_BG_REPEAT = "bgRepeat";

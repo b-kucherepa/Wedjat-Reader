@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  NAME_MENU_STATE,
   OPTION_NAME_BG_FILES,
   OPTION_NAME_BG_INDEX,
   OPTION_NAME_BG_REPEAT,
@@ -19,6 +20,7 @@ import {
 
 import { configureStore } from "@reduxjs/toolkit";
 
+import menuStateSlice from "./menuStateSlice";
 import bgFilesSlice from "./bgFilesSlice";
 import bgIndexSlice from "./bgIndexSlice";
 import bgRepeatSlice from "./bgRepeatSlice";
@@ -35,6 +37,7 @@ import textSlice from "./textDataSlice";
 import textSpacingSlice from "./textSpacingSlice";
 
 export const reducerList = {
+  [NAME_MENU_STATE]: menuStateSlice,
   [OPTION_NAME_BG_FILES]: bgFilesSlice,
   [OPTION_NAME_BG_INDEX]: bgIndexSlice,
   [OPTION_NAME_BG_REPEAT]: bgRepeatSlice,
