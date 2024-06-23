@@ -2,9 +2,12 @@
   "name": "wedjat-reader",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
+
   "scripts": {
+    "make-relative": "node ./makeRelative.mjs",
     "dev": "next dev",
-    "build": "next build && touch ./build/.nojekyll && npx cap copy",
+    "build": "next build && touch ./build/.nojekyll && npm run make-relative && npx cap copy",
     "start": "next start",
     "lint": "next lint"
   },
