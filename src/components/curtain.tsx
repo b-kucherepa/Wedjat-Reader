@@ -5,7 +5,7 @@ import { getScreenPercentSize, saveStates } from "@/common/utils";
 
 import { Swipe } from "@/common/swipeHandler";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { App } from "@capacitor/app";
@@ -19,8 +19,11 @@ export default function Curtain(props: any) {
 
   const dispatch = useDispatch();
 
+  const menuStateRef = useRef(menuState);
+  menuStateRef.current = menuState;
+
   function getCurtainHeight(): number {
-    switch (menuState) {
+    switch (menuStateRef.current) {
       case MenuState.Open:
         return EXPANDED_HEIGHT_PERCENTAGE;
       case MenuState.Close:
@@ -28,10 +31,19 @@ export default function Curtain(props: any) {
       case MenuState.Hint:
         return CLICK_MARGIN_PERCENTAGE;
       default:
-        throw TypeError(
-          "No such menu state exists" + menuState + MenuState.Open
-        );
+        throw TypeError("No such menu state exists");
     }
+  }
+
+  function getIsCollapsed(): boolean {
+    return (
+      menuStateRef.current === MenuState.Close ||
+      menuStateRef.current === MenuState.Hint
+    );
+  }
+
+  function getIfInHintZone(y: number): boolean {
+    return y <= getScreenPercentSize(CLICK_MARGIN_PERCENTAGE, true);
   }
 
   useEffect(() => {
@@ -57,28 +69,14 @@ export default function Curtain(props: any) {
     }
 
     function handleClick(e: MouseEvent): void {
-      const isUpperSideTouch: boolean =
-        e.clientY <= getScreenPercentSize(CLICK_MARGIN_PERCENTAGE, true);
-
-      const isCurtainCollapsed: boolean =
-        menuState === (MenuState.Close || MenuState.Hint);
-      console.log(isCurtainCollapsed);
-
-      if (isUpperSideTouch && isCurtainCollapsed) {
+      if (getIfInHintZone(e.clientY) && getIsCollapsed()) {
         dispatch(open());
       }
     }
 
     function handleMouseMove(e: MouseEvent): void {
-      const isUpperSideHover: boolean =
-        e.clientY <= getScreenPercentSize(CLICK_MARGIN_PERCENTAGE, true);
-
-      const isCurtainCollapsed: boolean =
-        menuState === (MenuState.Close || MenuState.Hint);
-      console.log(isCurtainCollapsed);
-
-      if (isCurtainCollapsed) {
-        isUpperSideHover ? dispatch(hint()) : dispatch(close());
+      if (getIsCollapsed()) {
+        getIfInHintZone(e.clientY) ? dispatch(hint()) : dispatch(close());
       }
     }
 
