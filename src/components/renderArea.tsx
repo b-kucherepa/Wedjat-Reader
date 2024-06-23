@@ -1,12 +1,12 @@
 "use client";
 
-import { CLICK_MARGIN_PERCENTAGE, DEFAULT_BG_IMAGE } from "@/common/constants";
+import { CLICK_MARGIN_PERCENTAGE, DEFAULT_BG_IMAGE, SWIPE_PERCENTAGE } from "@/common/constants";
 import {
   getScreenPercentSize,
   loadStates,
   normalizeArrayIndex,
 } from "@/common/utils";
-import { Swipe } from "@/common/swipeHandler";
+import SwipeHandler, { Swipe } from "@/common/swipeHandler";
 
 import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -48,6 +48,8 @@ export default function RenderArea() {
   bgImageFilesLengthRef.current = bgImageFiles.length;
 
   useEffect(() => {
+    const swipeHandler = new SwipeHandler(document, SWIPE_PERCENTAGE);
+
     function handleSwipeEnd(e: CustomEvent): void {
       if (e.detail.swipe === Swipe.Right) {
         dispatch(decrementImageIndex(bgImageFilesLengthRef.current));
