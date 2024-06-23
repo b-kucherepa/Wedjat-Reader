@@ -1,4 +1,4 @@
-import { OPTION_NAME_TEXT_SPACING } from '@/common/constants';
+import { NAME_TEXT_SPACING } from '@/common/constants';
 import { clampNumber } from '@/common/utils';
 import { createSlice } from '@reduxjs/toolkit'
 
@@ -7,7 +7,7 @@ const MIN_VALUE = 0.2;
 const MAX_VALUE = 10;
 
 export const textSpacingSlice = createSlice({
-  name: OPTION_NAME_TEXT_SPACING,
+  name: NAME_TEXT_SPACING,
   initialState: {
     value: DEFAULT_VALUE,
   },

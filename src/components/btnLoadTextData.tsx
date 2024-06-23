@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { set } from "@/store/textDataSlice";
 
 export default function BtnLoadTextData() {
-
   const dispatch = useDispatch();
 
   async function getEncoding(file: File): Promise<string> {

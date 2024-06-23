@@ -1,4 +1,4 @@
-import { OPTION_NAME_BG_FILES, OPTION_NAME_BG_INDEX } from "@/common/constants";
+import { NAME_BG_FILES, NAME_BG_INDEX } from "@/common/constants";
 
 import { ChangeEvent } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,12 +6,8 @@ import { set as setImageFiles } from "@/store/bgFilesSlice";
 import { set as setImageIndex } from "@/store/bgIndexSlice";
 
 export default function OptionBgSortBy() {
-  const imageFiles = useSelector(
-    (state: any) => state[OPTION_NAME_BG_FILES].value
-  );
-  const imageIndex = useSelector(
-    (state: any) => state[OPTION_NAME_BG_INDEX].value
-  );
+  const imageFiles = useSelector((state: any) => state[NAME_BG_FILES].value);
+  const imageIndex = useSelector((state: any) => state[NAME_BG_INDEX].value);
   const dispatch = useDispatch();
 
   enum SortBy {

@@ -1,11 +1,11 @@
-import { OPTION_NAME_TEXT_SPACING } from "@/common/constants";
+import { NAME_TEXT_SPACING } from "@/common/constants";
 
 import { ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { decrement, increment, set } from "@/store/textSpacingSlice";
 
 export default function OptionTextSpacing() {
-  const spacing = useSelector((state: any) => state[OPTION_NAME_TEXT_SPACING].value);
+  const spacing = useSelector((state: any) => state[NAME_TEXT_SPACING].value);
   const dispatch = useDispatch();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {

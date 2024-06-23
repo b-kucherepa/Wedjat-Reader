@@ -1,4 +1,4 @@
-import { OPTION_NAME_TEXT_MARGIN_H } from '@/common/constants';
+import { NAME_TEXT_MARGIN_H } from '@/common/constants';
 import { clampNumber } from '@/common/utils';
 import { createSlice } from '@reduxjs/toolkit'
 
@@ -7,7 +7,7 @@ const MIN_VALUE = 0;
 const MAX_VALUE = 128;
 
 export const textHMarginSlice = createSlice({
-  name: OPTION_NAME_TEXT_MARGIN_H,
+  name: NAME_TEXT_MARGIN_H,
   initialState: {
     value: DEFAULT_VALUE,
   },

@@ -16,17 +16,17 @@ export const DEFAULT_BG_IMAGE: {
 };
 
 export const NAME_MENU_STATE = "menuState"
-export const OPTION_NAME_BG_FILES = "bgFiles";
-export const OPTION_NAME_BG_INDEX = "bgIndex";
-export const OPTION_NAME_BG_REPEAT = "bgRepeat";
-export const OPTION_NAME_BG_SIZE = "bgSize";
-export const OPTION_NAME_SHOW_INTERVAL = "showInterval";
-export const OPTION_NAME_SHOW_IS_ENABLED = "showIsEnabled";
-export const OPTION_NAME_SHOW_IS_RANDOM = "showIsRandom";
-export const OPTION_NAME_TEXT_COLOR = "textColor";
-export const OPTION_NAME_TEXT_DATA = "textData";
-export const OPTION_NAME_TEXT_FONT = "textFont";
-export const OPTION_NAME_TEXT_MARGIN_H = "textMarginH";
-export const OPTION_NAME_TEXT_MARGIN_V = "textMarginV";
-export const OPTION_NAME_TEXT_SIZE = "textSize";
-export const OPTION_NAME_TEXT_SPACING = "textSpacing";
+export const NAME_BG_FILES = "bgFiles";
+export const NAME_BG_INDEX = "bgIndex";
+export const NAME_BG_REPEAT = "bgRepeat";
+export const NAME_BG_SIZE = "bgSize";
+export const NAME_SHOW_INTERVAL = "showInterval";
+export const NAME_SHOW_IS_ENABLED = "showIsEnabled";
+export const NAME_SHOW_IS_RANDOM = "showIsRandom";
+export const NAME_TEXT_COLOR = "textColor";
+export const NAME_TEXT_DATA = "textData";
+export const NAME_TEXT_FONT = "textFont";
+export const NAME_TEXT_MARGIN_H = "textMarginH";
+export const NAME_TEXT_MARGIN_V = "textMarginV";
+export const NAME_TEXT_SIZE = "textSize";
+export const NAME_TEXT_SPACING = "textSpacing";

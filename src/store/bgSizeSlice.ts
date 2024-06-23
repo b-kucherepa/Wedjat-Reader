@@ -1,10 +1,10 @@
-import { OPTION_NAME_BG_SIZE } from '@/common/constants';
+import { NAME_BG_SIZE } from '@/common/constants';
 import { createSlice } from '@reduxjs/toolkit'
 
 const DEFAULT_VALUE = "cover";
 
 export const bgImageSizeSlice = createSlice({
-  name: OPTION_NAME_BG_SIZE,
+  name: NAME_BG_SIZE,
   initialState: {
     value: DEFAULT_VALUE
   },

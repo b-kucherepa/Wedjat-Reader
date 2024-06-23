@@ -1,4 +1,8 @@
-import { OPTION_NAME_BG_FILES, OPTION_NAME_BG_INDEX, OPTION_NAME_TEXT_COLOR } from "@/common/constants";
+import {
+  NAME_BG_FILES,
+  NAME_BG_INDEX,
+  NAME_TEXT_COLOR,
+} from "@/common/constants";
 
 import { formatBytes } from "../common/utils";
 
@@ -7,11 +11,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { set } from "@/store/bgIndexSlice";
 
 export default function OptionBgSelect(): JSX.Element {
-
-
-  const imageFiles = useSelector((state: any) => state[OPTION_NAME_BG_FILES].value);
-  const imageIndex = useSelector((state: any) => state[OPTION_NAME_BG_INDEX].value);
-  const textColor = useSelector((state: any) => state[OPTION_NAME_TEXT_COLOR].value);
+  const imageFiles = useSelector((state: any) => state[NAME_BG_FILES].value);
+  const imageIndex = useSelector((state: any) => state[NAME_BG_INDEX].value);
+  const textColor = useSelector((state: any) => state[NAME_TEXT_COLOR].value);
   const dispatch = useDispatch();
 
   const options: ReactElement[] = imageFiles.map(
@@ -45,7 +47,7 @@ export default function OptionBgSelect(): JSX.Element {
       style={{
         backgroundSize: "cover",
         backgroundImage: `url(${imageFiles[imageIndex]?.file ?? ""})`,
-        color: textColor
+        color: textColor,
       }}
       onChange={handleDropdownSelect}
     >

@@ -1,4 +1,4 @@
-import { MILLISECONDS_IN_SECONDS, OPTION_NAME_SHOW_INTERVAL } from "@/common/constants";
+import { MILLISECONDS_IN_SECONDS, NAME_SHOW_INTERVAL } from "@/common/constants";
 import { clampNumber } from "@/common/utils";
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -7,7 +7,7 @@ const MIN_VALUE = MILLISECONDS_IN_SECONDS;
 const MAX_VALUE = 3600 * MILLISECONDS_IN_SECONDS;
 
 export const showIntervalSlice = createSlice({
-  name: OPTION_NAME_SHOW_INTERVAL,
+  name: NAME_SHOW_INTERVAL,
   initialState: {
     value: DEFAULT_VALUE,
   },

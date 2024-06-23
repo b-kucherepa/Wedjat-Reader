@@ -1,10 +1,10 @@
-import { DEFAULT_BG_IMAGE, OPTION_NAME_BG_FILES } from '@/common/constants';
+import { DEFAULT_BG_IMAGE, NAME_BG_FILES } from '@/common/constants';
 import { createSlice } from '@reduxjs/toolkit'
 
 const DEFAULT_VALUE = [DEFAULT_BG_IMAGE];
 
 export const bgImageFilesSlice = createSlice({
-  name: OPTION_NAME_BG_FILES,
+  name: NAME_BG_FILES,
   initialState: {
     value: DEFAULT_VALUE
   },

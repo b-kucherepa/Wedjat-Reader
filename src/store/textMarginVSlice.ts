@@ -1,4 +1,4 @@
-import { OPTION_NAME_TEXT_MARGIN_V } from '@/common/constants';
+import { NAME_TEXT_MARGIN_V } from '@/common/constants';
 import { clampNumber } from '@/common/utils';
 import { createSlice } from '@reduxjs/toolkit'
 
@@ -7,7 +7,7 @@ const MIN_VALUE = 0;
 const MAX_VALUE = 128;
 
 export const textVMarginSlice = createSlice({
-  name: OPTION_NAME_TEXT_MARGIN_V,
+  name: NAME_TEXT_MARGIN_V,
   initialState: {
     value: DEFAULT_VALUE,
   },

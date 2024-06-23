@@ -1,10 +1,10 @@
-import { OPTION_NAME_TEXT_FONT } from '@/common/constants';
+import { NAME_TEXT_FONT } from '@/common/constants';
 import { createSlice } from '@reduxjs/toolkit'
 
 const DEFAULT_VALUE = "Arial, sans-serif";
 
 export const textFontSlice = createSlice({
-  name: OPTION_NAME_TEXT_FONT,
+  name: NAME_TEXT_FONT,
   initialState: {
     value: DEFAULT_VALUE
   },
