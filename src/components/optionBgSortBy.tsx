@@ -7,8 +7,12 @@ export default function OptionBgSortBy() {
   const OPTION_NAME_FILES = "bgImageFiles";
   const OPTION_NAME_INDEX = "bgImageIndex";
 
-  const imageFiles = useSelector((state: any) => state[OPTION_NAME_FILES].value);
-  const imageIndex = useSelector((state: any) => state[OPTION_NAME_INDEX].value);
+  const imageFiles = useSelector(
+    (state: any) => state[OPTION_NAME_FILES].value
+  );
+  const imageIndex = useSelector(
+    (state: any) => state[OPTION_NAME_INDEX].value
+  );
   const dispatch = useDispatch();
 
   enum SortBy {
@@ -40,13 +44,13 @@ export default function OptionBgSortBy() {
 
     switch (e.target.value) {
       case SortBy.NameAsc.toString():
-        indexedImageArray.sort(
-          (a: any, b: any) => a.imageData.name - b.imageData.name
+        indexedImageArray.sort((a: any, b: any) =>
+          a.imageData.name > b.imageData.name ? 1 : -1
         );
         break;
       case SortBy.NameDesc.toString():
-        indexedImageArray.sort(
-          (a: any, b: any) => b.imageData.name - a.imageData.name
+        indexedImageArray.sort((a: any, b: any) =>
+          b.imageData.name - a.imageData.name ? 1 : -1
         );
         break;
 
