@@ -4,16 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && touch ./build/.nojekyll",
+    "build": "next build && touch ./build/.nojekyll && npx cap copy",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@capacitor/android": "^6.1.0",
+    "@capacitor/android": "6.1.0",
     "@capacitor/app": "^6.0.0",
     "@capacitor/cli": "^6.1.0",
     "@capacitor/core": "^6.1.0",
-    "@capacitor/ios": "^6.1.0",
+    "@capacitor/ios": "6.1.0",
     "@capacitor/preferences": "^6.0.1",
     "@reduxjs/toolkit": "^2.2.5",
     "detect-file-encoding-and-language": "^2.4.0",

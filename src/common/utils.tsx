@@ -1,5 +1,6 @@
 import store from "@/store/store";
 import { Preferences } from "@capacitor/preferences";
+import { statesToSave } from "./constants";
 
 export function normalizeArrayIndex (
   currentIndex: number,
@@ -63,7 +64,11 @@ export function clampNumber(number: number, min: number, max: number): number {
 export async function saveStates(): Promise<void> {
   const storeState: any = store.getState();
 
-  for (let state in storeState) {
+  console.log(storeState);
+  for (let state of statesToSave) {
+    console.log(state);
+    console.log(storeState[state]);
+
     const serializedState: string = JSON.stringify(storeState[state].value);
     Preferences.set({
       key: state,
@@ -73,9 +78,7 @@ export async function saveStates(): Promise<void> {
 }
 
 export async function loadStates(dispatch: any): Promise<void> {
-  const storeState: any = store.getState();
-
-  for (let state in storeState) {
+  for (let state of statesToSave) {
     Preferences.get({
       key: state,
     })

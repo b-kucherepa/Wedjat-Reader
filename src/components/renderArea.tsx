@@ -24,6 +24,7 @@ import {
   getScreenPercentSize,
   loadStates,
   normalizeArrayIndex,
+  saveStates,
 } from "@/common/utils";
 
 import SwipeHandler, { Swipe } from "@/common/swipeHandler";
@@ -37,13 +38,9 @@ import {
   set as setImageIndex,
 } from "@/store/bgIndexSlice";
 
+import { App } from "@capacitor/app";
+
 export default function RenderArea() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    loadStates(dispatch);
-  }, []);
-
   const text = useSelector((state: any) => state[NAME_TEXT_DATA].value);
   const textColor = useSelector((state: any) => state[NAME_TEXT_COLOR].value);
   const textSize = useSelector((state: any) => state[NAME_TEXT_SIZE].value);
@@ -75,9 +72,19 @@ export default function RenderArea() {
     (state: any) => state[NAME_SHOW_INTERVAL].value
   );
 
+  const dispatch = useDispatch();
+
   const slideshowTimer = useRef(setInterval(() => {}, 0));
   const bgImageFilesLengthRef = useRef(bgImageFiles.length);
   bgImageFilesLengthRef.current = bgImageFiles.length;
+
+  useEffect(() => {
+    loadStates(dispatch);
+
+    App.addListener("pause", () => saveStates());
+    window.addEventListener("beforeunload", saveStates);
+    window.addEventListener("visibilitychange", saveStates);
+  }, []);
 
   useEffect(() => {
     const swipeHandler = new SwipeHandler(document, SWIPE_PERCENTAGE);

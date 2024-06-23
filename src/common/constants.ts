@@ -15,7 +15,7 @@ export const DEFAULT_BG_IMAGE: {
   modified: 0,
 };
 
-export const NAME_MENU_STATE = "menuState"
+export const NAME_MENU_STATE = "menuState";
 export const NAME_BG_FILES = "bgFiles";
 export const NAME_BG_INDEX = "bgIndex";
 export const NAME_BG_REPEAT = "bgRepeat";
@@ -30,3 +30,17 @@ export const NAME_TEXT_MARGIN_H = "textMarginH";
 export const NAME_TEXT_MARGIN_V = "textMarginV";
 export const NAME_TEXT_SIZE = "textSize";
 export const NAME_TEXT_SPACING = "textSpacing";
+
+export const statesToSave: string[] = [
+  NAME_BG_REPEAT,
+  NAME_BG_SIZE,
+  NAME_SHOW_INTERVAL,
+  NAME_SHOW_IS_ENABLED,
+  NAME_SHOW_IS_RANDOM,
+  NAME_TEXT_COLOR,
+  NAME_TEXT_FONT,
+  NAME_TEXT_MARGIN_H,
+  NAME_TEXT_MARGIN_V,
+  NAME_TEXT_SIZE,
+  NAME_TEXT_SPACING,
+];

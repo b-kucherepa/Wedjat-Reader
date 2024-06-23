@@ -1,16 +1,15 @@
 "use client";
 
 import { CLICK_MARGIN_PERCENTAGE, NAME_MENU_STATE } from "@/common/constants";
-import { getScreenPercentSize, saveStates } from "@/common/utils";
+import { getScreenPercentSize } from "@/common/utils";
 
 import { Swipe } from "@/common/swipeHandler";
 
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { App } from "@capacitor/app";
-
 import { MenuState, open, close, hint } from "@/store/menuStateSlice";
+import BtnMenuClose from "./btnMenuClose";
 
 export default function Curtain(props: any) {
   const EXPANDED_HEIGHT_PERCENTAGE: number = 100;
@@ -45,19 +44,6 @@ export default function Curtain(props: any) {
   function getIfInHintZone(y: number): boolean {
     return y <= getScreenPercentSize(CLICK_MARGIN_PERCENTAGE, true);
   }
-
-  useEffect(() => {
-    function handleStop(e?: Event) {
-      if (e) {
-        e.preventDefault();
-      }
-      saveStates();
-    }
-
-    App.addListener("pause", () => handleStop());
-    window.addEventListener("beforeunload", handleStop);
-    window.addEventListener("visibilitychange", handleStop);
-  }, []);
 
   useEffect(() => {
     function handleSwipeEnd(e: CustomEvent): void {
@@ -103,7 +89,14 @@ export default function Curtain(props: any) {
         overflowY: menuState === MenuState.Open ? "auto" : "hidden",
       }}
     >
-      {props.children}
+      <div
+        style={{
+          transition: "inherit",
+          scale: menuState === MenuState.Open ? 1 : 0,
+        }}
+      >
+        {props.children}
+      </div>
     </div>
   );
 }
