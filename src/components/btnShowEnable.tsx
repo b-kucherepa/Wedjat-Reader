@@ -14,7 +14,9 @@ export default function BtnShowEnable() {
 
   function handleClick(): void {
     dispatch(set(!isEnabled));
-    dispatch(close());
+    if (!isEnabled) {
+      dispatch(close());
+    }
   }
 
   return (
