@@ -17,6 +17,7 @@ import {
   NAME_TEXT_SIZE,
   NAME_TEXT_SPACING,
   NAME_TEXT_MARGIN_V,
+  NAME_MENU_STATE,
   SWIPE_PERCENTAGE,
 } from "@/common/constants";
 
@@ -39,6 +40,7 @@ import {
 } from "@/store/bgIndexSlice";
 
 import { App } from "@capacitor/app";
+import { MenuState } from "@/store/menuStateSlice";
 
 export default function RenderArea() {
   const text = useSelector((state: any) => state[NAME_TEXT_DATA].value);
@@ -72,11 +74,15 @@ export default function RenderArea() {
     (state: any) => state[NAME_SHOW_INTERVAL].value
   );
 
+  const menuState = useSelector((state: any) => state[NAME_MENU_STATE].value);
+
   const dispatch = useDispatch();
 
   const slideshowTimer = useRef(setInterval(() => {}, 0));
   const bgImageFilesLengthRef = useRef(bgImageFiles.length);
   bgImageFilesLengthRef.current = bgImageFiles.length;
+  const menuStateRef = useRef(menuState);
+  menuStateRef.current = menuState;
 
   useEffect(() => {
     loadStates(dispatch);
@@ -90,25 +96,29 @@ export default function RenderArea() {
     const swipeHandler = new SwipeHandler(document, SWIPE_PERCENTAGE);
 
     function handleSwipeEnd(e: CustomEvent): void {
-      if (e.detail.swipe === Swipe.Right) {
-        dispatch(decrementImageIndex(bgImageFilesLengthRef.current));
-      } else if (e.detail.swipe === Swipe.Left) {
-        dispatch(incrementImageIndex(bgImageFilesLengthRef.current));
+      if (menuStateRef.current === MenuState.Close) {
+        if (e.detail.swipe === Swipe.Right) {
+          dispatch(decrementImageIndex(bgImageFilesLengthRef.current));
+        } else if (e.detail.swipe === Swipe.Left) {
+          dispatch(incrementImageIndex(bgImageFilesLengthRef.current));
+        }
       }
     }
 
     function handleClick(e: MouseEvent): void {
-      const isLeftSideTouch: boolean =
-        e.clientX <= getScreenPercentSize(CLICK_MARGIN_PERCENTAGE, false);
-      const isRightSideTouch: boolean =
-        e.clientX >= getScreenPercentSize(-CLICK_MARGIN_PERCENTAGE, false);
+      if (menuStateRef.current === MenuState.Close) {
+        const isLeftSideTouch: boolean =
+          e.clientX <= getScreenPercentSize(CLICK_MARGIN_PERCENTAGE, false);
+        const isRightSideTouch: boolean =
+          e.clientX >= getScreenPercentSize(-CLICK_MARGIN_PERCENTAGE, false);
 
-      if (isLeftSideTouch) {
-        dispatch(decrementImageIndex(bgImageFilesLengthRef.current));
-      }
+        if (isLeftSideTouch) {
+          dispatch(decrementImageIndex(bgImageFilesLengthRef.current));
+        }
 
-      if (isRightSideTouch) {
-        dispatch(incrementImageIndex(bgImageFilesLengthRef.current));
+        if (isRightSideTouch) {
+          dispatch(incrementImageIndex(bgImageFilesLengthRef.current));
+        }
       }
     }
 
