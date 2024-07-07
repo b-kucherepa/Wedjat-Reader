@@ -11,7 +11,7 @@ export const DEFAULT_BG_IMAGE: {
 } = {
   file: "default.png",
   name: "default image",
-  size: 378940,
+  size: 1411728,
   modified: 0,
 };
 
