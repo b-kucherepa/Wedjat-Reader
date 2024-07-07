@@ -11,9 +11,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { set } from "@/store/bgIndexSlice";
 
 export default function OptionBgSelect(): JSX.Element {
-  const imageFiles = useSelector((state: any) => state[NAME_BG_FILES].value);
-  const imageIndex = useSelector((state: any) => state[NAME_BG_INDEX].value);
-  const textColor = useSelector((state: any) => state[NAME_TEXT_COLOR].value);
+  const [imageFiles, imageIndex, textColor] = useSelector((state: any) => [
+    state[NAME_BG_FILES].value,
+    state[NAME_BG_INDEX].value,
+    state[NAME_TEXT_COLOR].value,
+  ]);
+
   const dispatch = useDispatch();
 
   const options: ReactElement[] = imageFiles.map(

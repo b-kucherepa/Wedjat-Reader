@@ -43,38 +43,39 @@ import { App } from "@capacitor/app";
 import { MenuState } from "@/store/menuStateSlice";
 
 export default function RenderArea() {
-  const text = useSelector((state: any) => state[NAME_TEXT_DATA].value);
-  const textColor = useSelector((state: any) => state[NAME_TEXT_COLOR].value);
-  const textSize = useSelector((state: any) => state[NAME_TEXT_SIZE].value);
-  const textSpacing = useSelector(
-    (state: any) => state[NAME_TEXT_SPACING].value
-  );
-  const textFont = useSelector((state: any) => state[NAME_TEXT_FONT].value);
-  const textHMargin = useSelector(
-    (state: any) => state[NAME_TEXT_MARGIN_H].value
-  );
-  const textVMargin = useSelector(
-    (state: any) => state[NAME_TEXT_MARGIN_V].value
-  );
-
-  const bgImageFiles = useSelector((state: any) => state[NAME_BG_FILES].value);
-  const bgImageIndex = useSelector((state: any) => state[NAME_BG_INDEX].value);
-  const bgImageSize = useSelector((state: any) => state[NAME_BG_SIZE].value);
-  const bgImageRepeat = useSelector(
-    (state: any) => state[NAME_BG_REPEAT].value
-  );
-
-  const showIsEnabled = useSelector(
-    (state: any) => state[NAME_SHOW_IS_ENABLED].value
-  );
-  const showIsRandom = useSelector(
-    (state: any) => state[NAME_SHOW_IS_RANDOM].value
-  );
-  const showInterval = useSelector(
-    (state: any) => state[NAME_SHOW_INTERVAL].value
-  );
-
-  const menuState = useSelector((state: any) => state[NAME_MENU_STATE].value);
+  const [
+    bgImageFiles,
+    bgImageIndex,
+    bgImageRepeat,
+    bgImageSize,
+    menuState,
+    showInterval,
+    showIsEnabled,
+    showIsRandom,
+    textColor,
+    textData,
+    textFont,
+    textMarginH,
+    textMarginV,
+    textSize,
+    textSpacing,
+  ] = useSelector((state: any) => [
+    state[NAME_BG_FILES].value,
+    state[NAME_BG_INDEX].value,
+    state[NAME_BG_REPEAT].value,
+    state[NAME_BG_SIZE].value,
+    state[NAME_MENU_STATE].value,
+    state[NAME_SHOW_INTERVAL].value,
+    state[NAME_SHOW_IS_ENABLED].value,
+    state[NAME_SHOW_IS_RANDOM].value,
+    state[NAME_TEXT_COLOR].value,
+    state[NAME_TEXT_DATA].value,
+    state[NAME_TEXT_FONT].value,
+    state[NAME_TEXT_MARGIN_H].value,
+    state[NAME_TEXT_MARGIN_V].value,
+    state[NAME_TEXT_SIZE].value,
+    state[NAME_TEXT_SPACING].value,
+  ]);
 
   const dispatch = useDispatch();
 
@@ -171,13 +172,13 @@ export default function RenderArea() {
         fontSize: textSize,
         lineHeight: textSpacing,
         fontFamily: textFont,
-        paddingLeft: `${textHMargin}px`,
-        paddingRight: `${textHMargin}px`,
-        paddingTop: `${textVMargin}px`,
-        paddingBottom: `${textVMargin}px`,
+        paddingLeft: `${textMarginH}px`,
+        paddingRight: `${textMarginH}px`,
+        paddingTop: `${textMarginV}px`,
+        paddingBottom: `${textMarginV}px`,
       }}
     >
-      <div>{text}</div>
+      <div>{textData}</div>
     </div>
   );
 }
