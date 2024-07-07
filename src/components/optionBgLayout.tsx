@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useCallback } from "react";
 import { useDispatch } from "react-redux";
 
 import { set as setSize } from "@/store/bgSizeSlice";
@@ -15,32 +15,35 @@ export default function OptionBgLayout(): JSX.Element {
     Fill,
   }
 
-  function handleDropdownSelect(e: ChangeEvent<HTMLSelectElement>): void {
-    switch (e.target.value) {
-      case Layout.Cover.toString():
-        dispatch(setSize("cover"));
-        dispatch(setRepeat("no-repeat"));
-        return;
-      case Layout.Contain.toString():
-        dispatch(setSize("contain"));
-        dispatch(setRepeat("no-repeat"));
-        return;
-      case Layout.Original.toString():
-        dispatch(setSize("auto"));
-        dispatch(setRepeat("no-repeat"));
-        return;
-      case Layout.Tile.toString():
-        dispatch(setSize("auto"));
-        dispatch(setRepeat("repeat"));
-        return;
-      case Layout.Fill.toString():
-        dispatch(setSize("contain"));
-        dispatch(setRepeat("repeat"));
-        return;
-      default:
-        throw TypeError("No such background layout type!");
-    }
-  }
+  const handleDropdownSelect = useCallback(
+    (e: ChangeEvent<HTMLSelectElement>): void => {
+      switch (e.target.value) {
+        case Layout.Cover.toString():
+          dispatch(setSize("cover"));
+          dispatch(setRepeat("no-repeat"));
+          return;
+        case Layout.Contain.toString():
+          dispatch(setSize("contain"));
+          dispatch(setRepeat("no-repeat"));
+          return;
+        case Layout.Original.toString():
+          dispatch(setSize("auto"));
+          dispatch(setRepeat("no-repeat"));
+          return;
+        case Layout.Tile.toString():
+          dispatch(setSize("auto"));
+          dispatch(setRepeat("repeat"));
+          return;
+        case Layout.Fill.toString():
+          dispatch(setSize("contain"));
+          dispatch(setRepeat("repeat"));
+          return;
+        default:
+          throw TypeError("No such background layout type!");
+      }
+    },
+    []
+  );
 
   return (
     <select className="menu-item select" onChange={handleDropdownSelect}>

@@ -89,8 +89,13 @@ export default function RenderArea() {
     loadStates(dispatch);
 
     App.addListener("pause", () => saveStates());
-    window.addEventListener("beforeunload", saveStates);
-    window.addEventListener("visibilitychange", saveStates);
+    document.addEventListener("beforeunload", saveStates);
+    document.addEventListener("visibilitychange", saveStates);
+
+    return () => {
+      document.removeEventListener("beforeunload", saveStates);
+      document.removeEventListener("visibilitychange", saveStates);
+    };
   }, []);
 
   useEffect(() => {

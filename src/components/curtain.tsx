@@ -5,11 +5,10 @@ import { getScreenPercentSize } from "@/common/utils";
 
 import { Swipe } from "@/common/swipeHandler";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { MenuState, open, close, hint } from "@/store/menuStateSlice";
-import BtnMenuClose from "./btnMenuClose";
 
 export default function Curtain(props: any) {
   const EXPANDED_HEIGHT_PERCENTAGE: number = 100;
@@ -21,7 +20,7 @@ export default function Curtain(props: any) {
   const menuStateRef = useRef(menuState);
   menuStateRef.current = menuState;
 
-  function getCurtainHeight(): number {
+  const getCurtainHeight = useCallback(() => {
     switch (menuStateRef.current) {
       case MenuState.Open:
         return EXPANDED_HEIGHT_PERCENTAGE;
@@ -32,18 +31,18 @@ export default function Curtain(props: any) {
       default:
         throw TypeError("No such menu state exists");
     }
-  }
+  }, []);
 
-  function getIsCollapsed(): boolean {
+  const getIsCollapsed = useCallback(() => {
     return (
       menuStateRef.current === MenuState.Close ||
       menuStateRef.current === MenuState.Hint
     );
-  }
+  }, []);
 
-  function getIfInHintZone(y: number): boolean {
+  const getIfInHintZone = useCallback((y: number) => {
     return y <= getScreenPercentSize(CLICK_MARGIN_PERCENTAGE, true);
-  }
+  }, []);
 
   useEffect(() => {
     function handleSwipeEnd(e: CustomEvent): void {

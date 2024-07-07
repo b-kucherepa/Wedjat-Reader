@@ -1,6 +1,6 @@
 import { NAME_BG_FILES, NAME_BG_INDEX } from "@/common/constants";
 
-import { ChangeEvent } from "react";
+import { ChangeEvent, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { set as setImageFiles } from "@/store/bgFilesSlice";
 import { set as setImageIndex } from "@/store/bgIndexSlice";
@@ -22,74 +22,77 @@ export default function OptionBgSortBy() {
     ModifiedDesc,
   }
 
-  function handleDropdownSelect(e: ChangeEvent<HTMLSelectElement>) {
-    const indexedImageArray: {
-      imageData: any;
-      prevIndex: number;
-    }[] = imageFiles.map(
-      (
-        image: {
-          file: string;
-          name: string;
-          size: number;
-          modified: number;
-        },
-        index: number
-      ) => {
-        return { imageData: image, prevIndex: index };
+  const handleDropdownSelect = useCallback(
+    (e: ChangeEvent<HTMLSelectElement>) => {
+      const indexedImageArray: {
+        imageData: any;
+        prevIndex: number;
+      }[] = imageFiles.map(
+        (
+          image: {
+            file: string;
+            name: string;
+            size: number;
+            modified: number;
+          },
+          index: number
+        ) => {
+          return { imageData: image, prevIndex: index };
+        }
+      );
+
+      switch (e.target.value) {
+        case SortBy.NameAsc.toString():
+          indexedImageArray.sort((a: any, b: any) =>
+            a.imageData.name > b.imageData.name ? 1 : -1
+          );
+          break;
+        case SortBy.NameDesc.toString():
+          indexedImageArray.sort((a: any, b: any) =>
+            b.imageData.name - a.imageData.name ? 1 : -1
+          );
+          break;
+
+        case SortBy.SizeAsc.toString():
+          indexedImageArray.sort(
+            (a: any, b: any) => a.imageData.size - b.imageData.size
+          );
+          break;
+        case SortBy.SizeDesc.toString():
+          indexedImageArray.sort(
+            (a: any, b: any) => b.imageData.size - a.imageData.size
+          );
+          break;
+        case SortBy.ModifiedAsc.toString():
+          indexedImageArray.sort(
+            (a: any, b: any) => a.imageData.modified - b.imageData.modified
+          );
+          break;
+        case SortBy.ModifiedDesc.toString():
+          indexedImageArray.sort(
+            (a: any, b: any) => b.imageData.modified - a.imageData.modified
+          );
+          break;
+        default:
+          throw TypeError("Wrong sort type!");
       }
-    );
 
-    switch (e.target.value) {
-      case SortBy.NameAsc.toString():
-        indexedImageArray.sort((a: any, b: any) =>
-          a.imageData.name > b.imageData.name ? 1 : -1
-        );
-        break;
-      case SortBy.NameDesc.toString():
-        indexedImageArray.sort((a: any, b: any) =>
-          b.imageData.name - a.imageData.name ? 1 : -1
-        );
-        break;
+      const newImageIndex = indexedImageArray.findIndex(
+        (indexedImage) => indexedImage.prevIndex === imageIndex
+      );
 
-      case SortBy.SizeAsc.toString():
-        indexedImageArray.sort(
-          (a: any, b: any) => a.imageData.size - b.imageData.size
-        );
-        break;
-      case SortBy.SizeDesc.toString():
-        indexedImageArray.sort(
-          (a: any, b: any) => b.imageData.size - a.imageData.size
-        );
-        break;
-      case SortBy.ModifiedAsc.toString():
-        indexedImageArray.sort(
-          (a: any, b: any) => a.imageData.modified - b.imageData.modified
-        );
-        break;
-      case SortBy.ModifiedDesc.toString():
-        indexedImageArray.sort(
-          (a: any, b: any) => b.imageData.modified - a.imageData.modified
-        );
-        break;
-      default:
-        throw TypeError("Wrong sort type!");
-    }
+      const sortedBgArray: {
+        file: string;
+        name: string;
+        size: number;
+        modified: number;
+      }[] = indexedImageArray.map((image) => image.imageData);
 
-    const newImageIndex = indexedImageArray.findIndex(
-      (indexedImage) => indexedImage.prevIndex === imageIndex
-    );
-
-    const sortedBgArray: {
-      file: string;
-      name: string;
-      size: number;
-      modified: number;
-    }[] = indexedImageArray.map((image) => image.imageData);
-
-    dispatch(setImageFiles(sortedBgArray));
-    dispatch(setImageIndex(newImageIndex));
-  }
+      dispatch(setImageFiles(sortedBgArray));
+      dispatch(setImageIndex(newImageIndex));
+    },
+    []
+  );
 
   return (
     <select className="menu-item select" onChange={handleDropdownSelect}>

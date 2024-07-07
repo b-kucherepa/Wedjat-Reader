@@ -6,7 +6,7 @@ import {
 
 import { formatBytes } from "../common/utils";
 
-import { ChangeEvent, ReactElement } from "react";
+import { ChangeEvent, ReactElement, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { set } from "@/store/bgIndexSlice";
 
@@ -39,9 +39,12 @@ export default function OptionBgSelect(): JSX.Element {
     }
   );
 
-  function handleDropdownSelect(e: ChangeEvent<HTMLSelectElement>): void {
-    dispatch(set(parseInt(e.target.value)));
-  }
+  const handleDropdownSelect = useCallback(
+    (e: ChangeEvent<HTMLSelectElement>): void => {
+      dispatch(set(parseInt(e.target.value)));
+    },
+    []
+  );
 
   return (
     <select
