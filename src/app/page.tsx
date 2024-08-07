@@ -23,8 +23,11 @@ import OptionTextSpacing from "../components/optionTextSpacing";
 import OptionTextVMargin from "../components/optionTextMarginV";
 
 import "./globals.css";
+import { SWIPE_PERCENTAGE } from "@/common/constants";
+import useSwipes from "@/hooks/useSwipes";
 
 export default function Main() {
+  useSwipes(SWIPE_PERCENTAGE);
   return (
     <main>
       <Provider store={store}>

@@ -28,8 +28,6 @@ import {
   saveStates,
 } from "@/common/utils";
 
-import SwipeHandler, { Swipe } from "@/common/swipeHandler";
-
 import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -41,6 +39,7 @@ import {
 
 import { App } from "@capacitor/app";
 import { MenuState } from "@/store/menuStateSlice";
+import { Swipe } from "@/hooks/useSwipes";
 
 export default function RenderArea() {
   const [
@@ -99,8 +98,6 @@ export default function RenderArea() {
   }, []);
 
   useEffect(() => {
-    const swipeHandler = new SwipeHandler(document, SWIPE_PERCENTAGE);
-
     function handleSwipeEnd(e: CustomEvent): void {
       if (menuStateRef.current === MenuState.Close) {
         if (e.detail.swipe === Swipe.Right) {

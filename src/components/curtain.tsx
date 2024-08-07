@@ -1,14 +1,17 @@
 "use client";
 
-import { CLICK_MARGIN_PERCENTAGE, NAME_MENU_STATE } from "@/common/constants";
+import {
+  CLICK_MARGIN_PERCENTAGE,
+  NAME_MENU_STATE,
+  SWIPE_PERCENTAGE,
+} from "@/common/constants";
 import { getScreenPercentSize } from "@/common/utils";
-
-import { Swipe } from "@/common/swipeHandler";
 
 import { useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { MenuState, open, close, hint } from "@/store/menuStateSlice";
+import { Swipe } from "@/hooks/useSwipes";
 
 export default function Curtain(props: any) {
   const EXPANDED_HEIGHT_PERCENTAGE: number = 100;
@@ -46,6 +49,8 @@ export default function Curtain(props: any) {
 
   useEffect(() => {
     function handleSwipeEnd(e: CustomEvent): void {
+      console.log("Points");
+
       if (e.detail.swipe === Swipe.Down) {
         dispatch(open());
       } else if (e.detail.swipe === Swipe.Up) {

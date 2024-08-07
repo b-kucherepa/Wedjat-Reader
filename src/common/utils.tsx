@@ -2,7 +2,7 @@ import store from "@/store/store";
 import { Preferences } from "@capacitor/preferences";
 import { statesToSave } from "./constants";
 
-export function normalizeArrayIndex (
+export function normalizeArrayIndex(
   currentIndex: number,
   arrayLength: number
 ): number {
@@ -64,11 +64,7 @@ export function clampNumber(number: number, min: number, max: number): number {
 export async function saveStates(): Promise<void> {
   const storeState: any = store.getState();
 
-  console.log(storeState);
   for (let state of statesToSave) {
-    console.log(state);
-    console.log(storeState[state]);
-
     const serializedState: string = JSON.stringify(storeState[state].value);
     Preferences.set({
       key: state,
@@ -104,7 +100,7 @@ export async function removeStates(dispatch: any): Promise<void> {
     );
     for (let item of itemNames) {
       Preferences.remove({ key: item });
-      dispatch({ type: `${item}/reset`})
+      dispatch({ type: `${item}/reset` });
     }
   } catch (error) {
     console.log(error);
