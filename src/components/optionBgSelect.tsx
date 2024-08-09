@@ -1,25 +1,23 @@
-import {
-  NAME_BG_FILES,
-  NAME_BG_INDEX,
-  NAME_TEXT_COLOR,
-} from "@/common/constants";
+import { StateName, StoreActions } from "@/common/constants";
 
 import { formatBytes } from "../common/utils";
 
 import { ChangeEvent, ReactElement, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { set } from "@/store/bgIndexSlice";
+
+import useSelectorValuesManager from "@/hooks/useSelectorValuesRouter";
+import useDispatchRouter from "@/hooks/useDispatchRouter";
 
 export default function OptionBgSelect(): JSX.Element {
-  const [imageFiles, imageIndex, textColor] = useSelector((state: any) => [
-    state[NAME_BG_FILES].value,
-    state[NAME_BG_INDEX].value,
-    state[NAME_TEXT_COLOR].value,
-  ]);
+  const dispatch = useDispatchRouter();
 
-  const dispatch = useDispatch();
+  const storeValues = useSelectorValuesManager(
+    StateName.BG_FILES,
+    StateName.BG_INDEX,
+    StateName.TEXT_COLOR,
+    StateName.TEXT_FONT
+  );
 
-  const options: ReactElement[] = imageFiles.map(
+  const options: ReactElement[] = storeValues[StateName.BG_FILES].map(
     (
       image: {
         file: string;
@@ -41,19 +39,23 @@ export default function OptionBgSelect(): JSX.Element {
 
   const handleDropdownSelect = useCallback(
     (e: ChangeEvent<HTMLSelectElement>): void => {
-      dispatch(set(parseInt(e.target.value)));
+      dispatch(StateName.BG_INDEX, StoreActions.SET, parseInt(e.target.value));
     },
     []
   );
 
   return (
     <select
-      value={imageIndex}
+      value={storeValues[StateName.BG_INDEX]}
       className="menu-item select bordered bg-list"
       style={{
         backgroundSize: "cover",
-        backgroundImage: `url(${imageFiles[imageIndex]?.file ?? ""})`,
-        color: textColor,
+        backgroundImage: `url(${
+          storeValues[StateName.BG_FILES][storeValues[StateName.BG_INDEX]]
+            ?.file ?? ""
+        })`,
+        color: storeValues[StateName.TEXT_COLOR],
+        fontFamily: storeValues[StateName.TEXT_FONT],
       }}
       onChange={handleDropdownSelect}
     >

@@ -1,23 +1,29 @@
-import { NAME_TEXT_MARGIN_H } from "@/common/constants";
+import { StateName, StoreActions } from "@/common/constants";
 
 import { ChangeEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { decrement, increment, set } from "@/store/textMarginHSlice";
+
+import useSelectorValuesManager from "@/hooks/useSelectorValuesRouter";
+import useDispatchRouter from "@/hooks/useDispatchRouter";
 
 export default function OptionTextHMargin() {
-  const hMargin = useSelector((state: any) => state[NAME_TEXT_MARGIN_H].value);
-  const dispatch = useDispatch();
+  const dispatch = useDispatchRouter();
+
+  const storeValues = useSelectorValuesManager(StateName.TEXT_MARGIN_H);
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
-    dispatch(set(parseInt(e.target.value)));
+    dispatch(
+      StateName.TEXT_MARGIN_H,
+      StoreActions.SET,
+      parseInt(e.target.value)
+    );
   }
 
   function handleDecrement(): void {
-    dispatch(decrement());
+    dispatch(StateName.TEXT_MARGIN_H, StoreActions.DECREMENT);
   }
 
   function handleIncrement(): void {
-    dispatch(increment());
+    dispatch(StateName.TEXT_MARGIN_H, StoreActions.INCREMENT);
   }
 
   return (
@@ -29,7 +35,7 @@ export default function OptionTextHMargin() {
         type="text"
         pattern="\d*"
         maxLength={3}
-        value={hMargin}
+        value={storeValues[StateName.TEXT_MARGIN_H]}
         className="menu-item counter"
         onChange={handleChange}
       />

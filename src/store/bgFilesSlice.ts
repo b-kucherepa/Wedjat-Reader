@@ -1,29 +1,27 @@
-import { DEFAULT_BG_IMAGE, NAME_BG_FILES } from '@/common/constants';
-import { createSlice } from '@reduxjs/toolkit'
+import { DEFAULT_BG_IMAGE, StateName, StoreActions } from "@/common/constants";
+import { createSlice } from "@reduxjs/toolkit";
 
 const DEFAULT_VALUE = [DEFAULT_BG_IMAGE];
 
 export const bgImageFilesSlice = createSlice({
-  name: NAME_BG_FILES,
+  name: StateName.BG_FILES,
   initialState: {
-    value: DEFAULT_VALUE
+    value: DEFAULT_VALUE,
   },
   reducers: {
-    push: (state, action) => {
+    [StoreActions.PUSH]: (state, action) => {
       state.value = [...state.value, action.payload];
     },
-    set: (state, action) => {
+    [StoreActions.SET]: (state, action) => {
       state.value = action.payload;
     },
-    wipe: (state) => {
+    [StoreActions.WIPE]: (state) => {
       state.value = [];
     },
-    reset: (state) => {
+    [StoreActions.RESET]: (state) => {
       state.value = DEFAULT_VALUE;
     },
   },
-})
-
-export const { push, set, reset, wipe } = bgImageFilesSlice.actions;
+});
 
 export default bgImageFilesSlice.reducer;

@@ -1,38 +1,37 @@
-import { NAME_MENU_STATE } from '@/common/constants';
-import { createSlice } from '@reduxjs/toolkit'
+import { StateName, StoreActions } from "@/common/constants";
+
+import { createSlice } from "@reduxjs/toolkit";
 
 export enum MenuState {
   Open,
   Close,
-  Hint
+  Hint,
 }
 
 const DEFAULT_VALUE = MenuState.Close;
 
 export const textSizeSlice = createSlice({
-  name: NAME_MENU_STATE,
+  name: StateName.MENU_STATE,
   initialState: {
     value: DEFAULT_VALUE,
   },
   reducers: {
-    open: (state) => {
+    [StoreActions.OPEN]: (state) => {
       state.value = MenuState.Open;
     },
-    close: (state) => {
+    [StoreActions.CLOSE]: (state) => {
       state.value = MenuState.Close;
     },
-    hint: (state) => {
+    [StoreActions.HINT]: (state) => {
       state.value = MenuState.Hint;
     },
-    set: (state, action) => {
+    [StoreActions.SET]: (state, action) => {
       state.value = action.payload;
     },
-    reset: (state) => {
+    [StoreActions.RESET]: (state) => {
       state.value = DEFAULT_VALUE;
     },
   },
-})
-
-export const { open, close, hint, set, reset } = textSizeSlice.actions;
+});
 
 export default textSizeSlice.reducer;

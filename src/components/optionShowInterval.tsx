@@ -1,26 +1,32 @@
 import {
   MILLISECONDS_IN_SECONDS,
-  NAME_SHOW_INTERVAL,
+  StateName,
+  StoreActions,
 } from "@/common/constants";
 
 import { ChangeEvent } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { decrement, increment, set } from "@/store/showIntervalSlice";
+
+import useSelectorValuesManager from "@/hooks/useSelectorValuesRouter";
+import useDispatchRouter from "@/hooks/useDispatchRouter";
 
 export default function OptionShowInterval() {
-  const interval = useSelector((state: any) => state[NAME_SHOW_INTERVAL].value);
-  const dispatch = useDispatch();
+  const storeValues = useSelectorValuesManager(StateName.SHOW_INTERVAL);
+  const dispatch = useDispatchRouter();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
-    dispatch(set(parseInt(e.target.value) * MILLISECONDS_IN_SECONDS));
+    dispatch(
+      StateName.SHOW_INTERVAL,
+      StoreActions.SET,
+      parseInt(e.target.value) * MILLISECONDS_IN_SECONDS
+    );
   }
 
   function handleDecrement(): void {
-    dispatch(decrement());
+    dispatch(StateName.SHOW_INTERVAL, StoreActions.DECREMENT);
   }
 
   function handleIncrement(): void {
-    dispatch(increment());
+    dispatch(StateName.SHOW_INTERVAL, StoreActions.INCREMENT);
   }
 
   return (
@@ -32,7 +38,7 @@ export default function OptionShowInterval() {
         type="text"
         pattern="\d*"
         maxLength={4}
-        value={interval / MILLISECONDS_IN_SECONDS}
+        value={storeValues[StateName.SHOW_INTERVAL] / MILLISECONDS_IN_SECONDS}
         className="menu-item counter"
         onChange={handleChange}
       />

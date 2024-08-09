@@ -3,22 +3,8 @@
 import {
   CLICK_MARGIN_PERCENTAGE,
   DEFAULT_BG_IMAGE,
-  NAME_BG_FILES,
-  NAME_BG_INDEX,
-  NAME_BG_REPEAT,
-  NAME_BG_SIZE,
-  NAME_SHOW_IS_ENABLED,
-  NAME_SHOW_INTERVAL,
-  NAME_SHOW_IS_RANDOM,
-  NAME_TEXT_DATA,
-  NAME_TEXT_COLOR,
-  NAME_TEXT_FONT,
-  NAME_TEXT_MARGIN_H,
-  NAME_TEXT_SIZE,
-  NAME_TEXT_SPACING,
-  NAME_TEXT_MARGIN_V,
-  NAME_MENU_STATE,
-  SWIPE_PERCENTAGE,
+  StateName,
+  StoreActions,
 } from "@/common/constants";
 
 import {
@@ -28,61 +14,41 @@ import {
   saveStates,
 } from "@/common/utils";
 
-import { useEffect, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  increment as incrementImageIndex,
-  decrement as decrementImageIndex,
-  randomize as randomizeImageIndex,
-  set as setImageIndex,
-} from "@/store/bgIndexSlice";
-
 import { App } from "@capacitor/app";
 import { MenuState } from "@/store/menuStateSlice";
 import { Swipe } from "@/hooks/useSwipes";
 
-export default function RenderArea() {
-  const [
-    bgImageFiles,
-    bgImageIndex,
-    bgImageRepeat,
-    bgImageSize,
-    menuState,
-    showInterval,
-    showIsEnabled,
-    showIsRandom,
-    textColor,
-    textData,
-    textFont,
-    textMarginH,
-    textMarginV,
-    textSize,
-    textSpacing,
-  ] = useSelector((state: any) => [
-    state[NAME_BG_FILES].value,
-    state[NAME_BG_INDEX].value,
-    state[NAME_BG_REPEAT].value,
-    state[NAME_BG_SIZE].value,
-    state[NAME_MENU_STATE].value,
-    state[NAME_SHOW_INTERVAL].value,
-    state[NAME_SHOW_IS_ENABLED].value,
-    state[NAME_SHOW_IS_RANDOM].value,
-    state[NAME_TEXT_COLOR].value,
-    state[NAME_TEXT_DATA].value,
-    state[NAME_TEXT_FONT].value,
-    state[NAME_TEXT_MARGIN_H].value,
-    state[NAME_TEXT_MARGIN_V].value,
-    state[NAME_TEXT_SIZE].value,
-    state[NAME_TEXT_SPACING].value,
-  ]);
+import { useEffect, useRef } from "react";
 
-  const dispatch = useDispatch();
+import useSelectorValuesManager from "@/hooks/useSelectorValuesRouter";
+import useDispatchRouter from "@/hooks/useDispatchRouter";
+
+export default function RenderArea() {
+  const dispatch = useDispatchRouter();
+
+  const storeValues = useSelectorValuesManager(
+    StateName.BG_FILES,
+    StateName.BG_INDEX,
+    StateName.BG_REPEAT,
+    StateName.BG_SIZE,
+    StateName.MENU_STATE,
+    StateName.SHOW_INTERVAL,
+    StateName.SHOW_IS_ENABLED,
+    StateName.SHOW_IS_RANDOM,
+    StateName.TEXT_COLOR,
+    StateName.TEXT_DATA,
+    StateName.TEXT_FONT,
+    StateName.TEXT_MARGIN_H,
+    StateName.TEXT_MARGIN_V,
+    StateName.TEXT_SIZE,
+    StateName.TEXT_SPACING
+  );
 
   const slideshowTimer = useRef(setInterval(() => {}, 0));
-  const bgImageFilesLengthRef = useRef(bgImageFiles.length);
-  bgImageFilesLengthRef.current = bgImageFiles.length;
-  const menuStateRef = useRef(menuState);
-  menuStateRef.current = menuState;
+  const bgImageFilesLengthRef = useRef(storeValues[StateName.BG_FILES].length);
+  bgImageFilesLengthRef.current = storeValues[StateName.BG_FILES].length;
+  const menuStateRef = useRef(storeValues[StateName.MENU_STATE]);
+  menuStateRef.current = storeValues[StateName.MENU_STATE];
 
   useEffect(() => {
     loadStates(dispatch);
@@ -101,9 +67,17 @@ export default function RenderArea() {
     function handleSwipeEnd(e: CustomEvent): void {
       if (menuStateRef.current === MenuState.Close) {
         if (e.detail.swipe === Swipe.Right) {
-          dispatch(decrementImageIndex(bgImageFilesLengthRef.current));
+          dispatch(
+            StateName.BG_INDEX,
+            StoreActions.DECREMENT,
+            bgImageFilesLengthRef.current
+          );
         } else if (e.detail.swipe === Swipe.Left) {
-          dispatch(incrementImageIndex(bgImageFilesLengthRef.current));
+          dispatch(
+            StateName.BG_INDEX,
+            StoreActions.INCREMENT,
+            bgImageFilesLengthRef.current
+          );
         }
       }
     }
@@ -116,11 +90,19 @@ export default function RenderArea() {
           e.clientX >= getScreenPercentSize(-CLICK_MARGIN_PERCENTAGE, false);
 
         if (isLeftSideTouch) {
-          dispatch(decrementImageIndex(bgImageFilesLengthRef.current));
+          dispatch(
+            StateName.BG_INDEX,
+            StoreActions.DECREMENT,
+            bgImageFilesLengthRef.current
+          );
         }
 
         if (isRightSideTouch) {
-          dispatch(incrementImageIndex(bgImageFilesLengthRef.current));
+          dispatch(
+            StateName.BG_INDEX,
+            StoreActions.INCREMENT,
+            bgImageFilesLengthRef.current
+          );
         }
       }
     }
@@ -141,46 +123,61 @@ export default function RenderArea() {
   useEffect(() => {
     clearInterval(slideshowTimer.current);
 
-    if (showIsEnabled) {
+    if (storeValues[StateName.SHOW_IS_ENABLED]) {
       slideshowTimer.current = setInterval(() => {
-        if (showIsRandom) {
-          dispatch(randomizeImageIndex(bgImageFilesLengthRef.current));
+        if (storeValues[StateName.SHOW_IS_RANDOM]) {
+          dispatch(
+            StateName.BG_INDEX,
+            StoreActions.RANDOMIZE,
+            bgImageFilesLengthRef.current
+          );
         } else {
-          dispatch(incrementImageIndex(bgImageFilesLengthRef.current));
+          dispatch(
+            StateName.BG_INDEX,
+            StoreActions.INCREMENT,
+            bgImageFilesLengthRef.current
+          );
         }
-      }, showInterval);
+      }, storeValues[StateName.SHOW_INTERVAL]);
     }
-  }, [showInterval, showIsEnabled]);
+  }, [
+    storeValues[StateName.SHOW_INTERVAL],
+    storeValues[StateName.SHOW_IS_ENABLED],
+  ]);
 
   const normalizedIndex: number = normalizeArrayIndex(
-    bgImageIndex,
-    bgImageFiles.length
+    storeValues[StateName.BG_INDEX],
+    storeValues[StateName.BG_FILES].length
   );
-  dispatch(setImageIndex(normalizedIndex >= 0 ? normalizedIndex : 0));
+  dispatch(
+    StateName.BG_INDEX,
+    StoreActions.SET,
+    normalizedIndex >= 0 ? normalizedIndex : 0
+  );
 
   return (
     <div
       className="render-area"
       style={{
         backgroundImage: `url(${
-          bgImageFiles.length > 0
-            ? bgImageFiles[normalizedIndex].file
+          storeValues[StateName.BG_FILES].length > 0
+            ? storeValues[StateName.BG_FILES][normalizedIndex].file
             : DEFAULT_BG_IMAGE.file
         })`,
-        backgroundSize: bgImageSize,
-        backgroundRepeat: bgImageRepeat,
+        backgroundSize: storeValues[StateName.BG_SIZE],
+        backgroundRepeat: storeValues[StateName.BG_REPEAT],
 
-        color: textColor,
-        fontSize: textSize,
-        lineHeight: textSpacing,
-        fontFamily: textFont,
-        paddingLeft: `${textMarginH}px`,
-        paddingRight: `${textMarginH}px`,
-        paddingTop: `${textMarginV}px`,
-        paddingBottom: `${textMarginV}px`,
+        color: storeValues[StateName.TEXT_COLOR],
+        fontSize: storeValues[StateName.TEXT_SIZE],
+        lineHeight: storeValues[StateName.TEXT_SPACING],
+        fontFamily: storeValues[StateName.TEXT_FONT],
+        paddingLeft: `${storeValues[StateName.TEXT_MARGIN_H]}px`,
+        paddingRight: `${storeValues[StateName.TEXT_MARGIN_H]}px`,
+        paddingTop: `${storeValues[StateName.TEXT_MARGIN_V]}px`,
+        paddingBottom: `${storeValues[StateName.TEXT_MARGIN_V]}px`,
       }}
     >
-      <div>{textData}</div>
+      <div>{storeValues[StateName.TEXT_DATA]}</div>
     </div>
   );
 }

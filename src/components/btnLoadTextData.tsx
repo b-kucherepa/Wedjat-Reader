@@ -1,11 +1,13 @@
 import languageEncoding from "detect-file-encoding-and-language";
 
+import { StateName, StoreActions } from "@/common/constants";
+
 import { ChangeEvent, useCallback } from "react";
-import { useDispatch } from "react-redux";
-import { set } from "@/store/textDataSlice";
+
+import useDispatchRouter from "@/hooks/useDispatchRouter";
 
 export default function BtnLoadTextData() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatchRouter();
 
   const getEncoding = useCallback(async (file: File): Promise<string> => {
     return languageEncoding(file).then(
@@ -19,7 +21,7 @@ export default function BtnLoadTextData() {
     ).result?.toString();
 
     if (result) {
-      dispatch(set(result));
+      dispatch(StateName.TEXT_DATA, StoreActions.SET, result);
     }
   }, []);
 

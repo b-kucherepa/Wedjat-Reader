@@ -1,23 +1,22 @@
-import { NAME_BG_SIZE } from '@/common/constants';
-import { createSlice } from '@reduxjs/toolkit'
+import { StateName, StoreActions } from "@/common/constants";
+
+import { createSlice } from "@reduxjs/toolkit";
 
 const DEFAULT_VALUE = "cover";
 
 export const bgImageSizeSlice = createSlice({
-  name: NAME_BG_SIZE,
+  name: StateName.BG_SIZE,
   initialState: {
-    value: DEFAULT_VALUE
+    value: DEFAULT_VALUE,
   },
   reducers: {
-    set: (state, action) => {
+    [StoreActions.SET]: (state, action) => {
       state.value = action.payload;
     },
-    reset: (state) => {
+    [StoreActions.RESET]: (state) => {
       state.value = DEFAULT_VALUE;
     },
   },
-})
-
-export const { set, reset } = bgImageSizeSlice.actions;
+});
 
 export default bgImageSizeSlice.reducer;

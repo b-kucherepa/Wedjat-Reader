@@ -1,12 +1,10 @@
 import { ChangeEvent, useCallback } from "react";
-import { useDispatch } from "react-redux";
 
-import { set as setSize } from "@/store/bgSizeSlice";
-import { set as setRepeat } from "@/store/bgRepeatSlice";
+import { StateName, StoreActions } from "@/common/constants";
+
+import useDispatchRouter from "@/hooks/useDispatchRouter";
 
 export default function OptionBgLayout(): JSX.Element {
-  const dispatch = useDispatch();
-
   enum Layout {
     Cover,
     Contain,
@@ -15,28 +13,30 @@ export default function OptionBgLayout(): JSX.Element {
     Fill,
   }
 
+  const dispatch = useDispatchRouter();
+
   const handleDropdownSelect = useCallback(
     (e: ChangeEvent<HTMLSelectElement>): void => {
       switch (e.target.value) {
         case Layout.Cover.toString():
-          dispatch(setSize("cover"));
-          dispatch(setRepeat("no-repeat"));
+          dispatch(StateName.BG_SIZE, StoreActions.SET, "cover");
+          dispatch(StateName.BG_REPEAT, StoreActions.SET, "no-repeat");
           return;
         case Layout.Contain.toString():
-          dispatch(setSize("contain"));
-          dispatch(setRepeat("no-repeat"));
+          dispatch(StateName.BG_SIZE, StoreActions.SET, "contain");
+          dispatch(StateName.BG_REPEAT, StoreActions.SET, "no-repeat");
           return;
         case Layout.Original.toString():
-          dispatch(setSize("auto"));
-          dispatch(setRepeat("no-repeat"));
+          dispatch(StateName.BG_SIZE, StoreActions.SET, "auto");
+          dispatch(StateName.BG_REPEAT, StoreActions.SET, "no-repeat");
           return;
         case Layout.Tile.toString():
-          dispatch(setSize("auto"));
-          dispatch(setRepeat("repeat"));
+          dispatch(StateName.BG_SIZE, StoreActions.SET, "auto");
+          dispatch(StateName.BG_REPEAT, StoreActions.SET, "repeat");
           return;
         case Layout.Fill.toString():
-          dispatch(setSize("contain"));
-          dispatch(setRepeat("repeat"));
+          dispatch(StateName.BG_SIZE, StoreActions.SET, "repeat");
+          dispatch(StateName.BG_REPEAT, StoreActions.SET, "repeat");
           return;
         default:
           throw TypeError("No such background layout type!");

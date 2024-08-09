@@ -1,13 +1,14 @@
-import { useDispatch } from "react-redux";
+import { StateName, StoreActions } from "@/common/constants";
 
-import { close } from "@/store/menuStateSlice";
 import { saveStates } from "@/common/utils";
 
+import useDispatchRouter from "@/hooks/useDispatchRouter";
+
 export default function BtnMenuClose() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatchRouter();
 
   function handleClick(): void {
-    dispatch(close());
+    dispatch(StateName.MENU_STATE, StoreActions.CLOSE);
     saveStates();
   }
 

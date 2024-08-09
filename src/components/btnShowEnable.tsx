@@ -1,21 +1,21 @@
-import { NAME_SHOW_IS_ENABLED } from "@/common/constants";
+import { StateName, StoreActions } from "@/common/constants";
 
-import { useDispatch, useSelector } from "react-redux";
-import { set } from "@/store/showIsEnabledSlice";
-
-import { close } from "@/store/menuStateSlice";
+import useSelectorValuesManager from "@/hooks/useSelectorValuesRouter";
+import useDispatchRouter from "@/hooks/useDispatchRouter";
 
 export default function BtnShowEnable() {
-  const isEnabled = useSelector(
-    (state: any) => state[NAME_SHOW_IS_ENABLED].value
-  );
-
-  const dispatch = useDispatch();
+  const storeValues = useSelectorValuesManager(StateName.SHOW_IS_ENABLED);
+  const dispatch = useDispatchRouter();
 
   function handleClick(): void {
-    dispatch(set(!isEnabled));
-    if (!isEnabled) {
-      dispatch(close());
+    dispatch(
+      StateName.SHOW_IS_ENABLED,
+      StoreActions.SET,
+      !storeValues[StateName.SHOW_IS_ENABLED]
+    );
+
+    if (!storeValues[StateName.SHOW_IS_ENABLED]) {
+      dispatch(StateName.MENU_STATE, StoreActions.CLOSE);
     }
   }
 
@@ -25,7 +25,7 @@ export default function BtnShowEnable() {
       className="menu-item btn bordered"
       onClick={handleClick}
     >
-      {isEnabled ? "Stop" : "Start"}
+      {storeValues[StateName.SHOW_IS_ENABLED] ? "Stop" : "Start"}
     </button>
   );
 }

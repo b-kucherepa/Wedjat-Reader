@@ -2,6 +2,7 @@
   --foreground-color: #000000;
   --background-color: 255, 255, 255;
   --selected-color: #888888;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -152,7 +153,7 @@ input[type="file"]::file-selector-button {
 .btn-curtain-close:hover {
   color: var(--selected-color);
   scale: 1.25;
-  transition: 0.5s
+  transition: 0.5s;
 }
 
 .menu-item:hover {
@@ -161,7 +162,8 @@ input[type="file"]::file-selector-button {
   transition: 0.2s;
 }
 
-.color-picker:hover, .bg-list:hover {
+.color-picker:hover,
+.bg-list:hover {
   filter: brightness(1.2);
 }
 
@@ -198,7 +200,7 @@ input[type="file"]::file-selector-button {
   grid-row: span 1;
 }
 
-::-moz-selection { 
+::-moz-selection {
   color: rgba(var(--background-color), 1);
   background: var(--selected-color);
 }

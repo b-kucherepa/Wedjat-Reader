@@ -1,33 +1,32 @@
-import { NAME_BG_INDEX } from '@/common/constants';
-import { generateRandomBetween } from '@/common/utils';
-import { createSlice } from '@reduxjs/toolkit'
+import { StateName, StoreActions } from "@/common/constants";
+
+import { generateRandomBetween } from "@/common/utils";
+import { createSlice } from "@reduxjs/toolkit";
 
 const DEFAULT_VALUE = 0;
 
 export const bgImageIndexSlice = createSlice({
-  name: NAME_BG_INDEX,
+  name: StateName.BG_INDEX,
   initialState: {
     value: DEFAULT_VALUE,
   },
   reducers: {
-    increment: (state) => {
-      state.value +=1;
+    [StoreActions.INCREMENT]: (state) => {
+      state.value += 1;
     },
-    decrement: (state) => {
-      state.value -=1;
+    [StoreActions.DECREMENT]: (state) => {
+      state.value -= 1;
     },
-    randomize: (state) => {
+    [StoreActions.RANDOMIZE]: (state) => {
       state.value = generateRandomBetween(0, 1000);
     },
-    set: (state, action) => {
+    [StoreActions.SET]: (state, action) => {
       state.value = action.payload;
     },
-    reset: (state) => {
+    [StoreActions.RESET]: (state) => {
       state.value = DEFAULT_VALUE;
     },
   },
-})
-
-export const { increment, decrement, randomize, set, reset } = bgImageIndexSlice.actions;
+});
 
 export default bgImageIndexSlice.reducer;

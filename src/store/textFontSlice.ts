@@ -1,23 +1,21 @@
-import { NAME_TEXT_FONT } from '@/common/constants';
-import { createSlice } from '@reduxjs/toolkit'
+import { StateName, StoreActions } from "@/common/constants";
+import { createSlice } from "@reduxjs/toolkit";
 
 const DEFAULT_VALUE = "Arial, sans-serif";
 
 export const textFontSlice = createSlice({
-  name: NAME_TEXT_FONT,
+  name: StateName.TEXT_FONT,
   initialState: {
-    value: DEFAULT_VALUE
+    value: DEFAULT_VALUE,
   },
   reducers: {
-    set: (state, action) => {
+    [StoreActions.SET]: (state, action) => {
       state.value = action.payload;
     },
-    reset: (state) => {
+    [StoreActions.RESET]: (state) => {
       state.value = DEFAULT_VALUE;
     },
   },
-})
-
-export const { set, reset } = textFontSlice.actions;
+});
 
 export default textFontSlice.reducer;

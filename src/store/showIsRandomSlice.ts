@@ -1,23 +1,22 @@
-import { NAME_SHOW_IS_RANDOM } from '@/common/constants';
-import { createSlice } from '@reduxjs/toolkit'
+import { StateName, StoreActions } from "@/common/constants";
+
+import { createSlice } from "@reduxjs/toolkit";
 
 const DEFAULT_VALUE = false;
 
 export const showIsRandomSlice = createSlice({
-  name: NAME_SHOW_IS_RANDOM,
+  name: StateName.SHOW_IS_RANDOM,
   initialState: {
     value: DEFAULT_VALUE,
   },
   reducers: {
-    set: (state, action) => {
+    [StoreActions.SET]: (state, action) => {
       state.value = action.payload;
     },
-    reset: (state) => {
+    [StoreActions.RESET]: (state) => {
       state.value = DEFAULT_VALUE;
     },
   },
-})
-
-export const { set, reset } = showIsRandomSlice.actions;
+});
 
 export default showIsRandomSlice.reducer;

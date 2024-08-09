@@ -1,22 +1,23 @@
-import { NAME_TEXT_COLOR } from "@/common/constants";
+import { StateName, StoreActions } from "@/common/constants";
 
 import { ChangeEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
-import { set } from "@/store/textColorSlice";
+import useSelectorValuesManager from "@/hooks/useSelectorValuesRouter";
+import useDispatchRouter from "@/hooks/useDispatchRouter";
 
 export default function OptionTextColor() {
-  const color = useSelector((state: any) => state[NAME_TEXT_COLOR].value);
-  const dispatch = useDispatch();
+  const storeValues = useSelectorValuesManager(StateName.TEXT_COLOR);
+  const dispatch = useDispatchRouter();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
-    dispatch(set(e.target.value));
+    storeValues[StateName.TEXT_COLOR];
+    dispatch(StateName.TEXT_COLOR, StoreActions.SET, e.target.value);
   }
 
   return (
     <input
       type="color"
-      value={color}
+      value={storeValues[StateName.TEXT_COLOR]}
       className="menu-item color-picker"
       onChange={handleChange}
     />

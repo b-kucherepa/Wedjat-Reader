@@ -2,26 +2,27 @@
 
 import {
   CLICK_MARGIN_PERCENTAGE,
-  NAME_MENU_STATE,
-  SWIPE_PERCENTAGE,
+  StateName,
+  StoreActions,
 } from "@/common/constants";
+
 import { getScreenPercentSize } from "@/common/utils";
 
-import { useCallback, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import { MenuState, open, close, hint } from "@/store/menuStateSlice";
+import { MenuState } from "@/store/menuStateSlice";
 import { Swipe } from "@/hooks/useSwipes";
+
+import { useCallback, useEffect, useRef } from "react";
+
+import useSelectorValuesManager from "@/hooks/useSelectorValuesRouter";
+import useDispatchRouter from "@/hooks/useDispatchRouter";
 
 export default function Curtain(props: any) {
   const EXPANDED_HEIGHT_PERCENTAGE: number = 100;
   const COLLAPSED_HEIGHT_PERCENTAGE: number = 0;
-  const menuState = useSelector((state: any) => state[NAME_MENU_STATE].value);
-
-  const dispatch = useDispatch();
-
-  const menuStateRef = useRef(menuState);
-  menuStateRef.current = menuState;
+  const storeValues = useSelectorValuesManager(StateName.MENU_STATE);
+  const dispatch = useDispatchRouter();
+  const menuStateRef = useRef(storeValues[StateName.MENU_STATE]);
+  menuStateRef.current = storeValues[StateName.MENU_STATE];
 
   const getCurtainHeight = useCallback(() => {
     switch (menuStateRef.current) {
@@ -49,24 +50,23 @@ export default function Curtain(props: any) {
 
   useEffect(() => {
     function handleSwipeEnd(e: CustomEvent): void {
-      console.log("Points");
-
       if (e.detail.swipe === Swipe.Down) {
-        dispatch(open());
+        dispatch(StateName.MENU_STATE, StoreActions.OPEN);
       } else if (e.detail.swipe === Swipe.Up) {
-        dispatch(close());
+        dispatch(StateName.MENU_STATE, StoreActions.CLOSE);
       }
     }
 
     function handleClick(e: MouseEvent): void {
       if (getIfInHintZone(e.clientY) && getIsCollapsed()) {
-        dispatch(open());
+        dispatch(StateName.MENU_STATE, StoreActions.OPEN);
       }
     }
 
     function handleMouseMove(e: MouseEvent): void {
       if (getIsCollapsed()) {
-        getIfInHintZone(e.clientY) ? dispatch(hint()) : dispatch(close());
+        const action = getIfInHintZone(e.clientY) ? "hint" : StoreActions.CLOSE;
+        dispatch(StateName.MENU_STATE, action);
       }
     }
 
@@ -90,13 +90,16 @@ export default function Curtain(props: any) {
       className="curtain"
       style={{
         height: `${getCurtainHeight()}%`,
-        overflowY: menuState === MenuState.Open ? "auto" : "hidden",
+        overflowY:
+          storeValues[StateName.MENU_STATE] === MenuState.Open
+            ? "auto"
+            : "hidden",
       }}
     >
       <div
         style={{
           transition: "inherit",
-          scale: menuState === MenuState.Open ? 1 : 0,
+          scale: storeValues[StateName.MENU_STATE] === MenuState.Open ? 1 : 0,
         }}
       >
         {props.children}

@@ -1,12 +1,11 @@
-import { ChangeEvent, useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { StateName, StoreActions } from "@/common/constants";
 
-import { push as pushImageFiles } from "@/store/bgFilesSlice";
-import { wipe as wipeImageFiles } from "@/store/bgFilesSlice";
-import { reset as resetImageIndex } from "@/store/bgIndexSlice";
+import { ChangeEvent, useCallback } from "react";
+
+import useDispatchRouter from "@/hooks/useDispatchRouter";
 
 export default function BtnLoadBgFiles() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatchRouter();
 
   const handleFileRead = useCallback(
     (
@@ -20,14 +19,12 @@ export default function BtnLoadBgFiles() {
       ).result?.toString();
 
       if (result) {
-        dispatch(
-          pushImageFiles({
-            file: result,
-            name: fileName,
-            size: fileSize,
-            modified: fileLastModified,
-          })
-        );
+        dispatch(StateName.BG_FILES, StoreActions.PUSH, {
+          file: result,
+          name: fileName,
+          size: fileSize,
+          modified: fileLastModified,
+        });
       }
     },
     []
@@ -40,8 +37,8 @@ export default function BtnLoadBgFiles() {
       alert("Please, select a file...");
       return;
     } else {
-      dispatch(resetImageIndex());
-      dispatch(wipeImageFiles());
+      dispatch(StateName.BG_INDEX, StoreActions.RESET);
+      dispatch(StateName.BG_FILES, StoreActions.WIPE);
 
       for (let f of files) {
         let reader = new FileReader();

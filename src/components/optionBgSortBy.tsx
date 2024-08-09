@@ -1,17 +1,17 @@
-import { NAME_BG_FILES, NAME_BG_INDEX } from "@/common/constants";
+import { StateName, StoreActions } from "@/common/constants";
 
 import { ChangeEvent, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { set as setImageFiles } from "@/store/bgFilesSlice";
-import { set as setImageIndex } from "@/store/bgIndexSlice";
+
+import useSelectorValuesManager from "@/hooks/useSelectorValuesRouter";
+import useDispatchRouter from "@/hooks/useDispatchRouter";
 
 export default function OptionBgSortBy() {
-  const [imageFiles, imageIndex] = useSelector((state: any) => [
-    state[NAME_BG_FILES].value,
-    state[NAME_BG_INDEX].value,
-  ]);
+  const dispatch = useDispatchRouter();
 
-  const dispatch = useDispatch();
+  const storeValues = useSelectorValuesManager(
+    StateName.BG_FILES,
+    StateName.BG_INDEX
+  );
 
   enum SortBy {
     NameAsc,
@@ -27,7 +27,7 @@ export default function OptionBgSortBy() {
       const indexedImageArray: {
         imageData: any;
         prevIndex: number;
-      }[] = imageFiles.map(
+      }[] = storeValues[StateName.BG_FILES].map(
         (
           image: {
             file: string;
@@ -78,7 +78,8 @@ export default function OptionBgSortBy() {
       }
 
       const newImageIndex = indexedImageArray.findIndex(
-        (indexedImage) => indexedImage.prevIndex === imageIndex
+        (indexedImage) =>
+          indexedImage.prevIndex === storeValues[StateName.BG_INDEX]
       );
 
       const sortedBgArray: {
@@ -88,8 +89,8 @@ export default function OptionBgSortBy() {
         modified: number;
       }[] = indexedImageArray.map((image) => image.imageData);
 
-      dispatch(setImageFiles(sortedBgArray));
-      dispatch(setImageIndex(newImageIndex));
+      dispatch(StateName.BG_FILES, StoreActions.SET, sortedBgArray);
+      dispatch(StateName.BG_INDEX, StoreActions.SET, newImageIndex);
     },
     []
   );

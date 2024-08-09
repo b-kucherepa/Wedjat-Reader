@@ -1,16 +1,18 @@
-import { NAME_SHOW_IS_RANDOM } from "@/common/constants";
+import { StateName, StoreActions } from "@/common/constants";
 
-import { useDispatch, useSelector } from "react-redux";
-import { set } from "@/store/showIsRandomSlice";
+import useSelectorValuesManager from "@/hooks/useSelectorValuesRouter";
+import useDispatchRouter from "@/hooks/useDispatchRouter";
 
 export default function OptionShowRandom() {
-  const isRandom = useSelector(
-    (state: any) => state[NAME_SHOW_IS_RANDOM].value
-  );
-  const dispatch = useDispatch();
+  const storeValues = useSelectorValuesManager(StateName.SHOW_IS_RANDOM);
+  const dispatch = useDispatchRouter();
 
   function handleChange(): void {
-    dispatch(set(!isRandom));
+    dispatch(
+      StateName.SHOW_INTERVAL,
+      StoreActions.SET,
+      !storeValues[StateName.SHOW_IS_RANDOM]
+    );
   }
 
   return (
@@ -22,7 +24,7 @@ export default function OptionShowRandom() {
         type="text"
         pattern="\d*"
         maxLength={3}
-        value={isRandom ? "random" : "next"}
+        value={storeValues[StateName.SHOW_IS_RANDOM] ? "random" : "next"}
         className="menu-item counter"
         onChange={handleChange}
       />

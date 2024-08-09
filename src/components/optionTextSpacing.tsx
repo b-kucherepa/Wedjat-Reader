@@ -1,23 +1,28 @@
-import { NAME_TEXT_SPACING } from "@/common/constants";
+import { StateName, StoreActions } from "@/common/constants";
 
 import { ChangeEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { decrement, increment, set } from "@/store/textSpacingSlice";
+
+import useSelectorValuesManager from "@/hooks/useSelectorValuesRouter";
+import useDispatchRouter from "@/hooks/useDispatchRouter";
 
 export default function OptionTextSpacing() {
-  const spacing = useSelector((state: any) => state[NAME_TEXT_SPACING].value);
-  const dispatch = useDispatch();
+  const storeValues = useSelectorValuesManager(StateName.TEXT_SPACING);
+  const dispatch = useDispatchRouter();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
-    dispatch(set(parseInt(e.target.value)));
+    dispatch(
+      StateName.TEXT_SPACING,
+      StoreActions.SET,
+      parseInt(e.target.value)
+    );
   }
 
   function handleDecrement(): void {
-    dispatch(decrement());
+    dispatch(StateName.TEXT_SPACING, StoreActions.DECREMENT);
   }
 
   function handleIncrement(): void {
-    dispatch(increment());
+    dispatch(StateName.TEXT_SPACING, StoreActions.INCREMENT);
   }
 
   return (
@@ -29,7 +34,7 @@ export default function OptionTextSpacing() {
         type="text"
         pattern="\d*"
         maxLength={3}
-        value={spacing.toFixed(1)}
+        value={storeValues[StateName.TEXT_SPACING].toFixed(1)}
         className="menu-item counter"
         onChange={handleChange}
       />

@@ -1,23 +1,22 @@
-import { NAME_BG_REPEAT } from '@/common/constants';
-import { createSlice } from '@reduxjs/toolkit'
+import { StateName, StoreActions } from "@/common/constants";
+
+import { createSlice } from "@reduxjs/toolkit";
 
 const DEFAULT_VALUE = "repeat";
 
 export const bgImageRepeatSlice = createSlice({
-  name: NAME_BG_REPEAT,
+  name: StateName.BG_REPEAT,
   initialState: {
-    value: DEFAULT_VALUE
+    value: DEFAULT_VALUE,
   },
   reducers: {
-    set: (state, action) => {
+    [StoreActions.SET]: (state, action) => {
       state.value = action.payload;
     },
-    reset: (state) => {
+    [StoreActions.RESET]: (state) => {
       state.value = DEFAULT_VALUE;
     },
   },
-})
-
-export const { set, reset } = bgImageRepeatSlice.actions;
+});
 
 export default bgImageRepeatSlice.reducer;

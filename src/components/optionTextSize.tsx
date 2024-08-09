@@ -1,23 +1,24 @@
-import { NAME_TEXT_SIZE } from "@/common/constants";
+import { StateName, StoreActions } from "@/common/constants";
 
 import { ChangeEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { decrement, increment, set } from "@/store/textSizeSlice";
+
+import useSelectorValuesManager from "@/hooks/useSelectorValuesRouter";
+import useDispatchRouter from "@/hooks/useDispatchRouter";
 
 export default function OptionTextSize() {
-  const size = useSelector((state: any) => state[NAME_TEXT_SIZE].value);
-  const dispatch = useDispatch();
+  const storeValues = useSelectorValuesManager(StateName.TEXT_SIZE);
+  const dispatch = useDispatchRouter();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
-    dispatch(set(parseInt(e.target.value)));
+    dispatch(StateName.TEXT_SIZE, StoreActions.SET, parseInt(e.target.value));
   }
 
   function handleDecrement(): void {
-    dispatch(decrement());
+    dispatch(StateName.TEXT_SIZE, StoreActions.DECREMENT);
   }
 
   function handleIncrement(): void {
-    dispatch(increment());
+    dispatch(StateName.TEXT_SIZE, StoreActions.INCREMENT);
   }
 
   return (
@@ -29,7 +30,7 @@ export default function OptionTextSize() {
         type="text"
         pattern="\d*"
         maxLength={3}
-        value={size}
+        value={storeValues[StateName.TEXT_SIZE]}
         className="menu-item counter"
         onChange={handleChange}
       />

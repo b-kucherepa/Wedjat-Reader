@@ -1,23 +1,22 @@
-import { NAME_SHOW_IS_ENABLED } from '@/common/constants';
-import { createSlice } from '@reduxjs/toolkit'
+import { StateName, StoreActions } from "@/common/constants";
+
+import { createSlice } from "@reduxjs/toolkit";
 
 const DEFAULT_VALUE = false;
 
 export const showIsEnabledSlice = createSlice({
-  name: NAME_SHOW_IS_ENABLED,
+  name: StateName.SHOW_IS_ENABLED,
   initialState: {
     value: DEFAULT_VALUE,
   },
   reducers: {
-    set: (state, action) => {
+    [StoreActions.SET]: (state, action) => {
       state.value = action.payload;
     },
-    reset: (state) => {
+    [StoreActions.RESET]: (state) => {
       state.value = DEFAULT_VALUE;
     },
   },
-})
-
-export const { set, reset } = showIsEnabledSlice.actions;
+});
 
 export default showIsEnabledSlice.reducer;

@@ -1,23 +1,21 @@
-import { NAME_TEXT_COLOR } from '@/common/constants';
-import { createSlice } from '@reduxjs/toolkit'
+import { StateName, StoreActions } from "@/common/constants";
+import { createSlice } from "@reduxjs/toolkit";
 
 const DEFAULT_VALUE = "#FFFFFF";
 
 export const textColorSlice = createSlice({
-  name: NAME_TEXT_COLOR,
+  name: StateName.TEXT_COLOR,
   initialState: {
     value: DEFAULT_VALUE,
   },
   reducers: {
-    set: (state, action) => {
-      state.value = action.payload
+    [StoreActions.SET]: (state, action) => {
+      state.value = action.payload;
     },
-    reset: (state) => {
+    [StoreActions.RESET]: (state) => {
       state.value = DEFAULT_VALUE;
     },
   },
-})
-
-export const { set, reset } = textColorSlice.actions;
+});
 
 export default textColorSlice.reducer;

@@ -1,12 +1,14 @@
-import { set } from "@/store/textFontSlice";
+import { StateName, StoreActions } from "@/common/constants";
+
 import { ChangeEvent } from "react";
-import { useDispatch } from "react-redux";
+
+import useDispatchRouter from "@/hooks/useDispatchRouter";
 
 export default function OptionTextFont(): JSX.Element {
-  const dispatch = useDispatch();
+  const dispatch = useDispatchRouter();
 
   function handleDropdownSelect(e: ChangeEvent<HTMLSelectElement>): void {
-    dispatch(set(e.target.value));
+    dispatch(StateName.TEXT_FONT, StoreActions.SET, e.target.value);
   }
 
   return (
