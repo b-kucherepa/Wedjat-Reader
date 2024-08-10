@@ -2,13 +2,13 @@ import { StateName, StoreActions } from "@/common/constants";
 
 import { ChangeEvent } from "react";
 
-import useSelectorValuesManager from "@/hooks/useSelectorValuesRouter";
+import useSelectorValuesRouter from "@/hooks/useSelectorValuesRouter";
 import useDispatchRouter from "@/hooks/useDispatchRouter";
 
 export default function OptionTextHMargin() {
   const dispatch = useDispatchRouter();
 
-  const storeValues = useSelectorValuesManager(StateName.TEXT_MARGIN_H);
+  const storeValues = useSelectorValuesRouter(StateName.TEXT_MARGIN_H);
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
     dispatch(

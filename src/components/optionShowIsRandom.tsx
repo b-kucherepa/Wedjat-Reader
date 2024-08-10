@@ -1,10 +1,10 @@
 import { StateName, StoreActions } from "@/common/constants";
 
-import useSelectorValuesManager from "@/hooks/useSelectorValuesRouter";
+import useSelectorValuesRouter from "@/hooks/useSelectorValuesRouter";
 import useDispatchRouter from "@/hooks/useDispatchRouter";
 
 export default function OptionShowRandom() {
-  const storeValues = useSelectorValuesManager(StateName.SHOW_IS_RANDOM);
+  const storeValues = useSelectorValuesRouter(StateName.SHOW_IS_RANDOM);
   const dispatch = useDispatchRouter();
 
   function handleChange(): void {

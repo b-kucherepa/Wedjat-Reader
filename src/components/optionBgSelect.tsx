@@ -4,13 +4,13 @@ import { formatBytes } from "../common/utils";
 
 import { ChangeEvent, ReactElement, useCallback } from "react";
 
-import useSelectorValuesManager from "@/hooks/useSelectorValuesRouter";
+import useSelectorValuesRouter from "@/hooks/useSelectorValuesRouter";
 import useDispatchRouter from "@/hooks/useDispatchRouter";
 
 export default function OptionBgSelect(): JSX.Element {
   const dispatch = useDispatchRouter();
 
-  const storeValues = useSelectorValuesManager(
+  const storeValues = useSelectorValuesRouter(
     StateName.BG_FILES,
     StateName.BG_INDEX,
     StateName.TEXT_COLOR,

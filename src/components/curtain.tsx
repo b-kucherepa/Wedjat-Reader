@@ -13,13 +13,13 @@ import { Swipe } from "@/hooks/useSwipes";
 
 import { useCallback, useEffect, useRef } from "react";
 
-import useSelectorValuesManager from "@/hooks/useSelectorValuesRouter";
+import useSelectorValuesRouter from "@/hooks/useSelectorValuesRouter";
 import useDispatchRouter from "@/hooks/useDispatchRouter";
 
 export default function Curtain(props: any) {
   const EXPANDED_HEIGHT_PERCENTAGE: number = 100;
   const COLLAPSED_HEIGHT_PERCENTAGE: number = 0;
-  const storeValues = useSelectorValuesManager(StateName.MENU_STATE);
+  const storeValues = useSelectorValuesRouter(StateName.MENU_STATE);
   const dispatch = useDispatchRouter();
   const menuStateRef = useRef(storeValues[StateName.MENU_STATE]);
   menuStateRef.current = storeValues[StateName.MENU_STATE];

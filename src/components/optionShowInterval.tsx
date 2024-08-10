@@ -6,11 +6,11 @@ import {
 
 import { ChangeEvent } from "react";
 
-import useSelectorValuesManager from "@/hooks/useSelectorValuesRouter";
+import useSelectorValuesRouter from "@/hooks/useSelectorValuesRouter";
 import useDispatchRouter from "@/hooks/useDispatchRouter";
 
 export default function OptionShowInterval() {
-  const storeValues = useSelectorValuesManager(StateName.SHOW_INTERVAL);
+  const storeValues = useSelectorValuesRouter(StateName.SHOW_INTERVAL);
   const dispatch = useDispatchRouter();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {

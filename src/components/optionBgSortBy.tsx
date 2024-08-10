@@ -2,13 +2,13 @@ import { StateName, StoreActions } from "@/common/constants";
 
 import { ChangeEvent, useCallback } from "react";
 
-import useSelectorValuesManager from "@/hooks/useSelectorValuesRouter";
+import useSelectorValuesRouter from "@/hooks/useSelectorValuesRouter";
 import useDispatchRouter from "@/hooks/useDispatchRouter";
 
 export default function OptionBgSortBy() {
   const dispatch = useDispatchRouter();
 
-  const storeValues = useSelectorValuesManager(
+  const storeValues = useSelectorValuesRouter(
     StateName.BG_FILES,
     StateName.BG_INDEX
   );
