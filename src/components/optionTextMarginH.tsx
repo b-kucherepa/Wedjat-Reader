@@ -1,30 +1,13 @@
-import { StateName, StoreActions } from "@/common/constants";
-
-import { ChangeEvent } from "react";
+import { StateName } from "@/common/constants";
 
 import useSelectorValuesRouter from "@/hooks/useSelectorValuesRouter";
-import useDispatchRouter from "@/hooks/useDispatchRouter";
+import useCounter from "@/hooks/useCounter";
 
-export default function OptionTextHMargin() {
-  const dispatch = useDispatchRouter();
-
+export default function OptionTextSpacing() {
   const storeValues = useSelectorValuesRouter(StateName.TEXT_MARGIN_H);
-
-  function handleChange(e: ChangeEvent<HTMLInputElement>): void {
-    dispatch(
-      StateName.TEXT_MARGIN_H,
-      StoreActions.SET,
-      parseInt(e.target.value)
-    );
-  }
-
-  function handleDecrement(): void {
-    dispatch(StateName.TEXT_MARGIN_H, StoreActions.DECREMENT);
-  }
-
-  function handleIncrement(): void {
-    dispatch(StateName.TEXT_MARGIN_H, StoreActions.INCREMENT);
-  }
+  const [handleChange, handleDecrement, handleIncrement] = useCounter(
+    StateName.TEXT_MARGIN_H
+  );
 
   return (
     <div className="inline">
@@ -37,7 +20,7 @@ export default function OptionTextHMargin() {
         maxLength={3}
         value={storeValues[StateName.TEXT_MARGIN_H]}
         className="menu-item counter"
-        onChange={handleChange}
+        onChange={(e) => handleChange(parseInt(e.target.value))}
       />
       <button className="menu-item counter-arrow" onClick={handleIncrement}>
         {"→"}

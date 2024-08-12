@@ -1,33 +1,13 @@
-import {
-  MILLISECONDS_IN_SECONDS,
-  StateName,
-  StoreActions,
-} from "@/common/constants";
-
-import { ChangeEvent } from "react";
+import { MILLISECONDS_IN_SECONDS, StateName } from "@/common/constants";
 
 import useSelectorValuesRouter from "@/hooks/useSelectorValuesRouter";
-import useDispatchRouter from "@/hooks/useDispatchRouter";
+import useCounter from "@/hooks/useCounter";
 
-export default function OptionShowInterval() {
+export default function OptionTextSpacing() {
   const storeValues = useSelectorValuesRouter(StateName.SHOW_INTERVAL);
-  const dispatch = useDispatchRouter();
-
-  function handleChange(e: ChangeEvent<HTMLInputElement>): void {
-    dispatch(
-      StateName.SHOW_INTERVAL,
-      StoreActions.SET,
-      parseInt(e.target.value) * MILLISECONDS_IN_SECONDS
-    );
-  }
-
-  function handleDecrement(): void {
-    dispatch(StateName.SHOW_INTERVAL, StoreActions.DECREMENT);
-  }
-
-  function handleIncrement(): void {
-    dispatch(StateName.SHOW_INTERVAL, StoreActions.INCREMENT);
-  }
+  const [handleChange, handleDecrement, handleIncrement] = useCounter(
+    StateName.SHOW_INTERVAL
+  );
 
   return (
     <div className="inline">
@@ -40,7 +20,9 @@ export default function OptionShowInterval() {
         maxLength={4}
         value={storeValues[StateName.SHOW_INTERVAL] / MILLISECONDS_IN_SECONDS}
         className="menu-item counter"
-        onChange={handleChange}
+        onChange={(e) =>
+          handleChange(parseInt(e.target.value) * MILLISECONDS_IN_SECONDS)
+        }
       />
       <button className="menu-item counter-arrow" onClick={handleIncrement}>
         {"→"}

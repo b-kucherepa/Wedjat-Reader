@@ -1,23 +1,18 @@
-import { StateName, StoreActions } from "@/common/constants";
+import { StateName } from "@/common/constants";
 
 import useSelectorValuesRouter from "@/hooks/useSelectorValuesRouter";
-import useDispatchRouter from "@/hooks/useDispatchRouter";
+import useCounter from "@/hooks/useCounter";
 
-export default function OptionShowRandom() {
+export default function OptionTextSpacing() {
   const storeValues = useSelectorValuesRouter(StateName.SHOW_IS_RANDOM);
-  const dispatch = useDispatchRouter();
-
-  function handleChange(): void {
-    dispatch(
-      StateName.SHOW_INTERVAL,
-      StoreActions.SET,
-      !storeValues[StateName.SHOW_IS_RANDOM]
-    );
-  }
+  const [handleChange] = useCounter(StateName.SHOW_IS_RANDOM);
 
   return (
     <div className="inline">
-      <button className="menu-item counter-arrow" onClick={handleChange}>
+      <button
+        className="menu-item counter-arrow"
+        onClick={() => handleChange(!storeValues[StateName.SHOW_IS_RANDOM])}
+      >
         {"←"}
       </button>
       <input
@@ -26,9 +21,11 @@ export default function OptionShowRandom() {
         maxLength={3}
         value={storeValues[StateName.SHOW_IS_RANDOM] ? "random" : "next"}
         className="menu-item counter"
-        onChange={handleChange}
       />
-      <button className="menu-item counter-arrow" onClick={handleChange}>
+      <button
+        className="menu-item counter-arrow"
+        onClick={() => handleChange(!storeValues[StateName.SHOW_IS_RANDOM])}
+      >
         {"→"}
       </button>
     </div>

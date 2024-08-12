@@ -1,25 +1,13 @@
-import { StateName, StoreActions } from "@/common/constants";
-
-import { ChangeEvent } from "react";
+import { StateName } from "@/common/constants";
 
 import useSelectorValuesRouter from "@/hooks/useSelectorValuesRouter";
-import useDispatchRouter from "@/hooks/useDispatchRouter";
+import useCounter from "@/hooks/useCounter";
 
-export default function OptionTextSize() {
+export default function OptionTextSpacing() {
   const storeValues = useSelectorValuesRouter(StateName.TEXT_SIZE);
-  const dispatch = useDispatchRouter();
-
-  function handleChange(e: ChangeEvent<HTMLInputElement>): void {
-    dispatch(StateName.TEXT_SIZE, StoreActions.SET, parseInt(e.target.value));
-  }
-
-  function handleDecrement(): void {
-    dispatch(StateName.TEXT_SIZE, StoreActions.DECREMENT);
-  }
-
-  function handleIncrement(): void {
-    dispatch(StateName.TEXT_SIZE, StoreActions.INCREMENT);
-  }
+  const [handleChange, handleDecrement, handleIncrement] = useCounter(
+    StateName.TEXT_SIZE
+  );
 
   return (
     <div className="inline">
@@ -32,7 +20,7 @@ export default function OptionTextSize() {
         maxLength={3}
         value={storeValues[StateName.TEXT_SIZE]}
         className="menu-item counter"
-        onChange={handleChange}
+        onChange={(e) => handleChange(parseInt(e.target.value))}
       />
       <button className="menu-item counter-arrow" onClick={handleIncrement}>
         {"→"}
