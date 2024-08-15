@@ -2,6 +2,7 @@ import { StateName } from "@/common/constants";
 
 import useSelectorValuesRouter from "@/hooks/useSelectorValuesRouter";
 import useCounter from "@/hooks/useCounter";
+import { useEffect } from "react";
 
 export default function OptionTextSpacing() {
   const storeValues = useSelectorValuesRouter(StateName.TEXT_MARGIN_H);

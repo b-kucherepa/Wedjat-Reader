@@ -1,7 +1,3 @@
-import store from "@/store/store";
-import { Preferences } from "@capacitor/preferences";
-import { statesToSave } from "./constants";
-
 export function normalizeArrayIndex(
   currentIndex: number,
   arrayLength: number
@@ -59,50 +55,4 @@ export function getScreenPercentSize(
 
 export function clampNumber(number: number, min: number, max: number): number {
   return Math.min(Math.max(number, min), max);
-}
-
-export async function saveStates(): Promise<void> {
-  const storeState: any = store.getState();
-
-  for (let state of statesToSave) {
-    const serializedState: string = JSON.stringify(storeState[state].value);
-    Preferences.set({
-      key: state,
-      value: serializedState,
-    }).catch((error) => console.log(error));
-  }
-}
-
-export async function loadStates(dispatch: any): Promise<void> {
-  for (let state of statesToSave) {
-    Preferences.get({
-      key: state,
-    })
-      .then((result) => result.value)
-      .then((serializedState) => {
-        if (serializedState) {
-          return JSON.parse(serializedState);
-        }
-      })
-      .then((readyData) => {
-        if (readyData) {
-          dispatch({ type: `${state}/set`, payload: readyData });
-        }
-      })
-      .catch((error) => console.log(error));
-  }
-}
-
-export async function removeStates(dispatch: any): Promise<void> {
-  try {
-    const itemNames: string[] = await Preferences.keys().then(
-      (result) => result.keys
-    );
-    for (let item of itemNames) {
-      Preferences.remove({ key: item });
-      dispatch({ type: `${item}/reset` });
-    }
-  } catch (error) {
-    console.log(error);
-  }
 }

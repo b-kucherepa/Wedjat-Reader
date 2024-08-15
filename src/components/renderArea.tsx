@@ -7,12 +7,7 @@ import {
   StoreActions,
 } from "@/common/constants";
 
-import {
-  getScreenPercentSize,
-  loadStates,
-  normalizeArrayIndex,
-  saveStates,
-} from "@/common/utils";
+import { getScreenPercentSize, normalizeArrayIndex } from "@/common/utils";
 
 import { App } from "@capacitor/app";
 import { MenuState } from "@/store/menuStateSlice";
@@ -22,6 +17,7 @@ import { useEffect, useRef } from "react";
 
 import useSelectorValuesRouter from "@/hooks/useSelectorValuesRouter";
 import useDispatchRouter from "@/hooks/useDispatchRouter";
+import useLocalStore from "@/hooks/useLocalStore";
 
 export default function RenderArea() {
   const dispatch = useDispatchRouter();
@@ -44,6 +40,8 @@ export default function RenderArea() {
     StateName.TEXT_SPACING
   );
 
+  const [saveStates, loadStates] = useLocalStore();
+
   const slideshowTimer = useRef(setInterval(() => {}, 0));
   const bgImageFilesLengthRef = useRef(storeValues[StateName.BG_FILES].length);
   bgImageFilesLengthRef.current = storeValues[StateName.BG_FILES].length;
@@ -54,12 +52,12 @@ export default function RenderArea() {
     loadStates(dispatch);
 
     App.addListener("pause", () => saveStates());
-    document.addEventListener("beforeunload", saveStates);
-    document.addEventListener("visibilitychange", saveStates);
+    document.addEventListener("beforeunload", () => saveStates);
+    document.addEventListener("visibilitychange", () => saveStates);
 
     return () => {
-      document.removeEventListener("beforeunload", saveStates);
-      document.removeEventListener("visibilitychange", saveStates);
+      document.removeEventListener("beforeunload", () => saveStates);
+      document.removeEventListener("visibilitychange", () => saveStates);
     };
   }, []);
 
