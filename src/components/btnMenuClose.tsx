@@ -1,12 +1,12 @@
 import { StateName, StoreActions } from "@/common/constants";
 
-import { saveStates } from "@/common/utils";
-
 import useDispatchRouter from "@/hooks/useDispatchRouter";
+import useLocalStore from "@/hooks/useLocalStore";
 
 export default function BtnMenuClose() {
   const dispatch = useDispatchRouter();
 
+  const [saveStates, ,] = useLocalStore();
   function handleClick(): void {
     dispatch(StateName.MENU_STATE, StoreActions.CLOSE);
     saveStates();

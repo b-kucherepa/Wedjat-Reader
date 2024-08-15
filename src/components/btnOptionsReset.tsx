@@ -1,9 +1,10 @@
-import { removeStates } from "@/common/utils";
-
+import useLocalStore from "@/hooks/useLocalStore";
 import { useDispatch } from "react-redux";
 
 export default function BtnOptionsReset() {
   const dispatch = useDispatch();
+
+  const [, , removeStates] = useLocalStore();
 
   function handleClick(): void {
     removeStates(dispatch);
