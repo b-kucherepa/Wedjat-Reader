@@ -21,6 +21,7 @@ export default function OptionTextSpacing() {
         maxLength={3}
         value={storeValues[StateName.SHOW_IS_RANDOM] ? "random" : "next"}
         className="menu-item counter"
+        readOnly={true}
       />
       <button
         className="menu-item counter-arrow"
